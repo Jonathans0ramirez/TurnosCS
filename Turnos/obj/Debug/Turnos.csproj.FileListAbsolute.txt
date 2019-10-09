@@ -1,0 +1,15 @@
+C:\Users\1020490075\Desktop\Turnos\Turnos\bin\Debug\Turnos.exe.config
+C:\Users\1020490075\Desktop\Turnos\Turnos\bin\Debug\Turnos.exe
+C:\Users\1020490075\Desktop\Turnos\Turnos\bin\Debug\Turnos.pdb
+C:\Users\1020490075\Desktop\Turnos\Turnos\bin\Debug\Bunifu_UI_v1.52.dll
+C:\Users\1020490075\Desktop\Turnos\Turnos\obj\Debug\Turnos.Principal_OLD.resources
+C:\Users\1020490075\Desktop\Turnos\Turnos\obj\Debug\Turnos.Principal.resources
+C:\Users\1020490075\Desktop\Turnos\Turnos\obj\Debug\Turnos.Properties.Resources.resources
+C:\Users\1020490075\Desktop\Turnos\Turnos\obj\Debug\Turnos.ValidarTurno.resources
+C:\Users\1020490075\Desktop\Turnos\Turnos\obj\Debug\Turnos.csproj.GenerateResource.cache
+C:\Users\1020490075\Desktop\Turnos\Turnos\obj\Debug\Turnos.csproj.CoreCompileInputs.cache
+C:\Users\1020490075\Desktop\Turnos\Turnos\obj\Debug\Turnos.csproj.CopyComplete
+C:\Users\1020490075\Desktop\Turnos\Turnos\obj\Debug\Turnos.exe
+C:\Users\1020490075\Desktop\Turnos\Turnos\obj\Debug\Turnos.pdb
+C:\Users\1020490075\Desktop\Turnos\Turnos\obj\Debug\Turnos.ReservarTurno.resources
+C:\Users\1020490075\Desktop\Turnos\Turnos\obj\Debug\Turnos.csprojAssemblyReference.cache
