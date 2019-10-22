@@ -30,6 +30,12 @@ namespace Turnos
             string horaFinReserva = servicios.obtenerHoraReserva("PISO2-PC16", 1);
 
             string CurDate = DateTime.Now.Hour.ToString();
+
+            if (Int32.Parse(horaInicioReserva) < Int32.Parse(CurDate))
+            {
+                horaInicioReserva = CurDate;
+            }
+
             int contador = 1;
 
             string fechaInicioPC;
@@ -38,16 +44,18 @@ namespace Turnos
             JArray jsonArray = JArray.Parse(Reservas);
             var jsonObjects = jsonArray.OfType<JObject>().ToList();
 
-            while (horaFinReserva != horaInicioReserva)
+            while (Int32.Parse(horaFinReserva) >= Int32.Parse(horaInicioReserva))
             {
                 foreach (JToken signInName in jsonObjects)
                 {
                     fechaInicioPC = (string)signInName.SelectToken("fechaInicio");
+                    fechaInicioPC = fechaInicioPC.Substring(11, 2);
                     fechaFinPC = (string)signInName.SelectToken("fechaFin");
+                    fechaFinPC = fechaFinPC.Substring(11, 2);
 
                     if (Int32.Parse(fechaInicioPC) > Int32.Parse(CurDate))
                     {
-                        while (Int32.Parse(fechaInicioPC) <= Int32.Parse(CurDate))
+                        while (Int32.Parse(fechaInicioPC) > Int32.Parse(CurDate))
                         {
                             TextBox t1 = new TextBox();
                             this.Controls.Add(t1);
@@ -55,10 +63,11 @@ namespace Turnos
                             t1.Left = 100;
                             t1.Text = CurDate + ":00 - " + (DateTime.Now.Hour + contador).ToString() + ":00";
                             spaceControl++;
+                            CurDate = (DateTime.Now.Hour + contador).ToString();
                             contador++;
                         }
                     }
-                    else if (fechaInicioPC == CurDate)
+                    if (fechaInicioPC.Equals(CurDate))
                     {
                         TextBox t1 = new TextBox();
                         this.Controls.Add(t1);
@@ -67,16 +76,13 @@ namespace Turnos
                         t1.Text = CurDate + ":00 - " + (DateTime.Now.Hour + contador).ToString() + ":00";
                         t1.Enabled = false;
                         spaceControl++;
-                    }
-                    else
-                    {
                         CurDate = (DateTime.Now.Hour + contador).ToString();
+                        contador++;
                     }
+                    int aux = Int32.Parse(horaFinReserva);
+                    aux--;
+                    horaFinReserva = aux.ToString();
                 }
-                int aux = Int32.Parse(horaFinReserva);
-                aux--;
-                horaFinReserva = aux.ToString();
-                contador++;
             }
         }
 
