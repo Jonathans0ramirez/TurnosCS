@@ -159,7 +159,14 @@ namespace Turnos
         private void reservarBtns_Click(object sender, EventArgs e)
         {
             Button button = sender as Button;
-            button.BackColor = Color.DarkGreen;
+            if (button.BackColor == Color.DarkGreen)
+            {
+                button.BackColor = Color.FromArgb(0, 105, 92);
+            }
+            else
+            {
+                button.BackColor = Color.DarkGreen;
+            }
             string name = button.Text;
         }
     }
