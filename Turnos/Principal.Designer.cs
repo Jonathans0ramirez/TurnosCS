@@ -42,8 +42,8 @@
             this.reservarBtnImg = new ns1.BunifuFlatButton();
             this.headerPanel = new System.Windows.Forms.Panel();
             this.expandCollapseTransition = new BunifuAnimatorNS.BunifuTransition(this.components);
-            this.timerCollapse = new System.Windows.Forms.Timer(this.components);
             this.panelContainer = new System.Windows.Forms.Panel();
+            this.timerCollapse = new System.Windows.Forms.Timer(this.components);
             this.accionesPanel.SuspendLayout();
             this.accionesPanel_2.SuspendLayout();
             this.SuspendLayout();
@@ -252,7 +252,7 @@
             // 
             // headerPanel
             // 
-            this.headerPanel.BackColor = System.Drawing.Color.DarkGreen;
+            this.headerPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(51)))), ((int)(((byte)(0)))));
             this.expandCollapseTransition.SetDecoration(this.headerPanel, BunifuAnimatorNS.DecorationType.None);
             this.headerPanel.Dock = System.Windows.Forms.DockStyle.Top;
             this.headerPanel.Location = new System.Drawing.Point(0, 0);
@@ -281,11 +281,6 @@
             animation1.TransparencyCoeff = 0F;
             this.expandCollapseTransition.DefaultAnimation = animation1;
             // 
-            // timerCollapse
-            // 
-            this.timerCollapse.Interval = 5000;
-            this.timerCollapse.Tick += new System.EventHandler(this.TimerCollapse_Tick);
-            // 
             // panelContainer
             // 
             this.expandCollapseTransition.SetDecoration(this.panelContainer, BunifuAnimatorNS.DecorationType.None);
@@ -294,6 +289,11 @@
             this.panelContainer.Name = "panelContainer";
             this.panelContainer.Size = new System.Drawing.Size(920, 435);
             this.panelContainer.TabIndex = 13;
+            // 
+            // timerCollapse
+            // 
+            this.timerCollapse.Interval = 5000;
+            this.timerCollapse.Tick += new System.EventHandler(this.TimerCollapse_Tick);
             // 
             // Principal
             // 
