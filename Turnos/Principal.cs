@@ -220,13 +220,13 @@ namespace Turnos
             hk.HookStart();
             _obj = this;
 
-            ReservarTurno rt = new ReservarTurno();
-            rt.Dock = DockStyle.Fill;
-            panelContainer.Controls.Add(rt);
-
             ValidarTurno vt = new ValidarTurno();
             vt.Dock = DockStyle.Fill;
             panelContainer.Controls.Add(vt);
+
+            ReservarTurno rt = new ReservarTurno();
+            rt.Dock = DockStyle.Fill;
+            panelContainer.Controls.Add(rt);
         }
 
 

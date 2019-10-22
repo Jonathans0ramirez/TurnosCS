@@ -178,6 +178,7 @@ namespace Turnos
                 string horaInicio = "";
                 string horaFin = "";
                 string idSala = consultarSalaPorPC(codComputador);
+                idSala = idSala.Trim('"');
                 var uri = new Uri("http://biblioteca.udea.edu.co/turnos/services/ListarSalaPorCodigoSala.php?idSala=" + idSala);
                 var result_post = SendRequest(uri, null, "application/json", "GET");
                 result_post = result_post.Trim();
