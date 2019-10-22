@@ -161,11 +161,7 @@ namespace Turnos
 
                 }
             }
-            /*TextBox t1 = new TextBox();
-            this.Controls.Add(t1);
-            t1.Top = spaceControl * 25;
-            t1.Left = 100;
-            spaceControl++;*/
+            //servicios.registrarReserva(TextBoxUser.Text, jsonHorario);
         }
 
         private void reservarBtns_Click(object sender, EventArgs e)
