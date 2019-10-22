@@ -220,6 +220,10 @@ namespace Turnos
             hk.HookStart();
             _obj = this;
 
+            ReservarTurno rt = new ReservarTurno();
+            rt.Dock = DockStyle.Fill;
+            panelContainer.Controls.Add(rt);
+
             ValidarTurno vt = new ValidarTurno();
             vt.Dock = DockStyle.Fill;
             panelContainer.Controls.Add(vt);
@@ -299,11 +303,12 @@ namespace Turnos
         private void Reservar_Click(object sender, EventArgs e)
         {
             ValidarTurno validarTurno = new ValidarTurno();
+            panelContainer.Controls["ValidarTurno"].BringToFront();
         }
 
         private void Verificar_Click(object sender, EventArgs e)
         {
-
+            panelContainer.Controls["ReservarTurno"].BringToFront();
         }
     }
 }

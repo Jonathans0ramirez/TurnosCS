@@ -13,3 +13,5 @@ C:\Users\1020490075\Desktop\Turnos\Turnos\obj\Debug\Turnos.exe
 C:\Users\1020490075\Desktop\Turnos\Turnos\obj\Debug\Turnos.pdb
 C:\Users\1020490075\Desktop\Turnos\Turnos\obj\Debug\Turnos.ReservarTurno.resources
 C:\Users\1020490075\Desktop\Turnos\Turnos\obj\Debug\Turnos.csprojAssemblyReference.cache
+C:\Users\1020490075\Desktop\Turnos\Turnos\bin\Debug\Newtonsoft.Json.dll
+C:\Users\1020490075\Desktop\Turnos\Turnos\bin\Debug\Newtonsoft.Json.xml

@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -166,6 +168,51 @@ namespace Turnos
             {
                 Console.WriteLine("No se pudo consumir el servicio web que valida el usuario");
                 return true;
+            }
+        }
+
+        public string obtenerHoraReserva(string codComputador, int inicioOFin) //0 Inicio, 1 Fin
+        {
+            try
+            {
+                string horaInicio = "";
+                string horaFin = "";
+                string idSala = consultarSalaPorPC(codComputador);
+                var uri = new Uri("http://biblioteca.udea.edu.co/turnos/services/ListarSalaPorCodigoSala.php?idSala=" + idSala);
+                var result_post = SendRequest(uri, null, "application/json", "GET");
+                result_post = result_post.Trim();
+
+                JArray jsonArray = JArray.Parse(result_post);
+                var jsonObjects = jsonArray.OfType<JObject>().ToList();
+                CultureInfo ci = new CultureInfo("Es-Es");
+                var diaSemana = ci.DateTimeFormat.GetDayName(DateTime.Now.DayOfWeek);
+                foreach (JToken horarios in jsonObjects)
+                {
+                    switch (diaSemana)
+                    {
+                        case "sábado":
+                            horaInicio = (string)horarios.SelectToken("horaInicioSabado");
+                            horaFin = (string)horarios.SelectToken("horaFinSabado");
+                            break;
+                        case "domingo":
+                            horaInicio = (string)horarios.SelectToken("horaInicioDomingo");
+                            horaFin = (string)horarios.SelectToken("horaFinDomingo");
+                            break;
+                        default:
+                            horaInicio = (string)horarios.SelectToken("horaInicioSemana");
+                            horaFin = (string)horarios.SelectToken("horaFinSemana");
+                            break;
+                    }
+                }
+                if (inicioOFin == 0) {
+                    return horaInicio;
+                }
+                return horaFin;
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("No se pudo consumir el servicio web que retorna la hora de inicio de la sala del pc");
+                return null;
             }
         }
     }
