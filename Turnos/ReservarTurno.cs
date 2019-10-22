@@ -43,46 +43,95 @@ namespace Turnos
             string Reservas = servicios.consultarReservasEquipo("PISO2-PC16");
             JArray jsonArray = JArray.Parse(Reservas);
             var jsonObjects = jsonArray.OfType<JObject>().ToList();
+            int objetos = jsonObjects.Count();
 
             while (Int32.Parse(horaFinReserva) >= Int32.Parse(horaInicioReserva))
             {
-                foreach (JToken signInName in jsonObjects)
+                if (objetos != 0)
                 {
-                    fechaInicioPC = (string)signInName.SelectToken("fechaInicio");
-                    fechaInicioPC = fechaInicioPC.Substring(11, 2);
-                    fechaFinPC = (string)signInName.SelectToken("fechaFin");
-                    fechaFinPC = fechaFinPC.Substring(11, 2);
-
-                    if (Int32.Parse(fechaInicioPC) > Int32.Parse(CurDate))
+                    foreach (JToken signInName in jsonObjects)
                     {
-                        while (Int32.Parse(fechaInicioPC) > Int32.Parse(CurDate))
+                        fechaInicioPC = (string)signInName.SelectToken("fechaInicio");
+                        fechaInicioPC = fechaInicioPC.Substring(11, 2);
+                        fechaFinPC = (string)signInName.SelectToken("fechaFin");
+                        fechaFinPC = fechaFinPC.Substring(11, 2);
+
+                        if (Int32.Parse(fechaInicioPC) > Int32.Parse(CurDate))
                         {
-                            TextBox t1 = new TextBox();
+                            while (Int32.Parse(fechaInicioPC) > Int32.Parse(CurDate))
+                            {
+                                /*TextBox t1 = new TextBox();
+                                this.Controls.Add(t1);
+                                t1.Top = spaceControl * 25;
+                                t1.Left = 100;
+                                t1.Text = CurDate + ":00 - " + (DateTime.Now.Hour + contador).ToString() + ":00";
+                                spaceControl++;*/
+
+                                Button btn = new Button();
+                                flPanelHoras.Controls.Add(btn);
+                                btn.BackColor = System.Drawing.Color.FromArgb(0, 105, 92);
+                                btn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+                                btn.ForeColor = System.Drawing.SystemColors.Control;
+                                btn.Size = new System.Drawing.Size(97, 30);
+                                btn.Text = CurDate + ":00 - " + (DateTime.Now.Hour + contador).ToString() + ":00";
+                                btn.UseVisualStyleBackColor = false;
+                                btn.Click += new System.EventHandler(this.reservarBtns_Click);
+
+                                CurDate = (DateTime.Now.Hour + contador).ToString();
+                                contador++;
+                            }
+                        }
+                        if (fechaInicioPC.Equals(CurDate))
+                        {
+                            /*TextBox t1 = new TextBox();
                             this.Controls.Add(t1);
                             t1.Top = spaceControl * 25;
                             t1.Left = 100;
                             t1.Text = CurDate + ":00 - " + (DateTime.Now.Hour + contador).ToString() + ":00";
-                            spaceControl++;
+                            t1.Enabled = false;
+                            spaceControl++;*/
                             CurDate = (DateTime.Now.Hour + contador).ToString();
                             contador++;
+
+                            Button btn = new Button();
+                            flPanelHoras.Controls.Add(btn);
+                            btn.BackColor = System.Drawing.Color.FromArgb(0, 105, 92);
+                            btn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+                            btn.ForeColor = System.Drawing.SystemColors.Control;
+                            btn.Size = new System.Drawing.Size(97, 30);
+                            btn.Text = CurDate + ":00 - " + (DateTime.Now.Hour + contador).ToString() + ":00";
+                            btn.UseVisualStyleBackColor = false;
+                            btn.Enabled = false;
+                            btn.Click += new System.EventHandler(this.reservarBtns_Click);
                         }
+                        objetos--;
                     }
-                    if (fechaInicioPC.Equals(CurDate))
-                    {
-                        TextBox t1 = new TextBox();
-                        this.Controls.Add(t1);
-                        t1.Top = spaceControl * 25;
-                        t1.Left = 100;
-                        t1.Text = CurDate + ":00 - " + (DateTime.Now.Hour + contador).ToString() + ":00";
-                        t1.Enabled = false;
-                        spaceControl++;
-                        CurDate = (DateTime.Now.Hour + contador).ToString();
-                        contador++;
-                    }
-                    int aux = Int32.Parse(horaFinReserva);
-                    aux--;
-                    horaFinReserva = aux.ToString();
                 }
+                else if (Int32.Parse(CurDate) < 24)
+                {
+                    /*TextBox t1 = new TextBox();
+                    this.Controls.Add(t1);
+                    t1.Top = spaceControl * 25;
+                    t1.Left = 100;
+                    t1.Text = CurDate + ":00 - " + (DateTime.Now.Hour + contador).ToString() + ":00";
+                    spaceControl++;*/
+
+                    Button btn = new Button();
+                    flPanelHoras.Controls.Add(btn);
+                    btn.BackColor = System.Drawing.Color.FromArgb(0, 105, 92);
+                    btn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+                    btn.ForeColor = System.Drawing.SystemColors.Control;
+                    btn.Size = new System.Drawing.Size(97, 30);
+                    btn.Text = CurDate + ":00 - " + (DateTime.Now.Hour + contador).ToString() + ":00";
+                    btn.UseVisualStyleBackColor = false;
+                    btn.Click += new System.EventHandler(this.reservarBtns_Click);
+
+                    CurDate = (DateTime.Now.Hour + contador).ToString();
+                    contador++;
+                }
+                int aux = Int32.Parse(horaFinReserva);
+                aux--;
+                horaFinReserva = aux.ToString();
             }
         }
 
@@ -90,6 +139,7 @@ namespace Turnos
         {
             foreach (var button in this.Controls.OfType<Button>())
             {
+                button.Click += new System.EventHandler(this.reservarBtns_Click);
                 if (button.BackColor.Equals(Color.Maroon))
                 {
                     TextBox t1 = new TextBox();
@@ -104,6 +154,13 @@ namespace Turnos
             t1.Top = spaceControl * 25;
             t1.Left = 100;
             spaceControl++;*/
+        }
+
+        private void reservarBtns_Click(object sender, EventArgs e)
+        {
+            Button button = sender as Button;
+            button.BackColor = Color.DarkGreen;
+            string name = button.Text;
         }
     }
 }
