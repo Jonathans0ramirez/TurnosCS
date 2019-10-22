@@ -1,20 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using Newtonsoft.Json.Linq;
+using System;
 using System.Drawing;
-using System.Data;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using Newtonsoft.Json.Linq;
-using System.Globalization;
 
 namespace Turnos
 {
     public partial class ReservarTurno : UserControl
     {
         int spaceControl = 1;
+
+        string fechaHoy = DateTime.Now.ToString("yyyy-MM-dd ");
 
         WebServices servicios = new WebServices();
 
@@ -60,20 +56,22 @@ namespace Turnos
                         {
                             while (Int32.Parse(fechaInicioPC) > Int32.Parse(CurDate))
                             {
-                                /*TextBox t1 = new TextBox();
-                                this.Controls.Add(t1);
-                                t1.Top = spaceControl * 25;
-                                t1.Left = 100;
-                                t1.Text = CurDate + ":00 - " + (DateTime.Now.Hour + contador).ToString() + ":00";
-                                spaceControl++;*/
-
                                 Button btn = new Button();
                                 flPanelHoras.Controls.Add(btn);
                                 btn.BackColor = System.Drawing.Color.FromArgb(0, 105, 92);
                                 btn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
                                 btn.ForeColor = System.Drawing.SystemColors.Control;
                                 btn.Size = new System.Drawing.Size(97, 30);
-                                btn.Text = CurDate + ":00 - " + (DateTime.Now.Hour + contador).ToString() + ":00";
+                                string auxHour = string.Empty;
+                                if ((DateTime.Now.Hour + contador) == 24)
+                                {
+                                    auxHour = "00";
+                                }
+                                else
+                                {
+                                    auxHour = (DateTime.Now.Hour + contador).ToString();
+                                }
+                                btn.Text = CurDate + ":00 - " + auxHour + ":00";
                                 btn.UseVisualStyleBackColor = false;
                                 btn.Click += new System.EventHandler(this.reservarBtns_Click);
 
@@ -83,46 +81,49 @@ namespace Turnos
                         }
                         if (fechaInicioPC.Equals(CurDate))
                         {
-                            /*TextBox t1 = new TextBox();
-                            this.Controls.Add(t1);
-                            t1.Top = spaceControl * 25;
-                            t1.Left = 100;
-                            t1.Text = CurDate + ":00 - " + (DateTime.Now.Hour + contador).ToString() + ":00";
-                            t1.Enabled = false;
-                            spaceControl++;*/
-                            CurDate = (DateTime.Now.Hour + contador).ToString();
-                            contador++;
-
                             Button btn = new Button();
                             flPanelHoras.Controls.Add(btn);
                             btn.BackColor = System.Drawing.Color.FromArgb(0, 105, 92);
                             btn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
                             btn.ForeColor = System.Drawing.SystemColors.Control;
                             btn.Size = new System.Drawing.Size(97, 30);
-                            btn.Text = CurDate + ":00 - " + (DateTime.Now.Hour + contador).ToString() + ":00";
+                            string auxHour = string.Empty;
+                            if ((DateTime.Now.Hour + contador) == 24)
+                            {
+                                auxHour = "00";
+                            }
+                            else
+                            {
+                                auxHour = (DateTime.Now.Hour + contador).ToString();
+                            }
+                            btn.Text = CurDate + ":00 - " + auxHour + ":00";
                             btn.UseVisualStyleBackColor = false;
                             btn.Enabled = false;
                             btn.Click += new System.EventHandler(this.reservarBtns_Click);
+                            CurDate = (DateTime.Now.Hour + contador).ToString();
+                            contador++;
                         }
                         objetos--;
                     }
                 }
                 else if (Int32.Parse(CurDate) < 24)
                 {
-                    /*TextBox t1 = new TextBox();
-                    this.Controls.Add(t1);
-                    t1.Top = spaceControl * 25;
-                    t1.Left = 100;
-                    t1.Text = CurDate + ":00 - " + (DateTime.Now.Hour + contador).ToString() + ":00";
-                    spaceControl++;*/
-
                     Button btn = new Button();
                     flPanelHoras.Controls.Add(btn);
                     btn.BackColor = System.Drawing.Color.FromArgb(0, 105, 92);
                     btn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
                     btn.ForeColor = System.Drawing.SystemColors.Control;
                     btn.Size = new System.Drawing.Size(97, 30);
-                    btn.Text = CurDate + ":00 - " + (DateTime.Now.Hour + contador).ToString() + ":00";
+                    string auxHour = string.Empty;
+                    if ((DateTime.Now.Hour + contador) == 24)
+                    {
+                        auxHour = "00";
+                    }
+                    else
+                    {
+                        auxHour = (DateTime.Now.Hour + contador).ToString();
+                    }
+                    btn.Text = CurDate + ":00 - " + auxHour + ":00";
                     btn.UseVisualStyleBackColor = false;
                     btn.Click += new System.EventHandler(this.reservarBtns_Click);
 
@@ -137,16 +138,27 @@ namespace Turnos
 
         private void Button1_Click(object sender, EventArgs e)
         {
-            foreach (var button in this.Controls.OfType<Button>())
+            string jsonHorario = string.Empty;
+            bool moreThanOne = false;
+            foreach (var button in flPanelHoras.Controls.OfType<Button>())
             {
-                button.Click += new System.EventHandler(this.reservarBtns_Click);
-                if (button.BackColor.Equals(Color.Maroon))
+                if (button.BackColor.Equals(Color.DarkGreen))
                 {
                     TextBox t1 = new TextBox();
                     this.Controls.Add(t1);
                     t1.Top = spaceControl * 25;
                     t1.Left = 100;
+                    t1.Text = button.Text;
                     spaceControl++;
+
+                    if (moreThanOne)
+                    {
+                        jsonHorario = String.Concat(jsonHorario, ",");
+                    }
+
+                    jsonHorario = String.Concat(jsonHorario, "{\"horaInicioReserva\": \"" + fechaHoy + button.Text.Substring(0, 5) + ":00\", \"horaFinReserva\": " + fechaHoy + button.Text.Substring(8, 5) + ":00\"}");
+                    moreThanOne = true;
+
                 }
             }
             /*TextBox t1 = new TextBox();
