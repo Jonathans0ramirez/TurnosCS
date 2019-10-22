@@ -302,13 +302,26 @@ namespace Turnos
 
         private void Reservar_Click(object sender, EventArgs e)
         {
-            ValidarTurno validarTurno = new ValidarTurno();
+            if (!panelContainer.Controls.ContainsKey("ValidarTurno"))
+            {
+                ValidarTurno vt = new ValidarTurno();
+                vt.Dock = DockStyle.Fill;
+                panelContainer.Controls.Add(vt);
+            }
             panelContainer.Controls["ValidarTurno"].BringToFront();
+            panelContainer.Controls["ReservarTurno"].Dispose();
         }
 
         private void Verificar_Click(object sender, EventArgs e)
         {
+            if (!panelContainer.Controls.ContainsKey("ReservarTurno"))
+            {
+                ReservarTurno rt = new ReservarTurno();
+                rt.Dock = DockStyle.Fill;
+                panelContainer.Controls.Add(rt);
+            }
             panelContainer.Controls["ReservarTurno"].BringToFront();
+            panelContainer.Controls["ValidarTurno"].Dispose();
         }
     }
 }
