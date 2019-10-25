@@ -56,7 +56,7 @@ namespace Turnos
         // Constante en la cual se recargará el archivo plano de turnos Siguientes.
         private const int EXTRAER = 59;
 
-        private RegistryKey policies;
+        private RegistryKey policiesCU;
 
         WebServices servicios = new WebServices();
 
@@ -75,7 +75,7 @@ namespace Turnos
             x = (accionesPanel.Width / 2) - (accionesPanel_2.Width / 2);
             accionesPanel_2.Location = new Point(x, accionesPanel_2.Location.Y);
 
-            lockTaskManager(true);
+            //lockTaskManager(true);
             //makeVisible(true);
 
             var t = new Thread(new ThreadStart(service));
@@ -89,19 +89,27 @@ namespace Turnos
                 return;
             }
 
-            policies = Registry.CurrentUser.OpenSubKey("Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\System", true);
-            if (policies == null)
+            policiesCU = Registry.CurrentUser.OpenSubKey("Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\System", true);
+            if (policiesCU == null)
             {
                 Registry.CurrentUser.CreateSubKey("Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\System");
             }
 
-            policies = Registry.CurrentUser.OpenSubKey("Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\System", true);
+            policiesCU = Registry.CurrentUser.OpenSubKey("Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\System", true);
 
             if (flag)
-                policies.SetValue("DisableTaskMgr", 1);
+            {
+                policiesCU.SetValue("DisableLockWorkstation", 1);
+                policiesCU.SetValue("DisableChangePassword", 1);
+                policiesCU.SetValue("DisableTaskMgr", 1);
+            }
             else
-                policies.DeleteValue("DisableTaskMgr");
-            policies.Close();
+            {
+                policiesCU.DeleteValue("DisableLockWorkstation");
+                policiesCU.DeleteValue("DisableChangePassword");
+                policiesCU.DeleteValue("DisableTaskMgr");
+            }
+            policiesCU.Close();
         }
 
         public static bool IsAdministrator()
@@ -224,13 +232,31 @@ namespace Turnos
             vt.Dock = DockStyle.Fill;
             panelContainer.Controls.Add(vt);
 
-            ReservarTurno rt = new ReservarTurno();
+            /*ReservarTurno rt = new ReservarTurno();
             rt.Dock = DockStyle.Fill;
-            panelContainer.Controls.Add(rt);
+            panelContainer.Controls.Add(rt);*/
         }
 
 
         /*ANIMACIONES Y CONTROLES*/
+
+        public void carga(bool mostrar)
+        {
+            if (mostrar)
+            {
+                pictureBox1.BeginInvoke((Action)delegate ()
+                {
+                    pictureBox1.Visible = true;
+                });
+            }
+            else
+            {
+                pictureBox1.BeginInvoke((Action)delegate ()
+                {
+                    pictureBox1.Visible = false;
+                });
+            }
+        }
 
         private void TimerAnimation_Tick(object sender, EventArgs e)
         {
@@ -309,18 +335,18 @@ namespace Turnos
                 panelContainer.Controls.Add(vt);
             }
             panelContainer.Controls["ValidarTurno"].BringToFront();
-            panelContainer.Controls["ReservarTurno"].Dispose();
+            ReservarTurno.Instance.Dispose();
         }
 
         private void Verificar_Click(object sender, EventArgs e)
         {
-            if (!panelContainer.Controls.ContainsKey("ReservarTurno"))
+            carga(true);
+            if (!panelContainer.Controls.Contains(ReservarTurno.Instance))
             {
-                ReservarTurno rt = new ReservarTurno();
-                rt.Dock = DockStyle.Fill;
-                panelContainer.Controls.Add(rt);
+                ReservarTurno.Instance.Dock = DockStyle.Fill;
+                panelContainer.Controls.Add(ReservarTurno.Instance);
             }
-            panelContainer.Controls["ReservarTurno"].BringToFront();
+            ReservarTurno.Instance.BringToFront();
             panelContainer.Controls["ValidarTurno"].Dispose();
         }
     }

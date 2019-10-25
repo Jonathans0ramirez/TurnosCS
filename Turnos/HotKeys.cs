@@ -22,6 +22,8 @@ namespace Turnos
         public const int VK_CONTROL = 0x11;
         public const int VK_LCONTROL = 0xA2;
         public const int VK_RCONTROL = 0xA3;
+        public const int VK_SLEEP = 0x5F;
+        public const int VK_DEL = 0x7F;
 
         [StructLayout(LayoutKind.Sequential)]
         public class KeyBoardHookStruct
@@ -95,12 +97,12 @@ namespace Turnos
                 case WM_KEYUP:
                 case WM_SYSKEYDOWN:
                 case WM_SYSKEYUP:
-                    bMaskKeysFlag = ((kbh.vkCode == VK_TAB) && (kbh.flags == 32))      /* Tab + Alt */
-                                    | ((kbh.vkCode == VK_ESCAPE) && (kbh.flags == 32))   /* Esc + Alt */
-                                    | ((kbh.vkCode == VK_F4) && (kbh.flags == 32))       /* F4 + Alt */
-                                    | ((kbh.vkCode == VK_LWIN) && (kbh.flags == 1))    /* Left Win */
-                                    | ((kbh.vkCode == VK_RWIN) && (kbh.flags == 1))    /* Right Win */
-                                    | ((kbh.vkCode == VK_ESCAPE) && (kbh.flags == 0)); /* Ctrl + Esc */
+                    bMaskKeysFlag = ((kbh.vkCode == VK_TAB) && (kbh.flags == 32))       /* Tab + Alt */
+                                    | ((kbh.vkCode == VK_ESCAPE) && (kbh.flags == 32))  /* Esc + Alt */
+                                    | ((kbh.vkCode == VK_F4) && (kbh.flags == 32))      /* F4 + Alt */
+                                    | ((kbh.vkCode == VK_LWIN) && (kbh.flags == 1))     /* Left Win */
+                                    | ((kbh.vkCode == VK_RWIN) && (kbh.flags == 1))     /* Right Win */
+                                    | ((kbh.vkCode == VK_ESCAPE) && (kbh.flags == 0));   /* Esc + Ctrl */
                     break;
                 default:
                     break;

@@ -8,6 +8,8 @@ namespace Turnos
     {
         WebServices servicios = new WebServices();
 
+        ConfManager confManager = new ConfManager();
+
         //Configuración básica para los mensajes emergentes
         private readonly MessageBoxButtons buttons = MessageBoxButtons.YesNo;
         private readonly MessageBoxIcon infoIcon = MessageBoxIcon.Information;
@@ -32,6 +34,8 @@ namespace Turnos
             {
                 if (servicios.validarUsuario(textBoxUser.Text, textBoxPass.Text))
                 {
+                    confManager.AddUpdateAppSettings("Usuario", textBoxUser.Text);
+                    confManager.ReadSetting("Usuario");     //VERIFICAR SI LA RESPUESTA ES NULA [NULL]
                     //servicios.registrarUsoReserva(textBoxUser.Text);
                     Principal.Instance.esEquipoHabilitado = true;
                     Principal.Instance.makeVisible(false);
