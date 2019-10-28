@@ -189,7 +189,6 @@ namespace Turnos
 
                     jsonHorario = String.Concat(jsonHorario, "{\"horaInicioReserva\": \"" + fechaHoy + button.Text.Substring(0, 5) + ":00\", \"horaFinReserva\": " + fechaHoy + button.Text.Substring(8, 5) + ":00\"}");
                     moreThanOne = true;
-
                 }
             }
             //servicios.registrarReserva(TextBoxUser.Text, jsonHorario);
