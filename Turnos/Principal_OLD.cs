@@ -142,7 +142,7 @@ namespace Turnos
                 LabelIngreseNombreYPass.Visible = true;
             }
 
-            catch (Exception ex)
+            catch (Exception)
             {
             }
         }

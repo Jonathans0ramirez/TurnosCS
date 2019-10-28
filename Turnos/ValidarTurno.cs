@@ -14,6 +14,20 @@ namespace Turnos
         private readonly MessageBoxButtons buttons = MessageBoxButtons.YesNo;
         private readonly MessageBoxIcon infoIcon = MessageBoxIcon.Information;
 
+        static ValidarTurno _instance;
+
+        public static ValidarTurno Instance
+        {
+            get
+            {
+                if (_instance == null)
+                {
+                    _instance = new ValidarTurno();
+                }
+                return _instance;
+            }
+        }
+
         public ValidarTurno()
         {
             InitializeComponent();

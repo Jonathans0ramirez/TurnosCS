@@ -1,9 +1,9 @@
 ﻿using Newtonsoft.Json.Linq;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -21,7 +21,7 @@ namespace Turnos
 
         static ReservarTurno _instance;
         
-        private int contador = 1;
+        int contador = 1;
 
         public static ReservarTurno Instance
         {
@@ -38,9 +38,7 @@ namespace Turnos
         public ReservarTurno()
         {
             InitializeComponent();
-            //ThreadPool.QueueUserWorkItem(rellenarHorasParaReserva, rellenarHorasParaReserva);
-            /*Thread t = new Thread(rellenarHorasParaReserva);
-            t.Start();*/
+            button1.Visible = false;
             backgroundWorker1.RunWorkerAsync();
         }
 
@@ -48,195 +46,125 @@ namespace Turnos
         private async void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
             BackgroundWorker worker = sender as BackgroundWorker;
-
-            //await Task.Run(() => rellenarHorasParaReserva());
-            Principal.Instance.carga(true);
-            await rellenarHorasParaReserva();
+            Principal.Instance.BeginInvoke((Action)delegate ()
+            {
+                Principal.Instance.pictureLoading.Visible = true;
+            });
+            await pintarBotones();
         }
 
         private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
-        {
-            Principal.Instance.carga(false);
-        }
+        { }
 
-        private async Task rellenarHorasParaReserva()
+        private async Task pintarBotones()
         {
-            /*if (this.InvokeRequired)
-            {
-                RellenarHorasParaReservaDelegate d = new RellenarHorasParaReservaDelegate(rellenarHorasParaReserva);
-                this.Invoke(d, new object[] { });
-            }
-            else
-            {*/
+            string CurDate = DateTime.Now.Hour.ToString();
             await Task.Run(() =>
             {
-                string horaInicioReserva = servicios.obtenerHoraReserva("PISO3-PC16", 0);
-                string horaFinReserva = servicios.obtenerHoraReserva("PISO3-PC16", 1);
-
-                string CurDate = DateTime.Now.Hour.ToString();
-
-                if (Int32.Parse(horaInicioReserva) < Int32.Parse(CurDate))
+                List<int> hab = rellenarListaHoras();
+                foreach (var item in hab)
                 {
-                    horaInicioReserva = CurDate;
-                }
-
-                string fechaInicioPC;
-                string fechaFinPC;
-                string Reservas = servicios.consultarReservasEquipo("PISO3-PC16");
-                JArray jsonArray = JArray.Parse(Reservas);
-                var jsonObjects = jsonArray.OfType<JObject>().ToList();
-                int objetos = jsonObjects.Count();
-
-                while (Int32.Parse(horaFinReserva) >= Int32.Parse(horaInicioReserva))
-                {
-                    if (objetos != 0)
+                    if (!flPanelHoras.IsDisposed)
                     {
-                        foreach (JToken signInName in jsonObjects)
+                        flPanelHoras.BeginInvoke((Action)delegate ()
                         {
-                            fechaInicioPC = (string)signInName.SelectToken("fechaInicio");
-                            fechaInicioPC = fechaInicioPC.Substring(11, 2);
-                            fechaFinPC = (string)signInName.SelectToken("fechaFin");
-                            fechaFinPC = fechaFinPC.Substring(11, 2);
-
-                            if (Int32.Parse(fechaInicioPC) > Int32.Parse(CurDate))
+                            if (!flPanelHoras.IsDisposed)
                             {
-                                while (Int32.Parse(fechaInicioPC) > Int32.Parse(CurDate))
+                                Button btn = new Button();
+                                flPanelHoras.Controls.Add(btn);
+                                if (!btn.IsDisposed)
                                 {
-                                    if (!flPanelHoras.IsDisposed)
+                                    btn.BeginInvoke((Action)delegate ()
                                     {
-                                        flPanelHoras.BeginInvoke((Action)delegate ()
+                                        if (!btn.IsDisposed)
                                         {
-                                            if (!flPanelHoras.IsDisposed)
+                                            btn.BackColor = System.Drawing.Color.FromArgb(0, 105, 92);
+                                            btn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+                                            btn.ForeColor = System.Drawing.SystemColors.Control;
+                                            if (item == 1)
                                             {
-                                                Button btn = new Button();
-                                                flPanelHoras.Controls.Add(btn);
-                                                if (!btn.IsDisposed)
-                                                {
-                                                    btn.BeginInvoke((Action)delegate ()
-                                                    {
-                                                        if (!btn.IsDisposed)
-                                                        {
-                                                            btn.BackColor = System.Drawing.Color.FromArgb(0, 105, 92);
-                                                            btn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-                                                            btn.ForeColor = System.Drawing.SystemColors.Control;
-                                                            btn.Size = new System.Drawing.Size(97, 30);
-                                                            string auxHour = string.Empty;
-                                                            if ((DateTime.Now.Hour + contador) == 24)
-                                                            {
-                                                                auxHour = "00";
-                                                            }
-                                                            else
-                                                            {
-                                                                auxHour = (DateTime.Now.Hour + contador).ToString();
-                                                            }
-                                                            btn.Text = CurDate + ":00 - " + auxHour + ":00";
-                                                            btn.UseVisualStyleBackColor = false;
-                                                            btn.Click += new System.EventHandler(this.reservarBtns_Click);
-                                                        }
-                                                    });
-                                                }
+                                                btn.Enabled = false;
                                             }
-                                        });
-                                    }
-                                    CurDate = (DateTime.Now.Hour + contador).ToString();
-                                    contador++;
-                                }
-                            }
-                            if (fechaInicioPC.Equals(CurDate))
-                            {
-                                if (!flPanelHoras.IsDisposed)
-                                {
-                                    flPanelHoras.BeginInvoke((Action)delegate ()
-                                    {
-                                        if (!flPanelHoras.IsDisposed)
-                                        {
-                                            Button btn = new Button();
-                                            flPanelHoras.Controls.Add(btn);
-                                            if (!btn.IsDisposed)
+                                            btn.Size = new System.Drawing.Size(97, 30);
+                                            string auxHour = string.Empty;
+                                            if ((DateTime.Now.Hour + contador) == 24)
                                             {
-                                                btn.BeginInvoke((Action)delegate ()
-                                                {
-                                                    if (!btn.IsDisposed)
-                                                    {
-                                                        btn.BackColor = System.Drawing.Color.FromArgb(0, 105, 92);
-                                                        btn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-                                                        btn.ForeColor = System.Drawing.SystemColors.Control;
-                                                        btn.Size = new System.Drawing.Size(97, 30);
-                                                        btn.Enabled = false;
-                                                        string auxHour = string.Empty;
-                                                        if ((DateTime.Now.Hour + contador) == 24)
-                                                        {
-                                                            auxHour = "00";
-                                                        }
-                                                        else
-                                                        {
-                                                            auxHour = (DateTime.Now.Hour + contador).ToString();
-                                                        }
-                                                        btn.Text = CurDate + ":00 - " + auxHour + ":00";
-                                                        btn.UseVisualStyleBackColor = false;
-                                                        btn.Click += new System.EventHandler(this.reservarBtns_Click);
-                                                    }
-                                                });
+                                                auxHour = "00";
                                             }
+                                            else
+                                            {
+                                                auxHour = (DateTime.Now.Hour + contador).ToString();
+                                            }
+                                            btn.Text = CurDate + ":00 - " + auxHour + ":00";
+                                            btn.UseVisualStyleBackColor = false;
+                                            btn.Click += new System.EventHandler(this.reservarBtns_Click);
+                                            CurDate = (DateTime.Now.Hour + contador).ToString();
+                                            contador++;
                                         }
                                     });
                                 }
                             }
-                            CurDate = (DateTime.Now.Hour + contador).ToString();
-                            contador++;
-                            objetos--;
-                                //Application.DoEvents();
-                            }
+                        });
                     }
-                    else if (Int32.Parse(CurDate) < 24)
-                    {
-                        if (!flPanelHoras.IsDisposed)
-                        {
-                            flPanelHoras.BeginInvoke((Action)delegate ()
-                            {
-                                if (!flPanelHoras.IsDisposed)
-                                {
-                                    Button btn = new Button();
-                                    flPanelHoras.Controls.Add(btn);
-                                    if (!btn.IsDisposed)
-                                    {
-                                        btn.BeginInvoke((Action)delegate ()
-                                        {
-                                            if (!btn.IsDisposed)
-                                            {
-                                                btn.BackColor = System.Drawing.Color.FromArgb(0, 105, 92);
-                                                btn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-                                                btn.ForeColor = System.Drawing.SystemColors.Control;
-                                                btn.Size = new System.Drawing.Size(97, 30);
-                                                string auxHour = string.Empty;
-                                                if ((DateTime.Now.Hour + contador) == 24)
-                                                {
-                                                    auxHour = "00";
-                                                }
-                                                else
-                                                {
-                                                    auxHour = (DateTime.Now.Hour + contador).ToString();
-                                                }
-                                                btn.Text = CurDate + ":00 - " + auxHour + ":00";
-                                                btn.UseVisualStyleBackColor = false;
-                                                btn.Click += new System.EventHandler(this.reservarBtns_Click);
-                                                CurDate = (DateTime.Now.Hour + contador).ToString();
-                                                contador++;
-                                            }
-                                        });
-                                    }
-                                }
-                            });
-                        }
-                        
-                    }
-                    int aux = Int32.Parse(horaFinReserva);
-                    aux--;
-                    horaFinReserva = aux.ToString();
                 }
             });
-            contador = 1;
-            //}
+            Principal.Instance.BeginInvoke((Action)delegate ()
+            {
+                Principal.Instance.pictureLoading.Visible = false;
+            });
+            this.BeginInvoke((Action)delegate ()
+            {
+                button1.Visible = true;
+            });
+        }
+
+        private List<int> rellenarListaHoras()
+        {
+            List<int> retorno = new List<int>();
+            string horaInicioReserva = servicios.obtenerHoraReserva("PISO3-PC16", 0);
+            string horaFinReserva = servicios.obtenerHoraReserva("PISO3-PC16", 1);
+
+            string CurDate = DateTime.Now.Hour.ToString();
+
+            if (Int32.Parse(horaInicioReserva) < Int32.Parse(CurDate))
+            {
+                horaInicioReserva = CurDate;
+            }
+
+            string fechaInicioPC;
+            string Reservas = servicios.consultarReservasEquipo("PISO3-PC16");
+            JArray jsonArray = JArray.Parse(Reservas);
+            var jsonObjects = jsonArray.OfType<JObject>().ToList();
+            int objetos = jsonObjects.Count();
+
+            while (Int32.Parse(horaFinReserva) > Int32.Parse(horaInicioReserva))
+            {
+                if (objetos != 0)
+                {
+                    foreach (JToken signInName in jsonObjects)
+                    {
+                        fechaInicioPC = (string)signInName.SelectToken("fechaInicio");
+                        fechaInicioPC = fechaInicioPC.Substring(11, 2);
+                        while (!fechaInicioPC.Equals(horaInicioReserva) && Int32.Parse(horaInicioReserva) < Int32.Parse(horaFinReserva))
+                        {
+                            retorno.Add(0);
+                            horaInicioReserva = (Int32.Parse(horaInicioReserva) + 1).ToString();
+                        }
+                        if (fechaInicioPC.Equals(horaInicioReserva))
+                        {
+                            retorno.Add(1);
+                            horaInicioReserva = (Int32.Parse(horaInicioReserva) + 1).ToString();
+                        }
+                        objetos--;
+                    }
+                }
+                else
+                {
+                    retorno.Add(0);
+                    horaInicioReserva = (Int32.Parse(horaInicioReserva) + 1).ToString();
+                }
+            }
+            return retorno;
         }
 
         private void Button1_Click(object sender, EventArgs e)
@@ -281,16 +209,8 @@ namespace Turnos
             string name = button.Text;
         }
 
-        private async void ReservarTurno_Load(object sender, EventArgs e)
+        private void ReservarTurno_Load(object sender, EventArgs e)
         {
-            //await Task.Run(() => rellenarHorasParaReserva());
-            //Principal.Instance.carga(false);
-            
-            //Application.DoEvents();
-        }
-
-
-        private void agregarControl(Control Padre, Control Hijo) { 
         }
     }
 }

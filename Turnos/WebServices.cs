@@ -49,7 +49,7 @@ namespace Turnos
                 result_get = result_get.Trim();
                 return result_get;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return "No se pudo consumir el servicio web que retorna el número de sala";
             }
@@ -64,7 +64,7 @@ namespace Turnos
                 result_get = result_get.Trim();
                 return result_get;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return "No se pudo consumir el servicio web que retorna la disponibilidad del equipo";
             }
@@ -103,7 +103,7 @@ namespace Turnos
                 result_post = result_post.Trim();
                 return result_post == "{\"existeReserva\":true}";
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 Console.WriteLine("No se pudo consumir el servicio web que valida el turno");
                 return true;
@@ -128,7 +128,7 @@ namespace Turnos
                 else
                     return true;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 Console.WriteLine("No se pudo consumir el servicio web que valida el usuario");
                 return true;
@@ -146,7 +146,7 @@ namespace Turnos
                 result_post = result_post.Trim();
                 return result_post == "{\"existeReserva\":true}";
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 Console.WriteLine("No se pudo consumir el servicio web que valida el usuario");
                 return true;
@@ -164,7 +164,7 @@ namespace Turnos
                 result_post = result_post.Trim();
                 return result_post == "{\"existeReserva\":true}";
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 Console.WriteLine("No se pudo consumir el servicio web que valida el usuario");
                 return true;

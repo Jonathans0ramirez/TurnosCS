@@ -29,6 +29,12 @@ namespace Turnos
             set { panelContainer = value; }
         }
 
+        public PictureBox pictureLoading
+        {
+            get { return pictureBox1; }
+            set { pictureBox1 = value; }
+        }
+
         public int horaIncialTurno = 0;
         // Constante que determina la hora inicial de reserva
 
@@ -143,18 +149,9 @@ namespace Turnos
                 {
                     hk.HookStop();
                 }
-
-                //TextBoxUser.Text = "";
-                //TextBoxPass.Text = "";
-                //LabelUsuario.Visible = true;
-                //LabelContraseña.Visible = true;
-                //TextBoxUser.Visible = true;
-                //TextBoxPass.Visible = true;
-                //BotonValidarUsuario.Visible = true;
-                //LabelIngreseNombreYPass.Visible = true;
             }
 
-            catch (Exception ex)
+            catch (Exception)
             {
             }
         }
@@ -228,13 +225,8 @@ namespace Turnos
             hk.HookStart();
             _obj = this;
 
-            ValidarTurno vt = new ValidarTurno();
-            vt.Dock = DockStyle.Fill;
-            panelContainer.Controls.Add(vt);
-
-            /*ReservarTurno rt = new ReservarTurno();
-            rt.Dock = DockStyle.Fill;
-            panelContainer.Controls.Add(rt);*/
+            ValidarTurno.Instance.Dock = DockStyle.Fill;
+            panelContainer.Controls.Add(ValidarTurno.Instance);
         }
 
 
@@ -328,26 +320,33 @@ namespace Turnos
 
         private void Reservar_Click(object sender, EventArgs e)
         {
-            if (!panelContainer.Controls.ContainsKey("ValidarTurno"))
+            if (!panelContainer.Controls.Contains(ValidarTurno.Instance))
             {
-                ValidarTurno vt = new ValidarTurno();
-                vt.Dock = DockStyle.Fill;
-                panelContainer.Controls.Add(vt);
+                ValidarTurno.Instance.Dock = DockStyle.Fill;
+                panelContainer.Controls.Add(ValidarTurno.Instance);
             }
-            panelContainer.Controls["ValidarTurno"].BringToFront();
-            ReservarTurno.Instance.Dispose();
+            ValidarTurno.Instance.BringToFront();
+            if (panelContainer.Controls.Contains(ReservarTurno.Instance))
+            {
+                //ReservarTurno.Instance.Dispose();
+                panelContainer.Controls.Remove(ReservarTurno.Instance);
+            }
+                
         }
 
         private void Verificar_Click(object sender, EventArgs e)
         {
-            carga(true);
             if (!panelContainer.Controls.Contains(ReservarTurno.Instance))
             {
                 ReservarTurno.Instance.Dock = DockStyle.Fill;
                 panelContainer.Controls.Add(ReservarTurno.Instance);
             }
             ReservarTurno.Instance.BringToFront();
-            panelContainer.Controls["ValidarTurno"].Dispose();
+            if (panelContainer.Controls.Contains(ValidarTurno.Instance))
+            {
+                //ValidarTurno.Instance.Dispose();
+                panelContainer.Controls.Remove(ValidarTurno.Instance);
+            }
         }
     }
 }
