@@ -26,6 +26,10 @@ namespace Turnos
                 }
                 return _instance;
             }
+            set
+            {
+                _instance = value;
+            }
         }
 
         public ValidarTurno()

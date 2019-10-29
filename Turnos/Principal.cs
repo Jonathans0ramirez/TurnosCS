@@ -1,6 +1,7 @@
 ﻿using Microsoft.Win32;
 using System;
 using System.Drawing;
+using System.Linq;
 using System.Security.Principal;
 using System.Threading;
 using System.Windows.Forms;
@@ -328,8 +329,8 @@ namespace Turnos
             ValidarTurno.Instance.BringToFront();
             if (panelContainer.Controls.Contains(ReservarTurno.Instance))
             {
-                //ReservarTurno.Instance.Dispose();
                 panelContainer.Controls.Remove(ReservarTurno.Instance);
+                ReservarTurno.Instance = null;
             }
                 
         }
@@ -344,8 +345,8 @@ namespace Turnos
             ReservarTurno.Instance.BringToFront();
             if (panelContainer.Controls.Contains(ValidarTurno.Instance))
             {
-                //ValidarTurno.Instance.Dispose();
                 panelContainer.Controls.Remove(ValidarTurno.Instance);
+                ValidarTurno.Instance = null;
             }
         }
     }
