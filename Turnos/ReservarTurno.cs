@@ -55,10 +55,12 @@ namespace Turnos
                 Principal.Instance.pictureLoading.Visible = true;
             });
             await pintarBotones();
+            //Hacer llamado al reloj que finalizará instancia si es necesario
+            Principal.Instance.BeginInvoke((Action)delegate ()
+            {
+                Principal.Instance.timerReserva.Start();
+            });
         }
-
-        private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
-        { }
 
         private async Task pintarBotones()
         {
@@ -125,8 +127,8 @@ namespace Turnos
         private List<int> rellenarListaHoras()
         {
             List<int> retorno = new List<int>();
-            string horaInicioReserva = servicios.obtenerHoraReserva("PISO3-PC16", 0);
-            string horaFinReserva = servicios.obtenerHoraReserva("PISO3-PC16", 1);
+            string horaInicioReserva = servicios.obtenerHoraReserva("PISO3-PC20", 0);
+            string horaFinReserva = servicios.obtenerHoraReserva("PISO3-PC20", 1);
 
             string CurDate = DateTime.Now.Hour.ToString();
 
@@ -136,7 +138,7 @@ namespace Turnos
             }
 
             string fechaInicioPC;
-            string Reservas = servicios.consultarReservasEquipo("PISO3-PC16");
+            string Reservas = servicios.consultarReservasEquipo("PISO3-PC20");
             JArray jsonArray = JArray.Parse(Reservas);
             var jsonObjects = jsonArray.OfType<JObject>().ToList();
             int objetos = jsonObjects.Count();
@@ -147,7 +149,7 @@ namespace Turnos
                 {
                     foreach (JToken signInName in jsonObjects)
                     {
-                        fechaInicioPC = (string)signInName.SelectToken("fechaInicio");
+                        fechaInicioPC = (string)signInName.SelectToken("horaInicio");
                         fechaInicioPC = fechaInicioPC.Substring(11, 2);
                         while (!fechaInicioPC.Equals(horaInicioReserva) && Int32.Parse(horaInicioReserva) < Int32.Parse(horaFinReserva))
                         {

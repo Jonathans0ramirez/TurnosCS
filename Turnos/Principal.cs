@@ -36,6 +36,12 @@ namespace Turnos
             set { pictureBox1 = value; }
         }
 
+        public System.Windows.Forms.Timer timerReserva
+        {
+            get { return timerAnimation; }
+            set { timerAnimation = value; }
+        }
+
         public int horaIncialTurno = 0;
         // Constante que determina la hora inicial de reserva
 
@@ -69,15 +75,12 @@ namespace Turnos
 
         HotKeys hk = new HotKeys();
 
-        private bool Expanded;
-
         public delegate void MakeVisibleDelegate(bool flag);
 
         public Principal()
         {
             InitializeComponent();
             Show();
-            Expanded = false;
             int x;
             x = (accionesPanel.Width / 2) - (accionesPanel_2.Width / 2);
             accionesPanel_2.Location = new Point(x, accionesPanel_2.Location.Y);
@@ -253,7 +256,20 @@ namespace Turnos
 
         private void TimerAnimation_Tick(object sender, EventArgs e)
         {
-            if(!Expanded)
+            if (!panelContainer.Controls.Contains(ValidarTurno.Instance))
+            {
+                ValidarTurno.Instance.Dock = DockStyle.Fill;
+                panelContainer.Controls.Add(ValidarTurno.Instance);
+            }
+            ValidarTurno.Instance.BringToFront();
+            if (panelContainer.Controls.Contains(ReservarTurno.Instance))
+            {
+                panelContainer.Controls.Remove(ReservarTurno.Instance);
+                ReservarTurno.Instance = null;
+            }
+            actualizarImgEstado(true, global::Turnos.Properties.Resources.icons8_instagram_check_mark_100);
+            timerAnimation.Stop();
+            /*if(!Expanded)
             {
                 accionesPanel.Height = accionesPanel.Height + 5;
                 if (accionesPanel.Height >= 100)
@@ -273,49 +289,26 @@ namespace Turnos
                     expandCollapseTransition.ShowSync(expandCollapseBtn);
                     this.Refresh();
                 }
-            }
+            }*/
         }
 
-        private void ExpandCollapseBtn_Click(object sender, EventArgs e)
+        public void actualizarImgEstado(bool estaEnReservar, Image picturePath)
         {
-            if (!Expanded)
+            if (!estaEnReservar)
             {
-                reservarLbl.Visible = true;
-                verificarLbl.Visible = true;
                 this.Refresh();
                 Thread.Sleep(10);
-                expandCollapseTransition.HideSync(expandCollapseBtn);
-                expandCollapseBtn.BackgroundImage = global::Turnos.Properties.Resources.icons8_flecha_ampliar_50;
-                expandCollapseBtn.Location = new System.Drawing.Point(12, 50);
-                timerAnimation.Start();
-                timerCollapse.Start();
+                expandCollapseTransition.HideSync(ReservationCheckingImg);
+                ReservationCheckingImg.Image = picturePath;
+                expandCollapseTransition.ShowSync(ReservationCheckingImg);
             }
             else
             {
-                reservarLbl.Visible = false;
-                verificarLbl.Visible = false;
                 this.Refresh();
                 Thread.Sleep(10);
-                expandCollapseTransition.HideSync(expandCollapseBtn);
-                expandCollapseBtn.BackgroundImage = global::Turnos.Properties.Resources.icons8_flecha_contraer_50;
-                expandCollapseBtn.Location = new System.Drawing.Point(12, 20);
-                timerAnimation.Start();
-            }
-        }
-
-        private void TimerCollapse_Tick(object sender, EventArgs e)
-        {
-            if (Expanded)
-            {
-                reservarLbl.Visible = false;
-                verificarLbl.Visible = false;
-                this.Refresh();
-                Thread.Sleep(10);
-                expandCollapseTransition.HideSync(expandCollapseBtn);
-                expandCollapseBtn.BackgroundImage = global::Turnos.Properties.Resources.icons8_flecha_contraer_50;
-                expandCollapseBtn.Location = new System.Drawing.Point(12, 20);
-                timerAnimation.Start();
-                timerCollapse.Stop();
+                expandCollapseTransition.HideSync(ReservationCheckingImg);
+                ReservationCheckingImg.Image = picturePath;
+                expandCollapseTransition.ShowSync(ReservationCheckingImg);
             }
         }
 
@@ -332,7 +325,7 @@ namespace Turnos
                 panelContainer.Controls.Remove(ReservarTurno.Instance);
                 ReservarTurno.Instance = null;
             }
-                
+            actualizarImgEstado(true, global::Turnos.Properties.Resources.icons8_instagram_check_mark_100);
         }
 
         private void Verificar_Click(object sender, EventArgs e)
@@ -348,6 +341,8 @@ namespace Turnos
                 panelContainer.Controls.Remove(ValidarTurno.Instance);
                 ValidarTurno.Instance = null;
             }
+            actualizarImgEstado(false, global::Turnos.Properties.Resources.icons8_reservation_100__1_);
+            //timerAnimation.Start();
         }
     }
 }

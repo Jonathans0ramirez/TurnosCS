@@ -59,7 +59,7 @@ namespace Turnos
         {
             try
             {
-                var uri = new Uri("http://biblioteca.udea.edu.co/turnos/services/ListarReservasPorEquipo.php?equipoConsulta=" + codComputador);
+                var uri = new Uri("http://biblioteca.udea.edu.co/turnos/services/ListarReservasPorPC.php?codigoComputador=" + codComputador);
                 var result_get = SendRequest(uri, null, "application/json", "GET");
                 result_get = result_get.Trim();
                 return result_get;
