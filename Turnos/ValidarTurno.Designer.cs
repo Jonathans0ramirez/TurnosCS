@@ -32,19 +32,17 @@
             this.labelTurnos = new System.Windows.Forms.Label();
             this.panelContrasena = new System.Windows.Forms.Panel();
             this.textBoxPass = new System.Windows.Forms.TextBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panelUsuario = new System.Windows.Forms.Panel();
+            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.textBoxUser = new System.Windows.Forms.TextBox();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.validarBtn = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.panelValidar = new System.Windows.Forms.Panel();
+            this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             this.panelValidar_2.SuspendLayout();
             this.panelContrasena.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panelUsuario.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.panelValidar.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -80,8 +78,8 @@
             this.panelContrasena.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panelContrasena.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panelContrasena.Controls.Add(this.flowLayoutPanel2);
             this.panelContrasena.Controls.Add(this.textBoxPass);
-            this.panelContrasena.Controls.Add(this.pictureBox1);
             this.panelContrasena.Location = new System.Drawing.Point(35, 194);
             this.panelContrasena.Name = "panelContrasena";
             this.panelContrasena.Size = new System.Drawing.Size(333, 26);
@@ -91,69 +89,54 @@
             // 
             this.textBoxPass.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBoxPass.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBoxPass.Location = new System.Drawing.Point(26, 3);
+            this.textBoxPass.Location = new System.Drawing.Point(12, 3);
             this.textBoxPass.Margin = new System.Windows.Forms.Padding(0, 3, 3, 3);
             this.textBoxPass.Name = "textBoxPass";
             this.textBoxPass.PasswordChar = '•';
-            this.textBoxPass.Size = new System.Drawing.Size(305, 19);
+            this.textBoxPass.Size = new System.Drawing.Size(319, 19);
             this.textBoxPass.TabIndex = 41;
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
-            this.pictureBox1.BackgroundImage = global::Turnos.Properties.Resources.icons8_lock_64;
-            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Left;
-            this.pictureBox1.Location = new System.Drawing.Point(0, 0);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(3, 3, 0, 3);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(26, 24);
-            this.pictureBox1.TabIndex = 41;
-            this.pictureBox1.TabStop = false;
             // 
             // panelUsuario
             // 
             this.panelUsuario.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panelUsuario.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panelUsuario.Controls.Add(this.flowLayoutPanel1);
             this.panelUsuario.Controls.Add(this.textBoxUser);
-            this.panelUsuario.Controls.Add(this.pictureBox2);
             this.panelUsuario.Location = new System.Drawing.Point(35, 135);
             this.panelUsuario.Name = "panelUsuario";
             this.panelUsuario.Size = new System.Drawing.Size(333, 26);
             this.panelUsuario.TabIndex = 41;
             // 
+            // flowLayoutPanel1
+            // 
+            this.flowLayoutPanel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(51)))), ((int)(((byte)(0)))));
+            this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Left;
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
+            this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(0, 0, 2, 0);
+            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(10, 24);
+            this.flowLayoutPanel1.TabIndex = 44;
+            // 
             // textBoxUser
             // 
             this.textBoxUser.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBoxUser.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBoxUser.Location = new System.Drawing.Point(26, 3);
+            this.textBoxUser.Location = new System.Drawing.Point(12, 3);
             this.textBoxUser.Margin = new System.Windows.Forms.Padding(0);
             this.textBoxUser.Name = "textBoxUser";
-            this.textBoxUser.Size = new System.Drawing.Size(305, 19);
+            this.textBoxUser.Size = new System.Drawing.Size(319, 19);
             this.textBoxUser.TabIndex = 41;
-            // 
-            // pictureBox2
-            // 
-            this.pictureBox2.BackColor = System.Drawing.Color.Transparent;
-            this.pictureBox2.BackgroundImage = global::Turnos.Properties.Resources.icons8_customer_64;
-            this.pictureBox2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pictureBox2.Dock = System.Windows.Forms.DockStyle.Left;
-            this.pictureBox2.Location = new System.Drawing.Point(0, 0);
-            this.pictureBox2.Margin = new System.Windows.Forms.Padding(0);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(26, 24);
-            this.pictureBox2.TabIndex = 41;
-            this.pictureBox2.TabStop = false;
             // 
             // validarBtn
             // 
             this.validarBtn.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.validarBtn.BackColor = System.Drawing.Color.CadetBlue;
+            this.validarBtn.BackColor = System.Drawing.Color.DarkGreen;
             this.validarBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.validarBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.validarBtn.Font = new System.Drawing.Font("Georgia", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.validarBtn.ForeColor = System.Drawing.SystemColors.Control;
             this.validarBtn.Location = new System.Drawing.Point(134, 242);
             this.validarBtn.Margin = new System.Windows.Forms.Padding(0);
             this.validarBtn.Name = "validarBtn";
@@ -194,6 +177,16 @@
             this.panelValidar.Size = new System.Drawing.Size(721, 501);
             this.panelValidar.TabIndex = 36;
             // 
+            // flowLayoutPanel2
+            // 
+            this.flowLayoutPanel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(51)))), ((int)(((byte)(0)))));
+            this.flowLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Left;
+            this.flowLayoutPanel2.Location = new System.Drawing.Point(0, 0);
+            this.flowLayoutPanel2.Margin = new System.Windows.Forms.Padding(0, 0, 2, 0);
+            this.flowLayoutPanel2.Name = "flowLayoutPanel2";
+            this.flowLayoutPanel2.Size = new System.Drawing.Size(10, 24);
+            this.flowLayoutPanel2.TabIndex = 45;
+            // 
             // ValidarTurno
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -205,10 +198,8 @@
             this.panelValidar_2.PerformLayout();
             this.panelContrasena.ResumeLayout(false);
             this.panelContrasena.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panelUsuario.ResumeLayout(false);
             this.panelUsuario.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.panelValidar.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -221,11 +212,11 @@
         private System.Windows.Forms.Button validarBtn;
         private System.Windows.Forms.Panel panelContrasena;
         private System.Windows.Forms.TextBox textBoxPass;
-        private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Panel panelUsuario;
         private System.Windows.Forms.TextBox textBoxUser;
-        private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.Panel panelValidar;
         private System.Windows.Forms.Label labelTurnos;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
     }
 }

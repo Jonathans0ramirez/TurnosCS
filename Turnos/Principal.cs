@@ -218,14 +218,15 @@ namespace Turnos
         private void Turnos_Closing(object sender, System.Windows.Forms.FormClosingEventArgs e)
         {
             e.Cancel = true;
-            lockTaskManager(false);
+            //lockTaskManager(false);
             //makeVisible(false);
-            hk.HookStop();
+            //hk.HookStop();
         }
 
         // Ejecuta el evento cuando la ventana está cargada
         private void frmMain_Load(System.Object sender, System.EventArgs e)
         {
+            /*AQUÍ DEBE IR LA LLAMADA AL SERVICIO QUE VERIFICARÁ SI EL EQUIPO ESTÁ EN 130 HORAS*/
             hk.HookStart();
             _obj = this;
 
@@ -284,7 +285,7 @@ namespace Turnos
 
         }
 
-        private void Reservar_Click(object sender, EventArgs e)
+        private void Verificar_Click(object sender, EventArgs e)
         {
             if (!panelContainer.Controls.Contains(ValidarTurno.Instance))
             {
@@ -301,7 +302,7 @@ namespace Turnos
             timerAnimation.Stop();
         }
 
-        private void Verificar_Click(object sender, EventArgs e)
+        private void Reservar_Click(object sender, EventArgs e)
         {
             if (!panelContainer.Controls.Contains(ReservarTurno.Instance))
             {
@@ -314,8 +315,6 @@ namespace Turnos
                 panelContainer.Controls.Remove(ValidarTurno.Instance);
                 ValidarTurno.Instance = null;
             }
-            //actualizarImgEstado(global::Turnos.Properties.Resources.icons8_reservation_100__1_);
-            //timerAnimation.Start();
         }
     }
 }

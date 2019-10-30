@@ -29,25 +29,29 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.button1 = new System.Windows.Forms.Button();
+            this.reservarBtn = new System.Windows.Forms.Button();
             this.flPanelHoras = new System.Windows.Forms.FlowLayoutPanel();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.principalLbl = new System.Windows.Forms.Label();
+            this.cancelarBtn = new System.Windows.Forms.Button();
+            this.paneAcciones = new System.Windows.Forms.FlowLayoutPanel();
+            this.paneAcciones.SuspendLayout();
             this.SuspendLayout();
             // 
-            // button1
+            // reservarBtn
             // 
-            this.button1.BackColor = System.Drawing.Color.Maroon;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.ForeColor = System.Drawing.SystemColors.Control;
-            this.button1.Location = new System.Drawing.Point(397, 333);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(97, 30);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "Reservar";
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.Button1_Click);
+            this.reservarBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.reservarBtn.BackColor = System.Drawing.Color.DarkSlateGray;
+            this.reservarBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.reservarBtn.ForeColor = System.Drawing.SystemColors.Control;
+            this.reservarBtn.Location = new System.Drawing.Point(106, 3);
+            this.reservarBtn.Name = "reservarBtn";
+            this.reservarBtn.Size = new System.Drawing.Size(97, 30);
+            this.reservarBtn.TabIndex = 0;
+            this.reservarBtn.Text = "Reservar";
+            this.reservarBtn.UseVisualStyleBackColor = false;
+            this.reservarBtn.Click += new System.EventHandler(this.ReservarBtn_Click);
             // 
             // flPanelHoras
             // 
@@ -74,26 +78,54 @@
     " metus.";
             this.principalLbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // cancelarBtn
+            // 
+            this.cancelarBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.cancelarBtn.BackColor = System.Drawing.Color.Maroon;
+            this.cancelarBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.cancelarBtn.ForeColor = System.Drawing.SystemColors.Control;
+            this.cancelarBtn.Location = new System.Drawing.Point(3, 3);
+            this.cancelarBtn.Name = "cancelarBtn";
+            this.cancelarBtn.Size = new System.Drawing.Size(97, 30);
+            this.cancelarBtn.TabIndex = 0;
+            this.cancelarBtn.Text = "Cancelar";
+            this.cancelarBtn.UseVisualStyleBackColor = false;
+            this.cancelarBtn.Click += new System.EventHandler(this.CancelarBtn_Click);
+            // 
+            // paneAcciones
+            // 
+            this.paneAcciones.AutoSize = true;
+            this.paneAcciones.Controls.Add(this.cancelarBtn);
+            this.paneAcciones.Controls.Add(this.reservarBtn);
+            this.paneAcciones.Location = new System.Drawing.Point(329, 335);
+            this.paneAcciones.Name = "paneAcciones";
+            this.paneAcciones.Size = new System.Drawing.Size(206, 36);
+            this.paneAcciones.TabIndex = 3;
+            // 
             // ReservarTurno
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.paneAcciones);
             this.Controls.Add(this.principalLbl);
             this.Controls.Add(this.flPanelHoras);
-            this.Controls.Add(this.button1);
             this.Name = "ReservarTurno";
             this.Size = new System.Drawing.Size(882, 453);
             this.Load += new System.EventHandler(this.ReservarTurno_Load);
+            this.paneAcciones.ResumeLayout(false);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button reservarBtn;
         private System.Windows.Forms.FlowLayoutPanel flPanelHoras;
         private System.Windows.Forms.Timer timer1;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private System.Windows.Forms.Label principalLbl;
+        private System.Windows.Forms.Button cancelarBtn;
+        private System.Windows.Forms.FlowLayoutPanel paneAcciones;
     }
 }

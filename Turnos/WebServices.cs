@@ -116,14 +116,10 @@ namespace Turnos
             {
                 string json = "{\"usuario\":\"" + usuario + "\",\"clave\":\"" + clave + "\"}";
                 var data = Encoding.UTF8.GetBytes(json);
-                var uri = new Uri("http://biblioteca.udea.edu.co/turnos/services/loguearusuario.php");
+                var uri = new Uri("http://biblioteca.udea.edu.co/turnos/services/loguearusuarioreserva.php");
                 var result_post = SendRequest(uri, data, "application/json", "POST");
                 result_post = result_post.Trim();
-                if (result_post == "{\"VALIDADO\":false,\"RESULTADO\":\"ERROR 002: El usuario no existe en el oid\"}")
-                    return false;
-                else if (result_post == "{\"VALIDADO\":false,\"RESULTADO\":\"\"}")
-                    return false;
-                else if (result_post == "{\"VALIDADO\":false,\"RESULTADO\":\"ERROR 003: Password incorrecto\"}")
+                if (result_post.Contains("{\"VALIDADO\":false"))
                     return false;
                 else
                     return true;
@@ -213,6 +209,34 @@ namespace Turnos
             catch (Exception)
             {
                 Console.WriteLine("No se pudo consumir el servicio web que retorna la hora de inicio de la sala del pc");
+                return null;
+            }
+        }
+
+        public string obtenerMaxReservasEquipo(string codComputador)
+        {
+            try
+            {
+                string numMaxReservas = string.Empty;
+                string idSala = consultarSalaPorPC(codComputador);
+                idSala = idSala.Trim('"');
+                var uri = new Uri("http://biblioteca.udea.edu.co/turnos/services/ListarSalaPorCodigoSala.php?idSala=" + idSala);
+                var result_post = SendRequest(uri, null, "application/json", "GET");
+                result_post = result_post.Trim();
+
+                JArray jsonArray = JArray.Parse(result_post);
+                var jsonObjects = jsonArray.OfType<JObject>().ToList();
+                CultureInfo ci = new CultureInfo("Es-Es");
+                var diaSemana = ci.DateTimeFormat.GetDayName(DateTime.Now.DayOfWeek);
+                foreach (JToken sala in jsonObjects)
+                {
+                    numMaxReservas = (string)sala.SelectToken("maxHorasPordia");
+                }
+                return numMaxReservas;
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("No se pudo consumir el servicio web que retorna el número máximo de reservas por día de la sala del pc");
                 return null;
             }
         }
