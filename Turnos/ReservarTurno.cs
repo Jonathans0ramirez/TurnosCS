@@ -42,6 +42,7 @@ namespace Turnos
         public ReservarTurno()
         {
             InitializeComponent();
+            principalLbl.Visible = false;
             button1.Visible = false;
             backgroundWorker1.RunWorkerAsync();
         }
@@ -52,7 +53,8 @@ namespace Turnos
             BackgroundWorker worker = sender as BackgroundWorker;
             Principal.Instance.BeginInvoke((Action)delegate ()
             {
-                Principal.Instance.pictureLoading.Visible = true;
+                //Principal.Instance.pictureStatus.Visible = true;
+                Principal.Instance.actualizarImgEstado(global::Turnos.Properties.Resources.Double_Ring_1s_64px__1_);
             });
             await pintarBotones();
             //Hacer llamado al reloj que finalizará instancia si es necesario
@@ -116,10 +118,12 @@ namespace Turnos
             });
             Principal.Instance.BeginInvoke((Action)delegate ()
             {
-                Principal.Instance.pictureLoading.Visible = false;
+                //Principal.Instance.pictureStatus.Visible = false;
+                Principal.Instance.actualizarImgEstado(global::Turnos.Properties.Resources.icons8_reservation_100__1_);
             });
             this.BeginInvoke((Action)delegate ()
             {
+                principalLbl.Visible = true;
                 button1.Visible = true;
             });
         }

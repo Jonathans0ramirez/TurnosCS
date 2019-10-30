@@ -73,6 +73,16 @@ namespace Turnos.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Double_Ring_1s_64px__1_ {
+            get {
+                object obj = ResourceManager.GetObject("Double_Ring_1s_64px__1_", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap icons8_customer_64 {
             get {
                 object obj = ResourceManager.GetObject("icons8-customer-64", resourceCulture);

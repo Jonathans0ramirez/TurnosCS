@@ -152,5 +152,11 @@
   <ItemGroup>
     <None Include="Resources\Double Ring-1s-50px %281%29.gif" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Double Ring-1s-64px %281%29.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Double Ring-1s-64px %282%29.gif" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

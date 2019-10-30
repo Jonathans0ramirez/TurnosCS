@@ -29,29 +29,25 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            BunifuAnimatorNS.Animation animation11 = new BunifuAnimatorNS.Animation();
+            BunifuAnimatorNS.Animation animation2 = new BunifuAnimatorNS.Animation();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Principal));
             this.timerAnimation = new System.Windows.Forms.Timer(this.components);
             this.accionesPanel = new System.Windows.Forms.Panel();
-            this.expandCollapseBtn = new ns1.BunifuFlatButton();
             this.menuBtn = new ns1.BunifuFlatButton();
             this.accionesPanel_2 = new System.Windows.Forms.Panel();
             this.verificarLbl = new ns1.BunifuCustomLabel();
-            this.verificarBtnImg = new ns1.BunifuFlatButton();
             this.reservarLbl = new ns1.BunifuCustomLabel();
-            this.reservarBtnImg = new ns1.BunifuFlatButton();
             this.headerPanel = new System.Windows.Forms.Panel();
-            this.ReservationCheckingImg = new System.Windows.Forms.PictureBox();
-            this.pictureBox4 = new System.Windows.Forms.PictureBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.expandCollapseTransition = new BunifuAnimatorNS.BunifuTransition(this.components);
             this.panelContainer = new System.Windows.Forms.Panel();
+            this.ReservationLoadCheckingImg = new System.Windows.Forms.PictureBox();
+            this.expandCollapseBtn = new ns1.BunifuFlatButton();
+            this.verificarBtnImg = new ns1.BunifuFlatButton();
+            this.reservarBtnImg = new ns1.BunifuFlatButton();
             this.accionesPanel.SuspendLayout();
             this.accionesPanel_2.SuspendLayout();
             this.headerPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.ReservationCheckingImg)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ReservationLoadCheckingImg)).BeginInit();
             this.SuspendLayout();
             // 
             // timerAnimation
@@ -72,41 +68,6 @@
             this.accionesPanel.Name = "accionesPanel";
             this.accionesPanel.Size = new System.Drawing.Size(920, 70);
             this.accionesPanel.TabIndex = 11;
-            // 
-            // expandCollapseBtn
-            // 
-            this.expandCollapseBtn.Activecolor = System.Drawing.Color.Transparent;
-            this.expandCollapseBtn.BackColor = System.Drawing.Color.Transparent;
-            this.expandCollapseBtn.BackgroundImage = global::Turnos.Properties.Resources.icons8_flecha_contraer_50;
-            this.expandCollapseBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.expandCollapseBtn.BorderRadius = 0;
-            this.expandCollapseBtn.ButtonText = "";
-            this.expandCollapseBtn.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.expandCollapseTransition.SetDecoration(this.expandCollapseBtn, BunifuAnimatorNS.DecorationType.None);
-            this.expandCollapseBtn.DisabledColor = System.Drawing.Color.Transparent;
-            this.expandCollapseBtn.Iconcolor = System.Drawing.Color.Transparent;
-            this.expandCollapseBtn.Iconimage = null;
-            this.expandCollapseBtn.Iconimage_right = null;
-            this.expandCollapseBtn.Iconimage_right_Selected = null;
-            this.expandCollapseBtn.Iconimage_Selected = null;
-            this.expandCollapseBtn.IconMarginLeft = 0;
-            this.expandCollapseBtn.IconMarginRight = 0;
-            this.expandCollapseBtn.IconRightVisible = false;
-            this.expandCollapseBtn.IconRightZoom = 0D;
-            this.expandCollapseBtn.IconVisible = true;
-            this.expandCollapseBtn.IconZoom = 90D;
-            this.expandCollapseBtn.IsTab = false;
-            this.expandCollapseBtn.Location = new System.Drawing.Point(12, 20);
-            this.expandCollapseBtn.Name = "expandCollapseBtn";
-            this.expandCollapseBtn.Normalcolor = System.Drawing.Color.Transparent;
-            this.expandCollapseBtn.OnHovercolor = System.Drawing.Color.Transparent;
-            this.expandCollapseBtn.OnHoverTextColor = System.Drawing.Color.White;
-            this.expandCollapseBtn.selected = false;
-            this.expandCollapseBtn.Size = new System.Drawing.Size(26, 30);
-            this.expandCollapseBtn.TabIndex = 15;
-            this.expandCollapseBtn.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.expandCollapseBtn.Textcolor = System.Drawing.Color.White;
-            this.expandCollapseBtn.TextFont = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             // 
             // menuBtn
             // 
@@ -169,6 +130,107 @@
             this.verificarLbl.Visible = false;
             this.verificarLbl.Click += new System.EventHandler(this.Verificar_Click);
             // 
+            // reservarLbl
+            // 
+            this.reservarLbl.AutoSize = true;
+            this.expandCollapseTransition.SetDecoration(this.reservarLbl, BunifuAnimatorNS.DecorationType.None);
+            this.reservarLbl.Font = new System.Drawing.Font("Georgia", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.reservarLbl.ForeColor = System.Drawing.SystemColors.Control;
+            this.reservarLbl.Location = new System.Drawing.Point(3, 74);
+            this.reservarLbl.Name = "reservarLbl";
+            this.reservarLbl.Size = new System.Drawing.Size(72, 16);
+            this.reservarLbl.TabIndex = 11;
+            this.reservarLbl.Text = "Reservar";
+            this.reservarLbl.Visible = false;
+            this.reservarLbl.Click += new System.EventHandler(this.Reservar_Click);
+            // 
+            // headerPanel
+            // 
+            this.headerPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(51)))), ((int)(((byte)(0)))));
+            this.headerPanel.Controls.Add(this.ReservationLoadCheckingImg);
+            this.expandCollapseTransition.SetDecoration(this.headerPanel, BunifuAnimatorNS.DecorationType.None);
+            this.headerPanel.Dock = System.Windows.Forms.DockStyle.Top;
+            this.headerPanel.Location = new System.Drawing.Point(0, 0);
+            this.headerPanel.Name = "headerPanel";
+            this.headerPanel.Size = new System.Drawing.Size(920, 69);
+            this.headerPanel.TabIndex = 12;
+            // 
+            // expandCollapseTransition
+            // 
+            this.expandCollapseTransition.AnimationType = BunifuAnimatorNS.AnimationType.Mosaic;
+            this.expandCollapseTransition.Cursor = null;
+            animation2.AnimateOnlyDifferences = true;
+            animation2.BlindCoeff = ((System.Drawing.PointF)(resources.GetObject("animation2.BlindCoeff")));
+            animation2.LeafCoeff = 0F;
+            animation2.MaxTime = 1F;
+            animation2.MinTime = 0F;
+            animation2.MosaicCoeff = ((System.Drawing.PointF)(resources.GetObject("animation2.MosaicCoeff")));
+            animation2.MosaicShift = ((System.Drawing.PointF)(resources.GetObject("animation2.MosaicShift")));
+            animation2.MosaicSize = 20;
+            animation2.Padding = new System.Windows.Forms.Padding(30);
+            animation2.RotateCoeff = 0F;
+            animation2.RotateLimit = 0F;
+            animation2.ScaleCoeff = ((System.Drawing.PointF)(resources.GetObject("animation2.ScaleCoeff")));
+            animation2.SlideCoeff = ((System.Drawing.PointF)(resources.GetObject("animation2.SlideCoeff")));
+            animation2.TimeCoeff = 0F;
+            animation2.TransparencyCoeff = 0F;
+            this.expandCollapseTransition.DefaultAnimation = animation2;
+            // 
+            // panelContainer
+            // 
+            this.expandCollapseTransition.SetDecoration(this.panelContainer, BunifuAnimatorNS.DecorationType.None);
+            this.panelContainer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelContainer.Location = new System.Drawing.Point(0, 69);
+            this.panelContainer.Name = "panelContainer";
+            this.panelContainer.Size = new System.Drawing.Size(920, 445);
+            this.panelContainer.TabIndex = 13;
+            // 
+            // ReservationLoadCheckingImg
+            // 
+            this.expandCollapseTransition.SetDecoration(this.ReservationLoadCheckingImg, BunifuAnimatorNS.DecorationType.None);
+            this.ReservationLoadCheckingImg.Image = global::Turnos.Properties.Resources.icons8_instagram_check_mark_100;
+            this.ReservationLoadCheckingImg.Location = new System.Drawing.Point(3, 3);
+            this.ReservationLoadCheckingImg.Name = "ReservationLoadCheckingImg";
+            this.ReservationLoadCheckingImg.Size = new System.Drawing.Size(64, 64);
+            this.ReservationLoadCheckingImg.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.ReservationLoadCheckingImg.TabIndex = 11;
+            this.ReservationLoadCheckingImg.TabStop = false;
+            // 
+            // expandCollapseBtn
+            // 
+            this.expandCollapseBtn.Activecolor = System.Drawing.Color.Transparent;
+            this.expandCollapseBtn.BackColor = System.Drawing.Color.Transparent;
+            this.expandCollapseBtn.BackgroundImage = global::Turnos.Properties.Resources.icons8_flecha_contraer_50;
+            this.expandCollapseBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.expandCollapseBtn.BorderRadius = 0;
+            this.expandCollapseBtn.ButtonText = "";
+            this.expandCollapseBtn.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.expandCollapseTransition.SetDecoration(this.expandCollapseBtn, BunifuAnimatorNS.DecorationType.None);
+            this.expandCollapseBtn.DisabledColor = System.Drawing.Color.Transparent;
+            this.expandCollapseBtn.Iconcolor = System.Drawing.Color.Transparent;
+            this.expandCollapseBtn.Iconimage = null;
+            this.expandCollapseBtn.Iconimage_right = null;
+            this.expandCollapseBtn.Iconimage_right_Selected = null;
+            this.expandCollapseBtn.Iconimage_Selected = null;
+            this.expandCollapseBtn.IconMarginLeft = 0;
+            this.expandCollapseBtn.IconMarginRight = 0;
+            this.expandCollapseBtn.IconRightVisible = false;
+            this.expandCollapseBtn.IconRightZoom = 0D;
+            this.expandCollapseBtn.IconVisible = true;
+            this.expandCollapseBtn.IconZoom = 90D;
+            this.expandCollapseBtn.IsTab = false;
+            this.expandCollapseBtn.Location = new System.Drawing.Point(12, 20);
+            this.expandCollapseBtn.Name = "expandCollapseBtn";
+            this.expandCollapseBtn.Normalcolor = System.Drawing.Color.Transparent;
+            this.expandCollapseBtn.OnHovercolor = System.Drawing.Color.Transparent;
+            this.expandCollapseBtn.OnHoverTextColor = System.Drawing.Color.White;
+            this.expandCollapseBtn.selected = false;
+            this.expandCollapseBtn.Size = new System.Drawing.Size(26, 30);
+            this.expandCollapseBtn.TabIndex = 15;
+            this.expandCollapseBtn.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.expandCollapseBtn.Textcolor = System.Drawing.Color.White;
+            this.expandCollapseBtn.TextFont = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            // 
             // verificarBtnImg
             // 
             this.verificarBtnImg.Activecolor = System.Drawing.Color.Transparent;
@@ -204,20 +266,6 @@
             this.verificarBtnImg.Textcolor = System.Drawing.Color.White;
             this.verificarBtnImg.TextFont = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.verificarBtnImg.Click += new System.EventHandler(this.Verificar_Click);
-            // 
-            // reservarLbl
-            // 
-            this.reservarLbl.AutoSize = true;
-            this.expandCollapseTransition.SetDecoration(this.reservarLbl, BunifuAnimatorNS.DecorationType.None);
-            this.reservarLbl.Font = new System.Drawing.Font("Georgia", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.reservarLbl.ForeColor = System.Drawing.SystemColors.Control;
-            this.reservarLbl.Location = new System.Drawing.Point(3, 74);
-            this.reservarLbl.Name = "reservarLbl";
-            this.reservarLbl.Size = new System.Drawing.Size(72, 16);
-            this.reservarLbl.TabIndex = 11;
-            this.reservarLbl.Text = "Reservar";
-            this.reservarLbl.Visible = false;
-            this.reservarLbl.Click += new System.EventHandler(this.Reservar_Click);
             // 
             // reservarBtnImg
             // 
@@ -255,85 +303,6 @@
             this.reservarBtnImg.TextFont = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.reservarBtnImg.Click += new System.EventHandler(this.Reservar_Click);
             // 
-            // headerPanel
-            // 
-            this.headerPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(51)))), ((int)(((byte)(0)))));
-            this.headerPanel.Controls.Add(this.ReservationCheckingImg);
-            this.headerPanel.Controls.Add(this.pictureBox4);
-            this.headerPanel.Controls.Add(this.pictureBox1);
-            this.expandCollapseTransition.SetDecoration(this.headerPanel, BunifuAnimatorNS.DecorationType.None);
-            this.headerPanel.Dock = System.Windows.Forms.DockStyle.Top;
-            this.headerPanel.Location = new System.Drawing.Point(0, 0);
-            this.headerPanel.Name = "headerPanel";
-            this.headerPanel.Size = new System.Drawing.Size(920, 69);
-            this.headerPanel.TabIndex = 12;
-            // 
-            // ReservationCheckingImg
-            // 
-            this.expandCollapseTransition.SetDecoration(this.ReservationCheckingImg, BunifuAnimatorNS.DecorationType.None);
-            this.ReservationCheckingImg.Image = global::Turnos.Properties.Resources.icons8_instagram_check_mark_100;
-            this.ReservationCheckingImg.Location = new System.Drawing.Point(3, 3);
-            this.ReservationCheckingImg.Name = "ReservationCheckingImg";
-            this.ReservationCheckingImg.Size = new System.Drawing.Size(64, 64);
-            this.ReservationCheckingImg.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.ReservationCheckingImg.TabIndex = 11;
-            this.ReservationCheckingImg.TabStop = false;
-            // 
-            // pictureBox4
-            // 
-            this.pictureBox4.BackColor = System.Drawing.Color.Transparent;
-            this.expandCollapseTransition.SetDecoration(this.pictureBox4, BunifuAnimatorNS.DecorationType.None);
-            this.pictureBox4.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox4.Image")));
-            this.pictureBox4.Location = new System.Drawing.Point(690, 12);
-            this.pictureBox4.Name = "pictureBox4";
-            this.pictureBox4.Size = new System.Drawing.Size(50, 50);
-            this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
-            this.pictureBox4.TabIndex = 0;
-            this.pictureBox4.TabStop = false;
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
-            this.expandCollapseTransition.SetDecoration(this.pictureBox1, BunifuAnimatorNS.DecorationType.None);
-            this.pictureBox1.Image = global::Turnos.Properties.Resources.Double_Ring_1s_50px__1_;
-            this.pictureBox1.Location = new System.Drawing.Point(858, 12);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(50, 50);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
-            this.pictureBox1.Visible = false;
-            // 
-            // expandCollapseTransition
-            // 
-            this.expandCollapseTransition.AnimationType = BunifuAnimatorNS.AnimationType.ScaleAndRotate;
-            this.expandCollapseTransition.Cursor = null;
-            animation11.AnimateOnlyDifferences = true;
-            animation11.BlindCoeff = ((System.Drawing.PointF)(resources.GetObject("animation11.BlindCoeff")));
-            animation11.LeafCoeff = 0F;
-            animation11.MaxTime = 1F;
-            animation11.MinTime = 0F;
-            animation11.MosaicCoeff = ((System.Drawing.PointF)(resources.GetObject("animation11.MosaicCoeff")));
-            animation11.MosaicShift = ((System.Drawing.PointF)(resources.GetObject("animation11.MosaicShift")));
-            animation11.MosaicSize = 0;
-            animation11.Padding = new System.Windows.Forms.Padding(30);
-            animation11.RotateCoeff = 0.5F;
-            animation11.RotateLimit = 0.2F;
-            animation11.ScaleCoeff = ((System.Drawing.PointF)(resources.GetObject("animation11.ScaleCoeff")));
-            animation11.SlideCoeff = ((System.Drawing.PointF)(resources.GetObject("animation11.SlideCoeff")));
-            animation11.TimeCoeff = 0F;
-            animation11.TransparencyCoeff = 0F;
-            this.expandCollapseTransition.DefaultAnimation = animation11;
-            // 
-            // panelContainer
-            // 
-            this.expandCollapseTransition.SetDecoration(this.panelContainer, BunifuAnimatorNS.DecorationType.None);
-            this.panelContainer.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelContainer.Location = new System.Drawing.Point(0, 69);
-            this.panelContainer.Name = "panelContainer";
-            this.panelContainer.Size = new System.Drawing.Size(920, 445);
-            this.panelContainer.TabIndex = 13;
-            // 
             // Principal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -356,10 +325,7 @@
             this.accionesPanel_2.ResumeLayout(false);
             this.accionesPanel_2.PerformLayout();
             this.headerPanel.ResumeLayout(false);
-            this.headerPanel.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.ReservationCheckingImg)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ReservationLoadCheckingImg)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -377,8 +343,6 @@
         private System.Windows.Forms.Timer timerAnimation;
         private System.Windows.Forms.Panel panelContainer;
         private ns1.BunifuFlatButton expandCollapseBtn;
-        private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.PictureBox pictureBox4;
-        private System.Windows.Forms.PictureBox ReservationCheckingImg;
+        private System.Windows.Forms.PictureBox ReservationLoadCheckingImg;
     }
 }
