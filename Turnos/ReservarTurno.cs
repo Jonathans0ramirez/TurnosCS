@@ -11,8 +11,6 @@ namespace Turnos
 {
     public partial class ReservarTurno : UserControl
     {
-        int spaceControl = 1;
-
         string fechaHoy = DateTime.Now.ToString("yyyy-MM-dd ");
 
         WebServices servicios = new WebServices();
@@ -50,16 +48,16 @@ namespace Turnos
             InitializeComponent();
             principalLbl.Visible = false;
             paneAcciones.Visible = false;
-            backgroundWorker1.RunWorkerAsync();
+            backgroundWorkerHorasBtns.RunWorkerAsync();
         }
 
 
-        private async void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
+        private async void backgroundWorkerHorasBtns_DoWork(object sender, DoWorkEventArgs e)
         {
             BackgroundWorker worker = sender as BackgroundWorker;
             Principal.Instance.BeginInvoke((Action)delegate ()
             {
-                Principal.Instance.actualizarImgEstado(global::Turnos.Properties.Resources.Double_Ring_1s_64px__1_);
+                Principal.Instance.actualizarImgEstado(global::Turnos.Properties.Resources.Double_Ring_1s_64px);
             });
             await pintarBotones();
             //Hacer llamado al reloj que finalizará instancia si es necesario
@@ -91,12 +89,14 @@ namespace Turnos
                                     {
                                         if (!btn.IsDisposed)
                                         {
-                                            btn.BackColor = System.Drawing.Color.FromArgb(0, 105, 92);
+                                            //btn.BackColor = System.Drawing.Color.FromArgb(0, 149, 121);
+                                            btn.BackColor = System.Drawing.Color.FromArgb(0, 114, 151);
                                             btn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
                                             btn.ForeColor = System.Drawing.SystemColors.Control;
                                             if (item == 1)
                                             {
                                                 btn.Enabled = false;
+                                                btn.BackColor = System.Drawing.Color.FromArgb(114, 33, 89);
                                             }
                                             btn.Size = new System.Drawing.Size(97, 30);
                                             string auxHour = string.Empty;
@@ -186,36 +186,8 @@ namespace Turnos
 
         private void ReservarBtn_Click(object sender, EventArgs e)
         {
-            string jsonHorario = string.Empty;
-            bool moreThanOne = false;
-            foreach (var button in flPanelHoras.Controls.OfType<Button>())
-            {
-                if (button.BackColor.Equals(Color.DarkGreen))
-                {
-                    TextBox t1 = new TextBox();
-                    this.Controls.Add(t1);
-                    t1.Top = spaceControl * 25;
-                    t1.Left = 100;
-                    t1.Text = button.Text;
-                    spaceControl++;
-
-                    if (moreThanOne)
-                    {
-                        jsonHorario = String.Concat(jsonHorario, ",");
-                    }
-
-                    jsonHorario = String.Concat(jsonHorario, "{\"horaInicioReserva\": \"" + fechaHoy + button.Text.Substring(0, 5) + ":00\", \"horaFinReserva\": " + fechaHoy + button.Text.Substring(8, 5) + ":00\"}");
-                    moreThanOne = true;
-                }
-            }
-            //servicios.registrarReserva(confManager.ReadSetting("Usuario"), jsonHorario);
-
-            /* ASÍ FUNCIONABA */
-            //var horaInicioReserva = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-            //var horaFinReserva = DateTime.Now.AddHours(1).ToString("yyyy-MM-dd HH:00:00");
-            //string horasReserva = "[{\"horaInicioReserva\":\"" + horaInicioReserva + "\",\"horaFinReserva\":\"" + horaFinReserva + "\"}]";
-
-            //servicios.registrarReserva(textBoxUser.Text, horasReserva);
+            Principal.Instance.actualizarImgEstado(global::Turnos.Properties.Resources.Double_Ring_1s_64px);
+            backgroundWorkerReservar.RunWorkerAsync();
         }
 
         private void CancelarBtn_Click(object sender, EventArgs e)
@@ -230,6 +202,7 @@ namespace Turnos
             if (Principal.Instance.pnlContainer.Controls.Contains(ReservarTurno.Instance))
             {
                 Principal.Instance.pnlContainer.Controls.Remove(ReservarTurno.Instance);
+                ReservarTurno.Instance.Dispose();
                 ReservarTurno.Instance = null;
             }
             Principal.Instance.BeginInvoke((Action)delegate ()
@@ -244,10 +217,10 @@ namespace Turnos
             Button button = sender as Button;
             if (button.BackColor == Color.DarkGreen)
             {
-                button.BackColor = Color.FromArgb(0, 105, 92);
+                button.BackColor = Color.FromArgb(0, 114, 151);
                 contadorBotonesReserva--;
             }
-            else if (button.BackColor == Color.FromArgb(0, 105, 92) && contadorBotonesReserva < numeroMaximoReservasDia)
+            else if (button.BackColor == Color.FromArgb(0, 114, 151) && contadorBotonesReserva < numeroMaximoReservasDia)
             {
                 button.BackColor = Color.DarkGreen;
                 contadorBotonesReserva++;
@@ -260,6 +233,43 @@ namespace Turnos
             int x;
             x = (this.Width / 2) - (paneAcciones.Width / 2);
             paneAcciones.Location = new Point(x, paneAcciones.Location.Y);
+        }
+
+        private void backgroundWorkerReservar_DoWork(object sender, DoWorkEventArgs e)
+        {
+            string jsonHorario = string.Empty;
+            bool moreThanOne = false;
+            foreach (var button in flPanelHoras.Controls.OfType<Button>())
+            {
+                if (button.BackColor.Equals(Color.DarkGreen))
+                {
+                    if (moreThanOne)
+                    {
+                        jsonHorario = String.Concat(jsonHorario, ",");
+                    }
+
+                    jsonHorario = String.Concat(jsonHorario, "{\"horaInicioReserva\": \"" + fechaHoy + button.Text.Substring(0, 5) + ":00\", \"horaFinReserva\": \"" + fechaHoy + button.Text.Substring(8, 5) + ":00\"}");
+                    moreThanOne = true;
+                }
+            }
+            string resultadoCrearReserva = servicios.registrarReserva(confManager.ReadSetting("Usuario"), jsonHorario);
+            Principal.Instance.BeginInvoke((Action)delegate ()
+            {
+                Principal.Instance.actualizarImgEstado(global::Turnos.Properties.Resources.icons8_reservation_100__1_);
+            });
+
+            if (resultadoCrearReserva.Contains("\"La reserva No fue creada"))
+            {
+                CustomDialog.ShowMessage("La reserva no fue creada, ya que usted excedió el número máximo de reservas por día", "Reserva no creada");
+            }
+            else if (resultadoCrearReserva.Contains("\"La Reserva fue creada exitosamente.\""))
+            {
+                CustomDialog.ShowMessage("Bienvenid@", "Reserva creada exitosamente");
+            }
+            else if (resultadoCrearReserva.Contains("\"Reserva no creada"))
+            {
+                CustomDialog.ShowMessage("Otro usuario acaba de reservar el mismo equipo, lo invitamos a reservar en otro de nuestros equipos", "Reserva no creada");
+            }
         }
     }
 }

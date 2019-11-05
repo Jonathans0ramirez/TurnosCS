@@ -32,18 +32,20 @@
             this.reservarBtn = new System.Windows.Forms.Button();
             this.flPanelHoras = new System.Windows.Forms.FlowLayoutPanel();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.backgroundWorkerHorasBtns = new System.ComponentModel.BackgroundWorker();
             this.principalLbl = new System.Windows.Forms.Label();
             this.cancelarBtn = new System.Windows.Forms.Button();
             this.paneAcciones = new System.Windows.Forms.FlowLayoutPanel();
+            this.backgroundWorkerReservar = new System.ComponentModel.BackgroundWorker();
             this.paneAcciones.SuspendLayout();
             this.SuspendLayout();
             // 
             // reservarBtn
             // 
             this.reservarBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.reservarBtn.BackColor = System.Drawing.Color.DarkSlateGray;
+            this.reservarBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(114)))), ((int)(((byte)(151)))));
             this.reservarBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.reservarBtn.Font = new System.Drawing.Font("Segoe UI Semibold", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.reservarBtn.ForeColor = System.Drawing.SystemColors.Control;
             this.reservarBtn.Location = new System.Drawing.Point(106, 3);
             this.reservarBtn.Name = "reservarBtn";
@@ -61,9 +63,9 @@
             this.flPanelHoras.Size = new System.Drawing.Size(689, 141);
             this.flPanelHoras.TabIndex = 1;
             // 
-            // backgroundWorker1
+            // backgroundWorkerHorasBtns
             // 
-            this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
+            this.backgroundWorkerHorasBtns.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorkerHorasBtns_DoWork);
             // 
             // principalLbl
             // 
@@ -81,8 +83,9 @@
             // cancelarBtn
             // 
             this.cancelarBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.cancelarBtn.BackColor = System.Drawing.Color.Maroon;
+            this.cancelarBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(114)))), ((int)(((byte)(33)))), ((int)(((byte)(89)))));
             this.cancelarBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.cancelarBtn.Font = new System.Drawing.Font("Segoe UI Semibold", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cancelarBtn.ForeColor = System.Drawing.SystemColors.Control;
             this.cancelarBtn.Location = new System.Drawing.Point(3, 3);
             this.cancelarBtn.Name = "cancelarBtn";
@@ -94,6 +97,7 @@
             // 
             // paneAcciones
             // 
+            this.paneAcciones.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.paneAcciones.AutoSize = true;
             this.paneAcciones.Controls.Add(this.cancelarBtn);
             this.paneAcciones.Controls.Add(this.reservarBtn);
@@ -101,6 +105,10 @@
             this.paneAcciones.Name = "paneAcciones";
             this.paneAcciones.Size = new System.Drawing.Size(206, 36);
             this.paneAcciones.TabIndex = 3;
+            // 
+            // backgroundWorkerReservar
+            // 
+            this.backgroundWorkerReservar.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorkerReservar_DoWork);
             // 
             // ReservarTurno
             // 
@@ -123,9 +131,10 @@
         private System.Windows.Forms.Button reservarBtn;
         private System.Windows.Forms.FlowLayoutPanel flPanelHoras;
         private System.Windows.Forms.Timer timer1;
-        private System.ComponentModel.BackgroundWorker backgroundWorker1;
+        private System.ComponentModel.BackgroundWorker backgroundWorkerHorasBtns;
         private System.Windows.Forms.Label principalLbl;
         private System.Windows.Forms.Button cancelarBtn;
         private System.Windows.Forms.FlowLayoutPanel paneAcciones;
+        private System.ComponentModel.BackgroundWorker backgroundWorkerReservar;
     }
 }

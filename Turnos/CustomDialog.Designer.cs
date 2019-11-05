@@ -40,7 +40,7 @@
             // yesBtn
             // 
             this.yesBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.yesBtn.BackColor = System.Drawing.Color.SeaGreen;
+            this.yesBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(116)))), ((int)(((byte)(115)))));
             this.yesBtn.FlatAppearance.BorderSize = 0;
             this.yesBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.yesBtn.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));

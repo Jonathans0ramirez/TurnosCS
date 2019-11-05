@@ -70,25 +70,24 @@ namespace Turnos
             }
         }
 
-        public bool registrarReserva(string usuario, string horaReserva)
+        public string registrarReserva(string usuario, string horaReserva)
         {
             try
             {
                 //string codigoComputador = System.Net.Dns.GetHostName();
-                string codigoComputador = "PISO2-PC45";
+                string codigoComputador = "PISO3-PC20";
                 string idSala = consultarSalaPorPC(codigoComputador);
 
-                string json = "{\"codigoSala\":" + idSala + ",\"codigoComputador\":\"" + codigoComputador + "\",\"horasReserva\":" + horaReserva + ",\"usuario\":\"" + usuario + "\"}";
+                string json = "{\"codigoSala\":" + idSala + ",\"codigoComputador\":\"" + codigoComputador + "\",\"horasReserva\":[" + horaReserva + "],\"usuario\":\"" + usuario + "\"}";
                 var data = Encoding.UTF8.GetBytes(json);
                 var uri = new Uri("http://biblioteca.udea.edu.co/turnos/services/CrearReserva.php");
                 var result_post = SendRequest(uri, data, "application/json", "POST");
-                result_post = result_post.Trim();
-                return result_post == "{\"reservaCreada\":true}";
+                return result_post.Trim();
             }
             catch (Exception ex)
             {
                 Console.WriteLine("No se pudo consumir el servicio web que registra la reserva", ex);
-                return true;
+                return string.Empty;
             }
         }
 
@@ -101,7 +100,7 @@ namespace Turnos
                 var uri = new Uri("http://biblioteca.udea.edu.co/turnos/services/ValidarReservaUsuario.php");
                 var result_post = SendRequest(uri, data, "application/json", "POST");
                 result_post = result_post.Trim();
-                return result_post == "{\"existeReserva\":true}";
+                return result_post.Contains("\"existeReserva\":true");
             }
             catch (Exception)
             {
@@ -119,7 +118,7 @@ namespace Turnos
                 var uri = new Uri("http://biblioteca.udea.edu.co/turnos/services/loguearusuarioreserva.php");
                 var result_post = SendRequest(uri, data, "application/json", "POST");
                 result_post = result_post.Trim();
-                if (result_post.Contains("{\"VALIDADO\":false"))
+                if (result_post.Contains("\"VALIDADO\":false"))
                     return false;
                 else
                     return true;
@@ -140,7 +139,7 @@ namespace Turnos
                 var uri = new Uri("http://biblioteca.udea.edu.co/turnos/services/registrarUsoReserva.php");
                 var result_post = SendRequest(uri, data, "application/json", "POST");
                 result_post = result_post.Trim();
-                return result_post == "{\"existeReserva\":true}";
+                return result_post.Contains("\"resultadoActualizarUsoDeReserva\":true");
             }
             catch (Exception)
             {
@@ -158,7 +157,7 @@ namespace Turnos
                 var uri = new Uri("http://biblioteca.udea.edu.co/turnos/services/liberarReserva.php");
                 var result_post = SendRequest(uri, data, "application/json", "POST");
                 result_post = result_post.Trim();
-                return result_post == "{\"existeReserva\":true}";
+                return result_post.Contains("\"resultadoLiberarReserva\":true");
             }
             catch (Exception)
             {

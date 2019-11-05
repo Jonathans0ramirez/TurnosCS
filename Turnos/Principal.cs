@@ -248,6 +248,7 @@ namespace Turnos
             if (panelContainer.Controls.Contains(ReservarTurno.Instance))
             {
                 panelContainer.Controls.Remove(ReservarTurno.Instance);
+                ReservarTurno.Instance.Dispose();
                 ReservarTurno.Instance = null;
             }
             actualizarImgEstado(global::Turnos.Properties.Resources.icons8_instagram_check_mark_100);
@@ -296,6 +297,7 @@ namespace Turnos
             if (panelContainer.Controls.Contains(ReservarTurno.Instance))
             {
                 panelContainer.Controls.Remove(ReservarTurno.Instance);
+                ReservarTurno.Instance.Dispose();
                 ReservarTurno.Instance = null;
             }
             actualizarImgEstado(global::Turnos.Properties.Resources.icons8_instagram_check_mark_100);
@@ -313,6 +315,7 @@ namespace Turnos
             if (panelContainer.Controls.Contains(ValidarTurno.Instance))
             {
                 panelContainer.Controls.Remove(ValidarTurno.Instance);
+                ValidarTurno.Instance.Dispose();
                 ValidarTurno.Instance = null;
             }
         }

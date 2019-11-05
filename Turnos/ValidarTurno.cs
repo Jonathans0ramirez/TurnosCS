@@ -87,6 +87,7 @@ namespace Turnos
                         if (Principal.Instance.pnlContainer.Controls.Contains(ValidarTurno.Instance))
                         {
                             Principal.Instance.pnlContainer.Controls.Remove(ValidarTurno.Instance);
+                            ValidarTurno.Instance.Dispose();
                             ValidarTurno.Instance = null;
                         }
                     }
