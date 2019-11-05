@@ -46,14 +46,14 @@ namespace Turnos
         private void ValidarBtn_Click(object sender, EventArgs e)
         {
             if (textBoxPass.Text == "turnosUGT") { }
-            //makeVisible(false);
-            //else if (servicios.validarTurnoUsuario(textBoxUser.Text))
+            //Principal.Instance.makeVisible(false);
             else if (false) //Para Pruebas
+            //else if (servicios.validarTurnoUsuario(textBoxUser.Text))
             {
                 if (servicios.validarUsuario(textBoxUser.Text, textBoxPass.Text))
                 {
                     confManager.AddUpdateAppSettings("Usuario", textBoxUser.Text);
-                    confManager.ReadSetting("Usuario");     //VERIFICAR SI LA RESPUESTA ES NULA [NULL]
+                    //confManager.ReadSetting("Usuario");     //VERIFICAR SI LA RESPUESTA ES NULA [NULL]
                     //servicios.registrarUsoReserva(textBoxUser.Text);
                     Principal.Instance.esEquipoHabilitado = true;
                     Principal.Instance.makeVisible(false);
@@ -69,9 +69,11 @@ namespace Turnos
             {
                 if (servicios.validarUsuario(textBoxUser.Text, textBoxPass.Text))
                 {
-                    string message = "Señor usuario, usted no tiene reservado este equipo, recuerde que para usar el equipo de computo debe realizar la reserva previa a través de http://tiresias.udea.edu.co/turnos";
+                    //string message = "Señor usuario, usted no tiene reservado este equipo, recuerde que para usar el equipo de computo debe realizar la reserva previa a través de http://tiresias.udea.edu.co/turnos";
+                    string message = "Señor usuario, usted no tiene reservado este equipo. ¿Desea realizar la reserva de este equipo?";
                     string title = "¿Reservar?";
-                    DialogResult result = MessageBox.Show(message, title, buttons, infoIcon);
+                    //DialogResult result = MessageBox.Show(message, title, buttons, infoIcon);
+                    DialogResult result = CustomDialog.ShowMessage(message, title, MessageBoxButtons.YesNo);
                     if (result == DialogResult.Yes)
                     {
                         confManager.AddUpdateAppSettings("Usuario", textBoxUser.Text);
@@ -87,31 +89,24 @@ namespace Turnos
                             Principal.Instance.pnlContainer.Controls.Remove(ValidarTurno.Instance);
                             ValidarTurno.Instance = null;
                         }
-
-
-                        //var horaInicioReserva = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-                        //var horaFinReserva = DateTime.Now.AddHours(1).ToString("yyyy-MM-dd HH:00:00");
-                        //string horasReserva = "[{\"horaInicioReserva\":\"" + horaInicioReserva + "\",\"horaFinReserva\":\"" + horaFinReserva + "\"}]";
-
-                        //servicios.registrarReserva(textBoxUser.Text, horasReserva);
                     }
                     else
                     {
                         // Limpia los campos usuario y contraseña del UserControl
                         textBoxUser.Text = string.Empty;
                         textBoxPass.Text = string.Empty;
+                        textBoxUser.Focus();
                     }
                 }
                 else
                 {
-                    string message = "Bienvenid@ " + textBoxUser.Text + ", por favor digite correctamente su nombre de usuario y contraseña";
+                    string message = "Bienvenid@ " + textBoxUser.Text.ToUpper() + ", por favor digite correctamente su nombre de usuario y contraseña";
                     string title = "¡Error al autenticar!";
-                    MessageBox.Show(message, title, MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    //TextBoxInfo.Text = "Bienvenid@ " + TextBoxUser.Text + ", por favor digite correctamente su nombre de usuario y contraseña";
-                    //TextBoxInfo.SelectionAlignment = HorizontalAlignment.Center;
+                    //MessageBox.Show(message, title, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    CustomDialog.ShowMessage(message, title);
+                    textBoxPass.Text = string.Empty;
+                    textBoxPass.Focus();
                 }
-                //TextBoxInfo.Text = "Señor usuario, usted no tiene reservado este equipo, recuerde que para usar el equipo de computo debe realizar la reserva previa a través de http://tiresias.udea.edu.co/turnos";
-                //TextBoxInfo.SelectionAlignment = HorizontalAlignment.Center;
             }
         }
     }

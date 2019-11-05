@@ -59,7 +59,6 @@ namespace Turnos
             BackgroundWorker worker = sender as BackgroundWorker;
             Principal.Instance.BeginInvoke((Action)delegate ()
             {
-                //Principal.Instance.pictureStatus.Visible = true;
                 Principal.Instance.actualizarImgEstado(global::Turnos.Properties.Resources.Double_Ring_1s_64px__1_);
             });
             await pintarBotones();
@@ -210,6 +209,13 @@ namespace Turnos
                 }
             }
             //servicios.registrarReserva(confManager.ReadSetting("Usuario"), jsonHorario);
+
+            /* ASÍ FUNCIONABA */
+            //var horaInicioReserva = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+            //var horaFinReserva = DateTime.Now.AddHours(1).ToString("yyyy-MM-dd HH:00:00");
+            //string horasReserva = "[{\"horaInicioReserva\":\"" + horaInicioReserva + "\",\"horaFinReserva\":\"" + horaFinReserva + "\"}]";
+
+            //servicios.registrarReserva(textBoxUser.Text, horasReserva);
         }
 
         private void CancelarBtn_Click(object sender, EventArgs e)

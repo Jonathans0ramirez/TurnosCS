@@ -62,6 +62,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConfManager.cs" />
+    <Compile Include="CustomDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CustomDialog.Designer.cs">
+      <DependentUpon>CustomDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="HotKeys.cs" />
     <Compile Include="Principal_OLD.cs">
       <SubType>Form</SubType>
@@ -90,6 +96,9 @@
       <DependentUpon>ValidarTurno.cs</DependentUpon>
     </Compile>
     <Compile Include="WebServices.cs" />
+    <EmbeddedResource Include="CustomDialog.resx">
+      <DependentUpon>CustomDialog.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Principal_OLD.resx">
       <DependentUpon>Principal_OLD.cs</DependentUpon>
       <SubType>Designer</SubType>

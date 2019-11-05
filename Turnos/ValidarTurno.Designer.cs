@@ -31,6 +31,7 @@
             this.panelValidar_2 = new System.Windows.Forms.Panel();
             this.labelTurnos = new System.Windows.Forms.Label();
             this.panelContrasena = new System.Windows.Forms.Panel();
+            this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             this.textBoxPass = new System.Windows.Forms.TextBox();
             this.panelUsuario = new System.Windows.Forms.Panel();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
@@ -39,7 +40,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.panelValidar = new System.Windows.Forms.Panel();
-            this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
+            this.backgroundWorkerValidar = new System.ComponentModel.BackgroundWorker();
             this.panelValidar_2.SuspendLayout();
             this.panelContrasena.SuspendLayout();
             this.panelUsuario.SuspendLayout();
@@ -66,10 +67,10 @@
             // 
             this.labelTurnos.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.labelTurnos.AutoSize = true;
-            this.labelTurnos.Font = new System.Drawing.Font("Georgia", 48F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelTurnos.Font = new System.Drawing.Font("Segoe UI", 48F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelTurnos.Location = new System.Drawing.Point(80, 27);
             this.labelTurnos.Name = "labelTurnos";
-            this.labelTurnos.Size = new System.Drawing.Size(234, 72);
+            this.labelTurnos.Size = new System.Drawing.Size(230, 86);
             this.labelTurnos.TabIndex = 43;
             this.labelTurnos.Text = "Turnos";
             // 
@@ -84,6 +85,16 @@
             this.panelContrasena.Name = "panelContrasena";
             this.panelContrasena.Size = new System.Drawing.Size(333, 26);
             this.panelContrasena.TabIndex = 42;
+            // 
+            // flowLayoutPanel2
+            // 
+            this.flowLayoutPanel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(51)))), ((int)(((byte)(0)))));
+            this.flowLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Left;
+            this.flowLayoutPanel2.Location = new System.Drawing.Point(0, 0);
+            this.flowLayoutPanel2.Margin = new System.Windows.Forms.Padding(0, 0, 2, 0);
+            this.flowLayoutPanel2.Name = "flowLayoutPanel2";
+            this.flowLayoutPanel2.Size = new System.Drawing.Size(10, 24);
+            this.flowLayoutPanel2.TabIndex = 45;
             // 
             // textBoxPass
             // 
@@ -135,7 +146,7 @@
             this.validarBtn.BackColor = System.Drawing.Color.DarkGreen;
             this.validarBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.validarBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.validarBtn.Font = new System.Drawing.Font("Georgia", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.validarBtn.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.validarBtn.ForeColor = System.Drawing.SystemColors.Control;
             this.validarBtn.Location = new System.Drawing.Point(134, 242);
             this.validarBtn.Margin = new System.Windows.Forms.Padding(0);
@@ -149,43 +160,31 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Georgia", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.Location = new System.Drawing.Point(33, 173);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(103, 18);
+            this.label2.Size = new System.Drawing.Size(96, 21);
             this.label2.TabIndex = 34;
             this.label2.Text = "Contraseña";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Georgia", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(33, 114);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(74, 18);
+            this.label1.Size = new System.Drawing.Size(69, 21);
             this.label1.TabIndex = 33;
             this.label1.Text = "Usuario";
             // 
             // panelValidar
             // 
-            this.panelValidar.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.panelValidar.Controls.Add(this.panelValidar_2);
+            this.panelValidar.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelValidar.Location = new System.Drawing.Point(0, 0);
             this.panelValidar.Name = "panelValidar";
             this.panelValidar.Size = new System.Drawing.Size(721, 501);
             this.panelValidar.TabIndex = 36;
-            // 
-            // flowLayoutPanel2
-            // 
-            this.flowLayoutPanel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(51)))), ((int)(((byte)(0)))));
-            this.flowLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Left;
-            this.flowLayoutPanel2.Location = new System.Drawing.Point(0, 0);
-            this.flowLayoutPanel2.Margin = new System.Windows.Forms.Padding(0, 0, 2, 0);
-            this.flowLayoutPanel2.Name = "flowLayoutPanel2";
-            this.flowLayoutPanel2.Size = new System.Drawing.Size(10, 24);
-            this.flowLayoutPanel2.TabIndex = 45;
             // 
             // ValidarTurno
             // 
@@ -218,5 +217,6 @@
         private System.Windows.Forms.Label labelTurnos;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
+        private System.ComponentModel.BackgroundWorker backgroundWorkerValidar;
     }
 }

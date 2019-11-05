@@ -69,7 +69,7 @@
             // 
             this.principalLbl.AutoEllipsis = true;
             this.principalLbl.Dock = System.Windows.Forms.DockStyle.Top;
-            this.principalLbl.Font = new System.Drawing.Font("Georgia", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.principalLbl.Font = new System.Drawing.Font("Segoe UI", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.principalLbl.Location = new System.Drawing.Point(0, 0);
             this.principalLbl.Name = "principalLbl";
             this.principalLbl.Size = new System.Drawing.Size(882, 99);
