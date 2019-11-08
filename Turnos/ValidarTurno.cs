@@ -10,10 +10,6 @@ namespace Turnos
 
         ConfManager confManager = new ConfManager();
 
-        //Configuración básica para los mensajes emergentes
-        private readonly MessageBoxButtons buttons = MessageBoxButtons.YesNo;
-        private readonly MessageBoxIcon infoIcon = MessageBoxIcon.Information;
-
         static ValidarTurno _instance;
 
         public static ValidarTurno Instance
@@ -53,7 +49,6 @@ namespace Turnos
                 if (servicios.validarUsuario(textBoxUser.Text, textBoxPass.Text))
                 {
                     confManager.AddUpdateAppSettings("Usuario", textBoxUser.Text);
-                    //confManager.ReadSetting("Usuario");     //VERIFICAR SI LA RESPUESTA ES NULA [NULL]
                     servicios.registrarUsoReserva(textBoxUser.Text);
                     Principal.Instance.esEquipoHabilitado = true;
                     textBoxUser.Text = string.Empty;
@@ -64,7 +59,7 @@ namespace Turnos
                 else
                 {
                     string message = "Bienvenid@ " + textBoxUser.Text + ", por favor digite correctamente su nombre de usuario y contraseña";
-                    string title = "¡Error al autenticar!";
+                    string title = Emoji.X + " ¡Error al autenticar!";
                     MessageBox.Show(message, title, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
@@ -74,7 +69,7 @@ namespace Turnos
                 {
                     //string message = "Señor usuario, usted no tiene reservado este equipo, recuerde que para usar el equipo de computo debe realizar la reserva previa a través de http://tiresias.udea.edu.co/turnos";
                     string message = "Señor usuario, usted no tiene reservado este equipo. ¿Desea realizar la reserva de este equipo?";
-                    string title = "¿Reservar?";
+                    string title = Emoji.Calendar + " ¿Reservar?";
                     //DialogResult result = MessageBox.Show(message, title, buttons, infoIcon);
                     DialogResult result = CustomDialog.ShowMessage(message, title, MessageBoxButtons.YesNo);
                     if (result == DialogResult.Yes)
@@ -105,8 +100,7 @@ namespace Turnos
                 else
                 {
                     string message = "Bienvenid@ " + textBoxUser.Text.ToUpper() + ", por favor digite correctamente su nombre de usuario y contraseña";
-                    string title = "¡Error al autenticar!";
-                    //MessageBox.Show(message, title, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    string title = Emoji.X + " ¡Error al autenticar!";
                     CustomDialog.ShowMessage(message, title);
                     textBoxPass.Text = string.Empty;
                     textBoxPass.Focus();

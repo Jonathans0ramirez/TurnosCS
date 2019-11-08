@@ -45,7 +45,7 @@
             this.reservarBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.reservarBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(114)))), ((int)(((byte)(151)))));
             this.reservarBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.reservarBtn.Font = new System.Drawing.Font("Segoe UI Semibold", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.reservarBtn.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.reservarBtn.ForeColor = System.Drawing.SystemColors.Control;
             this.reservarBtn.Location = new System.Drawing.Point(106, 3);
             this.reservarBtn.Name = "reservarBtn";
@@ -85,7 +85,7 @@
             this.cancelarBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.cancelarBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(114)))), ((int)(((byte)(33)))), ((int)(((byte)(89)))));
             this.cancelarBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.cancelarBtn.Font = new System.Drawing.Font("Segoe UI Semibold", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cancelarBtn.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cancelarBtn.ForeColor = System.Drawing.SystemColors.Control;
             this.cancelarBtn.Location = new System.Drawing.Point(3, 3);
             this.cancelarBtn.Name = "cancelarBtn";

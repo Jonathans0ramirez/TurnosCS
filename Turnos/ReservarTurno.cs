@@ -104,7 +104,7 @@ namespace Turnos
                                             if (item == 1)
                                             {
                                                 btn.Enabled = false;
-                                                btn.BackColor = Color.FromArgb(114, 33, 89);
+                                                btn.BackColor = Color.FromArgb(245, 51, 63);
                                                 btn.ForeColor = SystemColors.Control;
                                             }
                                             btn.Size = new Size(97, 30);
