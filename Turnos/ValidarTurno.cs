@@ -47,15 +47,18 @@ namespace Turnos
         {
             if (textBoxPass.Text == "turnosUGT") { }
             //Principal.Instance.makeVisible(false);
-            else if (false) //Para Pruebas
-            //else if (servicios.validarTurnoUsuario(textBoxUser.Text))
+            //else if (false) //Para Pruebas
+            else if (servicios.validarTurnoUsuario(textBoxUser.Text))
             {
                 if (servicios.validarUsuario(textBoxUser.Text, textBoxPass.Text))
                 {
                     confManager.AddUpdateAppSettings("Usuario", textBoxUser.Text);
                     //confManager.ReadSetting("Usuario");     //VERIFICAR SI LA RESPUESTA ES NULA [NULL]
-                    //servicios.registrarUsoReserva(textBoxUser.Text);
+                    servicios.registrarUsoReserva(textBoxUser.Text);
                     Principal.Instance.esEquipoHabilitado = true;
+                    textBoxUser.Text = string.Empty;
+                    textBoxPass.Text = string.Empty;
+                    textBoxUser.Focus();
                     Principal.Instance.makeVisible(false);
                 }
                 else

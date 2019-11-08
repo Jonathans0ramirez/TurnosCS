@@ -68,6 +68,7 @@
     <Compile Include="CustomDialog.Designer.cs">
       <DependentUpon>CustomDialog.cs</DependentUpon>
     </Compile>
+    <Compile Include="Emoji.cs" />
     <Compile Include="HotKeys.cs" />
     <Compile Include="Principal_OLD.cs">
       <SubType>Form</SubType>

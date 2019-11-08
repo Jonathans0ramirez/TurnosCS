@@ -2,8 +2,10 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -11,7 +13,7 @@ namespace Turnos
 {
     public partial class ReservarTurno : UserControl
     {
-        string fechaHoy = DateTime.Now.ToString("yyyy-MM-dd ");
+        string fechaHoy = string.Empty;
 
         WebServices servicios = new WebServices();
 
@@ -48,6 +50,7 @@ namespace Turnos
             InitializeComponent();
             principalLbl.Visible = false;
             paneAcciones.Visible = false;
+            flPanelHoras.Visible = false;
             backgroundWorkerHorasBtns.RunWorkerAsync();
         }
 
@@ -70,6 +73,10 @@ namespace Turnos
         private async Task pintarBotones()
         {
             string CurDate = DateTime.Now.Hour.ToString();
+            if (CurDate.Length == 1)
+            {
+                CurDate = String.Concat("0", CurDate);
+            }
             await Task.Run(() =>
             {
                 List<int> hab = rellenarListaHoras();
@@ -90,15 +97,17 @@ namespace Turnos
                                         if (!btn.IsDisposed)
                                         {
                                             //btn.BackColor = System.Drawing.Color.FromArgb(0, 149, 121);
-                                            btn.BackColor = System.Drawing.Color.FromArgb(0, 114, 151);
-                                            btn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-                                            btn.ForeColor = System.Drawing.SystemColors.Control;
+                                            btn.BackColor = Color.FromArgb(0, 114, 151);
+                                            btn.FlatStyle = FlatStyle.Flat;
+                                            btn.ForeColor = SystemColors.Control;
+                                            btn.Font = new Font("Segoe UI", 8.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
                                             if (item == 1)
                                             {
                                                 btn.Enabled = false;
-                                                btn.BackColor = System.Drawing.Color.FromArgb(114, 33, 89);
+                                                btn.BackColor = Color.FromArgb(114, 33, 89);
+                                                btn.ForeColor = SystemColors.Control;
                                             }
-                                            btn.Size = new System.Drawing.Size(97, 30);
+                                            btn.Size = new Size(97, 30);
                                             string auxHour = string.Empty;
                                             if ((DateTime.Now.Hour + contadorHora) == 24)
                                             {
@@ -110,8 +119,16 @@ namespace Turnos
                                             }
                                             btn.Text = CurDate + ":00 - " + auxHour + ":00";
                                             btn.UseVisualStyleBackColor = false;
-                                            btn.Click += new System.EventHandler(this.reservarBtns_Click);
+                                            btn.Click += new EventHandler(this.reservarBtns_Click);
                                             CurDate = (DateTime.Now.Hour + contadorHora).ToString();
+                                            if (CurDate.Length == 1)
+                                            {
+                                                CurDate = String.Concat("0", CurDate);
+                                            }
+                                            if (auxHour.Length == 1)
+                                            {
+                                                auxHour = String.Concat("0", auxHour);
+                                            }
                                             contadorHora++;
                                         }
                                     });
@@ -123,7 +140,6 @@ namespace Turnos
             });
             Principal.Instance.BeginInvoke((Action)delegate ()
             {
-                //Principal.Instance.pictureStatus.Visible = false;
                 Principal.Instance.actualizarImgEstado(global::Turnos.Properties.Resources.icons8_reservation_100__1_);
             });
             this.BeginInvoke((Action)delegate ()
@@ -131,6 +147,8 @@ namespace Turnos
                 principalLbl.Text = confManager.ReadSetting("Usuario");
                 principalLbl.Visible = true;
                 paneAcciones.Visible = true;
+                flPanelHoras.Visible = true;
+                contadorHora = 1;
             });
         }
 
@@ -187,29 +205,13 @@ namespace Turnos
         private void ReservarBtn_Click(object sender, EventArgs e)
         {
             Principal.Instance.actualizarImgEstado(global::Turnos.Properties.Resources.Double_Ring_1s_64px);
+            contadorBotonesReserva = 0;
             backgroundWorkerReservar.RunWorkerAsync();
         }
 
         private void CancelarBtn_Click(object sender, EventArgs e)
         {
-            confManager.RemoveSetting("Usuario");
-            if (!Principal.Instance.pnlContainer.Controls.Contains(ValidarTurno.Instance))
-            {
-                ValidarTurno.Instance.Dock = DockStyle.Fill;
-                Principal.Instance.pnlContainer.Controls.Add(ValidarTurno.Instance);
-            }
-            ValidarTurno.Instance.BringToFront();
-            if (Principal.Instance.pnlContainer.Controls.Contains(ReservarTurno.Instance))
-            {
-                Principal.Instance.pnlContainer.Controls.Remove(ReservarTurno.Instance);
-                ReservarTurno.Instance.Dispose();
-                ReservarTurno.Instance = null;
-            }
-            Principal.Instance.BeginInvoke((Action)delegate ()
-            {
-                Principal.Instance.actualizarImgEstado(global::Turnos.Properties.Resources.icons8_instagram_check_mark_100);
-                Principal.Instance.timerReserva.Stop();
-            });
+            volverAVistaValidarTurno();
         }
 
         private void reservarBtns_Click(object sender, EventArgs e)
@@ -233,6 +235,7 @@ namespace Turnos
             int x;
             x = (this.Width / 2) - (paneAcciones.Width / 2);
             paneAcciones.Location = new Point(x, paneAcciones.Location.Y);
+            fechaHoy = DateTime.Now.ToString("yyyy-MM-dd ");
         }
 
         private void backgroundWorkerReservar_DoWork(object sender, DoWorkEventArgs e)
@@ -260,16 +263,62 @@ namespace Turnos
 
             if (resultadoCrearReserva.Contains("\"La reserva No fue creada"))
             {
-                CustomDialog.ShowMessage("La reserva no fue creada, ya que usted excedió el número máximo de reservas por día", "Reserva no creada");
+                volverAVistaValidarTurno();
+                CustomDialog.ShowMessage("La reserva no fue creada, ya que usted excedió el número máximo de reservas por día", "Reserva no creada " + Emoji.Worried);
             }
             else if (resultadoCrearReserva.Contains("\"La Reserva fue creada exitosamente.\""))
             {
-                CustomDialog.ShowMessage("Bienvenid@", "Reserva creada exitosamente");
+                volverAVistaValidarTurno();
+                CustomDialog.ShowMessage("Bienvenid@", "Reserva creada exitosamente " + Emoji.Smile);
             }
             else if (resultadoCrearReserva.Contains("\"Reserva no creada"))
             {
-                CustomDialog.ShowMessage("Otro usuario acaba de reservar el mismo equipo, lo invitamos a reservar en otro de nuestros equipos", "Reserva no creada");
+                Principal.Instance.BeginInvoke((Action)delegate ()
+                {
+                    Principal.Instance.timerReserva.Stop();
+                });
+                DialogResult result = CustomDialog.ShowMessage("Otro usuario acaba de reservar el mismo equipo, lo invitamos a reservar en otro horario. ¿Desea actualizar la lista con los horarios disponibles para este equipo?", "Reserva no creada " + Emoji.Confused, MessageBoxButtons.YesNo);
+                if (result == DialogResult.Yes)
+                {
+                    this.BeginInvoke((Action)delegate ()
+                    {
+                        flPanelHoras.Controls.Clear();
+                        principalLbl.Visible = false;
+                        paneAcciones.Visible = false;
+                        flPanelHoras.Visible = false;
+                        backgroundWorkerHorasBtns.RunWorkerAsync();
+                    });
+                }
+                else
+                {
+                    volverAVistaValidarTurno();
+                }
             }
+        }
+
+        private void volverAVistaValidarTurno()
+        {
+            confManager.RemoveSetting("Usuario");
+            Principal.Instance.BeginInvoke((Action)delegate ()
+            {
+                if (!Principal.Instance.pnlContainer.Controls.Contains(ValidarTurno.Instance))
+                {
+                    ValidarTurno.Instance.Dock = DockStyle.Fill;
+                    Principal.Instance.pnlContainer.Controls.Add(ValidarTurno.Instance);
+                }
+                ValidarTurno.Instance.BringToFront();
+                if (Principal.Instance.pnlContainer.Controls.Contains(ReservarTurno.Instance))
+                {
+                    Principal.Instance.pnlContainer.Controls.Remove(ReservarTurno.Instance);
+                    ReservarTurno.Instance.BeginInvoke((Action)delegate ()
+                    {
+                        ReservarTurno.Instance.Dispose();
+                        ReservarTurno.Instance = null;
+                    });
+                }           
+                Principal.Instance.actualizarImgEstado(global::Turnos.Properties.Resources.icons8_instagram_check_mark_100);
+                Principal.Instance.timerReserva.Stop();
+            });
         }
     }
 }

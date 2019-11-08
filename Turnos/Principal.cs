@@ -58,7 +58,7 @@ namespace Turnos
         public bool esEquipoHabilitado = false;
 
         // Constante que determina el momento en que la sesión de usuario será bloqueada
-        private const int BLOQUEAR = 0;
+        private const int BLOQUEAR = 26;
 
         // Constante que determina el momento en que la sesión de usuario será desbloqueada
         private const int DESBLOQUEAR = 10;
@@ -74,6 +74,8 @@ namespace Turnos
         WebServices servicios = new WebServices();
 
         HotKeys hk = new HotKeys();
+
+        ConfManager confManager = new ConfManager();
 
         public delegate void MakeVisibleDelegate(bool flag);
 
@@ -172,10 +174,22 @@ namespace Turnos
                     case BLOQUEAR:
                         {
                             Console.WriteLine("Momento en que la aplicación bloquea la sesión");
-                            esEquipoHabilitado = false;
-                            makeVisible(true);
-                            //TextBoxInfo.Text = "";
-                            inactive = 60000 * (DESBLOQUEAR);
+                            if (esEquipoHabilitado)
+                            {
+                                if (servicios.validarTurnoUsuario(confManager.ReadSetting("Usuario")))
+                                {
+                                    inactive = 60000;
+                                    servicios.registrarUsoReserva(confManager.ReadSetting("Usuario"));
+                                    CustomDialog.ShowMessage("Continúa navegando sin problemas por una hora más", "Te queda una hora" + Emoji.Hourglass_Flowing_Sand);
+                                }
+                                else
+                                {
+                                    confManager.RemoveSetting("Usuario");
+                                    esEquipoHabilitado = false;
+                                    makeVisible(true);
+                                    inactive = 60000 * (DESBLOQUEAR);
+                                }
+                            }
                             break;
                         }
 
@@ -199,9 +213,7 @@ namespace Turnos
                             Console.WriteLine("Momento en que la aplicación avisa al usuario el cierre de la sesión");
                             inactive = 60000 * (EXTRAER - MENSAJE);
                             if (esEquipoHabilitado) {
-                                /*
-                                * Mensaje de Aviso [POPUP GIGANTE] 
-                                */
+                                CustomDialog.ShowMessage("Señor usuario, su turno terminará en 5 min; " + "por favor cierre las cuentas en el navegador y guarde todos los datos importantes. GRACIAS!", "Te quedan 5 minutos" + Emoji.Grimacing);
                             }
                             //closeSessionMsg();
                             break;
@@ -220,7 +232,7 @@ namespace Turnos
             e.Cancel = true;
             //lockTaskManager(false);
             //makeVisible(false);
-            //hk.HookStop();
+            hk.HookStop();
         }
 
         // Ejecuta el evento cuando la ventana está cargada

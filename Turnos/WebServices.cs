@@ -95,7 +95,9 @@ namespace Turnos
         {
             try
             {
-                string json = "{\"usuario\":\"" + usuario + "\",\"codComputador\":\"" + System.Net.Dns.GetHostName() + "\"}";
+                //string codigoComputador = System.Net.Dns.GetHostName();
+                string codigoComputador = "PISO3-PC20";
+                string json = "{\"usuario\":\"" + usuario + "\",\"codComputador\":\"" + codigoComputador + "\"}";
                 var data = Encoding.UTF8.GetBytes(json);
                 var uri = new Uri("http://biblioteca.udea.edu.co/turnos/services/ValidarReservaUsuario.php");
                 var result_post = SendRequest(uri, data, "application/json", "POST");
@@ -134,7 +136,9 @@ namespace Turnos
         {
             try
             {
-                string json = "{\"usuario\":\"" + user + "\",\"codComputador\":\"" + System.Net.Dns.GetHostName() + "\"}";
+                //string codigoComputador = System.Net.Dns.GetHostName();
+                string codigoComputador = "PISO3-PC20";
+                string json = "{\"usuario\":\"" + user + "\",\"codComputador\":\"" + codigoComputador + "\"}";
                 var data = Encoding.UTF8.GetBytes(json);
                 var uri = new Uri("http://biblioteca.udea.edu.co/turnos/services/registrarUsoReserva.php");
                 var result_post = SendRequest(uri, data, "application/json", "POST");

@@ -44,5 +44,12 @@ namespace Turnos
             customDialog.Dispose();
             Button_id = System.Windows.Forms.DialogResult.No;
         }
+
+        private void CustomDialog_Load(object sender, EventArgs e)
+        {
+            this.BringToFront();
+            this.TopMost = true;
+            this.Focus();
+        }
     }
 }

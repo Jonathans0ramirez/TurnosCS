@@ -145,6 +145,8 @@
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.TopMost = true;
+            this.Load += new System.EventHandler(this.CustomDialog_Load);
             this.flowLayoutPanelButtons.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
