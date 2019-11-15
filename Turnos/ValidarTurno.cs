@@ -60,7 +60,9 @@ namespace Turnos
                 {
                     string message = "Bienvenid@ " + textBoxUser.Text + ", por favor digite correctamente su nombre de usuario y contraseña";
                     string title = Emoji.X + " ¡Error al autenticar!";
-                    MessageBox.Show(message, title, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    CustomDialog.ShowMessage(message, title, MessageBoxButtons.OK);
+                    textBoxPass.Text = string.Empty;
+                    textBoxPass.Focus();
                 }
             }
             else

@@ -243,5 +243,37 @@ namespace Turnos
                 return null;
             }
         }
+
+        public string obtenerMaxReservasUsuario(string usuario, string fechaReserva)
+        {
+            try
+            {
+                string numReservas = string.Empty;
+                var uri = new Uri("http://biblioteca.udea.edu.co/turnos/services/ConsultarCantidadReservasPorUsuario.php?usuario=" + usuario + "&fechaReserva=" + fechaReserva);
+                var result_post = SendRequest(uri, null, "application/json", "GET");
+                result_post = result_post.Trim();
+
+                JArray jsonArray = JArray.Parse(result_post);
+                var jsonObjects = jsonArray.OfType<JObject>().ToList();
+                foreach (JToken reserva in jsonObjects)
+                {
+                    numReservas = (string)reserva.SelectToken("numReservas");
+                }
+                switch (numReservas)
+                {
+                    case "0":
+                        return "2";
+                    case "1":
+                        return "1";
+                    default:
+                        return "0";
+                }
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("No se pudo consumir el servicio web que retorna el número máximo de reservas disponibles por el usuario");
+                return null;
+            }
+        }
     }
 }

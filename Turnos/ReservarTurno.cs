@@ -27,7 +27,9 @@ namespace Turnos
 
         int contadorBotonesReserva = 0;
 
-        int numeroMaximoReservasDia = 0;
+        //int numeroMaximoReservasDia = 0;
+
+        int numeroMaximoReservasUsuario = 0;
 
         public static ReservarTurno Instance
         {
@@ -73,10 +75,6 @@ namespace Turnos
         private async Task pintarBotones()
         {
             string CurDate = DateTime.Now.Hour.ToString();
-            if (CurDate.Length == 1)
-            {
-                CurDate = String.Concat("0", CurDate);
-            }
             await Task.Run(() =>
             {
                 List<int> hab = rellenarListaHoras();
@@ -117,10 +115,6 @@ namespace Turnos
                                             {
                                                 auxHour = (DateTime.Now.Hour + contadorHora).ToString();
                                             }
-                                            btn.Text = CurDate + ":00 - " + auxHour + ":00";
-                                            btn.UseVisualStyleBackColor = false;
-                                            btn.Click += new EventHandler(this.reservarBtns_Click);
-                                            CurDate = (DateTime.Now.Hour + contadorHora).ToString();
                                             if (CurDate.Length == 1)
                                             {
                                                 CurDate = String.Concat("0", CurDate);
@@ -129,6 +123,11 @@ namespace Turnos
                                             {
                                                 auxHour = String.Concat("0", auxHour);
                                             }
+                                            btn.Text = CurDate + ":00 - " + auxHour + ":00";
+                                            btn.UseVisualStyleBackColor = false;
+                                            btn.Click += new EventHandler(this.reservarBtns_Click);
+                                            CurDate = (DateTime.Now.Hour + contadorHora).ToString();
+                                            
                                             contadorHora++;
                                         }
                                     });
@@ -144,7 +143,7 @@ namespace Turnos
             });
             this.BeginInvoke((Action)delegate ()
             {
-                principalLbl.Text = confManager.ReadSetting("Usuario");
+                principalLbl.Text = confManager.ReadSetting("Usuario") + " reserva eliginedo las horas de acuerdo a tu disponibilidad.";
                 principalLbl.Visible = true;
                 paneAcciones.Visible = true;
                 flPanelHoras.Visible = true;
@@ -154,7 +153,8 @@ namespace Turnos
 
         private List<int> rellenarListaHoras()
         {
-            numeroMaximoReservasDia = Int32.Parse(servicios.obtenerMaxReservasEquipo("PISO3-PC20"));
+            //numeroMaximoReservasDia = Int32.Parse(servicios.obtenerMaxReservasEquipo("PISO3-PC20"));
+            numeroMaximoReservasUsuario = Int32.Parse(servicios.obtenerMaxReservasUsuario(confManager.ReadSetting("Usuario"), DateTime.Now.ToString("yyyy-MM-dd")));
             List<int> retorno = new List<int>();
             string horaInicioReserva = servicios.obtenerHoraReserva("PISO3-PC20", 0);
             string horaFinReserva = servicios.obtenerHoraReserva("PISO3-PC20", 1);
@@ -205,8 +205,25 @@ namespace Turnos
         private void ReservarBtn_Click(object sender, EventArgs e)
         {
             Principal.Instance.actualizarImgEstado(global::Turnos.Properties.Resources.Double_Ring_1s_64px);
+            if (contadorBotonesReserva == 0)
+            {                
+                Principal.Instance.BeginInvoke((Action)delegate ()
+                {
+                    Principal.Instance.actualizarImgEstado(global::Turnos.Properties.Resources.icons8_reservation_100__1_);
+                    Principal.Instance.timerReserva.Stop();
+                });
+                CustomDialog.ShowMessage("Por favor deja de ser tan bobo, gracias " + Emoji.Smiley, "No seleccionaste nada");
+                flPanelHoras.Controls.Clear();
+                principalLbl.Visible = false;
+                paneAcciones.Visible = false;
+                flPanelHoras.Visible = false;
+                backgroundWorkerHorasBtns.RunWorkerAsync();
+            }
+            else
+            {
             contadorBotonesReserva = 0;
             backgroundWorkerReservar.RunWorkerAsync();
+            }
         }
 
         private void CancelarBtn_Click(object sender, EventArgs e)
@@ -222,7 +239,7 @@ namespace Turnos
                 button.BackColor = Color.FromArgb(0, 114, 151);
                 contadorBotonesReserva--;
             }
-            else if (button.BackColor == Color.FromArgb(0, 114, 151) && contadorBotonesReserva < numeroMaximoReservasDia)
+            else if (button.BackColor == Color.FromArgb(0, 114, 151) && contadorBotonesReserva < numeroMaximoReservasUsuario)
             {
                 button.BackColor = Color.DarkGreen;
                 contadorBotonesReserva++;
@@ -240,6 +257,10 @@ namespace Turnos
 
         private void backgroundWorkerReservar_DoWork(object sender, DoWorkEventArgs e)
         {
+            Principal.Instance.BeginInvoke((Action)delegate ()
+            {
+                Principal.Instance.timerReserva.Stop();
+            });
             string jsonHorario = string.Empty;
             bool moreThanOne = false;
             foreach (var button in flPanelHoras.Controls.OfType<Button>())
@@ -251,7 +272,7 @@ namespace Turnos
                         jsonHorario = String.Concat(jsonHorario, ",");
                     }
 
-                    jsonHorario = String.Concat(jsonHorario, "{\"horaInicioReserva\": \"" + fechaHoy + button.Text.Substring(0, 5) + ":00\", \"horaFinReserva\": \"" + fechaHoy + button.Text.Substring(8, 5) + ":00\"}");
+                            jsonHorario = String.Concat(jsonHorario, "{\"horaInicioReserva\": \"" + fechaHoy + button.Text.Substring(0, 5) + ":00\", \"horaFinReserva\": \"" + fechaHoy + button.Text.Substring(8, 5) + ":00\"}");
                     moreThanOne = true;
                 }
             }
@@ -273,10 +294,6 @@ namespace Turnos
             }
             else if (resultadoCrearReserva.Contains("\"Reserva no creada"))
             {
-                Principal.Instance.BeginInvoke((Action)delegate ()
-                {
-                    Principal.Instance.timerReserva.Stop();
-                });
                 DialogResult result = CustomDialog.ShowMessage("Otro usuario acaba de reservar el mismo equipo, lo invitamos a reservar en otro horario. ¿Desea actualizar la lista con los horarios disponibles para este equipo?", "Reserva no creada " + Emoji.Confused, MessageBoxButtons.YesNo);
                 if (result == DialogResult.Yes)
                 {
@@ -317,7 +334,7 @@ namespace Turnos
                     });
                 }           
                 Principal.Instance.actualizarImgEstado(global::Turnos.Properties.Resources.icons8_instagram_check_mark_100);
-                Principal.Instance.timerReserva.Stop();
+                //Principal.Instance.timerReserva.Stop();
             });
         }
     }

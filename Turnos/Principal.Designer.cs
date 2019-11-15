@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            BunifuAnimatorNS.Animation animation2 = new BunifuAnimatorNS.Animation();
+            BunifuAnimatorNS.Animation animation1 = new BunifuAnimatorNS.Animation();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Principal));
             this.timerAnimation = new System.Windows.Forms.Timer(this.components);
             this.accionesPanel = new System.Windows.Forms.Panel();
@@ -64,10 +64,11 @@
             this.accionesPanel.Cursor = System.Windows.Forms.Cursors.Hand;
             this.expandCollapseTransition.SetDecoration(this.accionesPanel, BunifuAnimatorNS.DecorationType.None);
             this.accionesPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.accionesPanel.Location = new System.Drawing.Point(0, 514);
+            this.accionesPanel.Location = new System.Drawing.Point(0, 592);
             this.accionesPanel.Name = "accionesPanel";
             this.accionesPanel.Size = new System.Drawing.Size(920, 70);
             this.accionesPanel.TabIndex = 11;
+            this.accionesPanel.Visible = false;
             // 
             // expandCollapseBtn
             // 
@@ -103,6 +104,7 @@
             this.expandCollapseBtn.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.expandCollapseBtn.Textcolor = System.Drawing.Color.White;
             this.expandCollapseBtn.TextFont = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.expandCollapseBtn.Click += new System.EventHandler(this.expandCollapseBtn_Click);
             // 
             // menuBtn
             // 
@@ -259,14 +261,14 @@
             this.headerPanel.Dock = System.Windows.Forms.DockStyle.Top;
             this.headerPanel.Location = new System.Drawing.Point(0, 0);
             this.headerPanel.Name = "headerPanel";
-            this.headerPanel.Size = new System.Drawing.Size(920, 69);
+            this.headerPanel.Size = new System.Drawing.Size(920, 96);
             this.headerPanel.TabIndex = 12;
             // 
             // ReservationLoadCheckingImg
             // 
             this.expandCollapseTransition.SetDecoration(this.ReservationLoadCheckingImg, BunifuAnimatorNS.DecorationType.None);
             this.ReservationLoadCheckingImg.Image = global::Turnos.Properties.Resources.icons8_instagram_check_mark_100;
-            this.ReservationLoadCheckingImg.Location = new System.Drawing.Point(3, 3);
+            this.ReservationLoadCheckingImg.Location = new System.Drawing.Point(3, 14);
             this.ReservationLoadCheckingImg.Name = "ReservationLoadCheckingImg";
             this.ReservationLoadCheckingImg.Size = new System.Drawing.Size(64, 64);
             this.ReservationLoadCheckingImg.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -277,31 +279,31 @@
             // 
             this.expandCollapseTransition.AnimationType = BunifuAnimatorNS.AnimationType.Mosaic;
             this.expandCollapseTransition.Cursor = null;
-            animation2.AnimateOnlyDifferences = true;
-            animation2.BlindCoeff = ((System.Drawing.PointF)(resources.GetObject("animation2.BlindCoeff")));
-            animation2.LeafCoeff = 0F;
-            animation2.MaxTime = 1F;
-            animation2.MinTime = 0F;
-            animation2.MosaicCoeff = ((System.Drawing.PointF)(resources.GetObject("animation2.MosaicCoeff")));
-            animation2.MosaicShift = ((System.Drawing.PointF)(resources.GetObject("animation2.MosaicShift")));
-            animation2.MosaicSize = 20;
-            animation2.Padding = new System.Windows.Forms.Padding(30);
-            animation2.RotateCoeff = 0F;
-            animation2.RotateLimit = 0F;
-            animation2.ScaleCoeff = ((System.Drawing.PointF)(resources.GetObject("animation2.ScaleCoeff")));
-            animation2.SlideCoeff = ((System.Drawing.PointF)(resources.GetObject("animation2.SlideCoeff")));
-            animation2.TimeCoeff = 0F;
-            animation2.TransparencyCoeff = 0F;
-            this.expandCollapseTransition.DefaultAnimation = animation2;
+            animation1.AnimateOnlyDifferences = true;
+            animation1.BlindCoeff = ((System.Drawing.PointF)(resources.GetObject("animation1.BlindCoeff")));
+            animation1.LeafCoeff = 0F;
+            animation1.MaxTime = 1F;
+            animation1.MinTime = 0F;
+            animation1.MosaicCoeff = ((System.Drawing.PointF)(resources.GetObject("animation1.MosaicCoeff")));
+            animation1.MosaicShift = ((System.Drawing.PointF)(resources.GetObject("animation1.MosaicShift")));
+            animation1.MosaicSize = 20;
+            animation1.Padding = new System.Windows.Forms.Padding(30);
+            animation1.RotateCoeff = 0F;
+            animation1.RotateLimit = 0F;
+            animation1.ScaleCoeff = ((System.Drawing.PointF)(resources.GetObject("animation1.ScaleCoeff")));
+            animation1.SlideCoeff = ((System.Drawing.PointF)(resources.GetObject("animation1.SlideCoeff")));
+            animation1.TimeCoeff = 0F;
+            animation1.TransparencyCoeff = 0F;
+            this.expandCollapseTransition.DefaultAnimation = animation1;
             // 
             // panelContainer
             // 
             this.panelContainer.BackColor = System.Drawing.Color.Ivory;
             this.expandCollapseTransition.SetDecoration(this.panelContainer, BunifuAnimatorNS.DecorationType.None);
             this.panelContainer.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelContainer.Location = new System.Drawing.Point(0, 69);
+            this.panelContainer.Location = new System.Drawing.Point(0, 96);
             this.panelContainer.Name = "panelContainer";
-            this.panelContainer.Size = new System.Drawing.Size(920, 445);
+            this.panelContainer.Size = new System.Drawing.Size(920, 496);
             this.panelContainer.TabIndex = 13;
             // 
             // Principal
@@ -309,7 +311,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(920, 584);
+            this.ClientSize = new System.Drawing.Size(920, 662);
             this.Controls.Add(this.panelContainer);
             this.Controls.Add(this.headerPanel);
             this.Controls.Add(this.accionesPanel);
@@ -319,6 +321,7 @@
             this.Name = "Principal";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "PrincipalNew";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Turnos_Closing);
             this.Load += new System.EventHandler(this.frmMain_Load);
             this.accionesPanel.ResumeLayout(false);

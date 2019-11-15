@@ -70,6 +70,7 @@
             // principalLbl
             // 
             this.principalLbl.AutoEllipsis = true;
+            this.principalLbl.BackColor = System.Drawing.SystemColors.Info;
             this.principalLbl.Dock = System.Windows.Forms.DockStyle.Top;
             this.principalLbl.Font = new System.Drawing.Font("Segoe UI", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.principalLbl.Location = new System.Drawing.Point(0, 0);

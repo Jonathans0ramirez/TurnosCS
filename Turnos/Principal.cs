@@ -58,7 +58,7 @@ namespace Turnos
         public bool esEquipoHabilitado = false;
 
         // Constante que determina el momento en que la sesión de usuario será bloqueada
-        private const int BLOQUEAR = 26;
+        private const int BLOQUEAR = 9;
 
         // Constante que determina el momento en que la sesión de usuario será desbloqueada
         private const int DESBLOQUEAR = 10;
@@ -239,8 +239,12 @@ namespace Turnos
         private void frmMain_Load(System.Object sender, System.EventArgs e)
         {
             /*AQUÍ DEBE IR LA LLAMADA AL SERVICIO QUE VERIFICARÁ SI EL EQUIPO ESTÁ EN 130 HORAS*/
-            hk.HookStart();
+            //hk.HookStart();
             _obj = this;
+
+            int y;
+            y = (headerPanel.Height / 2) - (ReservationLoadCheckingImg.Height / 2);
+            ReservationLoadCheckingImg.Location = new Point(ReservationLoadCheckingImg.Location.X, y);
 
             ValidarTurno.Instance.Dock = DockStyle.Fill;
             panelContainer.Controls.Add(ValidarTurno.Instance);
@@ -330,6 +334,13 @@ namespace Turnos
                 ValidarTurno.Instance.Dispose();
                 ValidarTurno.Instance = null;
             }
+        }
+
+        private void expandCollapseBtn_Click(object sender, EventArgs e)
+        {
+            lockTaskManager(false);
+            makeVisible(false);
+            this.Close();
         }
     }
 }
