@@ -83,9 +83,6 @@ namespace Turnos
         {
             InitializeComponent();
             Show();
-            int x;
-            x = (accionesPanel.Width / 2) - (accionesPanel_2.Width / 2);
-            accionesPanel_2.Location = new Point(x, accionesPanel_2.Location.Y);
 
             //lockTaskManager(true);
             //makeVisible(true);
@@ -180,7 +177,7 @@ namespace Turnos
                                 {
                                     inactive = 60000;
                                     servicios.registrarUsoReserva(confManager.ReadSetting("Usuario"));
-                                    CustomDialog.ShowMessage("Continúa navegando sin problemas por una hora más", "Te queda una hora" + Emoji.Hourglass_Flowing_Sand);
+                                    CustomDialog.ShowMessage("Continúa trabajando sin problemas por una hora más.", "Te queda una hora", MessageBoxButtons.OK, global::Turnos.Properties.Resources.HoraLeftImg);
                                 }
                                 else
                                 {
@@ -213,7 +210,7 @@ namespace Turnos
                             Console.WriteLine("Momento en que la aplicación avisa al usuario el cierre de la sesión");
                             inactive = 60000 * (EXTRAER - MENSAJE);
                             if (esEquipoHabilitado) {
-                                CustomDialog.ShowMessage("Señor usuario, su turno terminará en 5 min; " + "por favor cierre las cuentas en el navegador y guarde todos los datos importantes. GRACIAS!", "Te quedan 5 minutos" + Emoji.Grimacing);
+                                CustomDialog.ShowMessage("Tu turno terminará en 5 minutos; " + "Asegúrate de cerrar tus cuentas y guardar todos los datos importantes. ¡GRACIAS!", "Te quedan 5 minutos", MessageBoxButtons.OK, global::Turnos.Properties.Resources._5MinLeftImg);
                             }
                             //closeSessionMsg();
                             break;
@@ -246,8 +243,9 @@ namespace Turnos
             y = (headerPanel.Height / 2) - (ReservationLoadCheckingImg.Height / 2);
             ReservationLoadCheckingImg.Location = new Point(ReservationLoadCheckingImg.Location.X, y);
 
-            ValidarTurno.Instance.Dock = DockStyle.Fill;
             panelContainer.Controls.Add(ValidarTurno.Instance);
+            ValidarTurno.Instance.Dock = DockStyle.Fill;
+            ValidarTurno.Instance.centrarPaneles();
         }
 
 
@@ -257,8 +255,9 @@ namespace Turnos
         {
             if (!panelContainer.Controls.Contains(ValidarTurno.Instance))
             {
-                ValidarTurno.Instance.Dock = DockStyle.Fill;
                 panelContainer.Controls.Add(ValidarTurno.Instance);
+                ValidarTurno.Instance.Dock = DockStyle.Fill;
+                ValidarTurno.Instance.centrarPaneles();
             }
             ValidarTurno.Instance.BringToFront();
             if (panelContainer.Controls.Contains(ReservarTurno.Instance))
@@ -296,9 +295,9 @@ namespace Turnos
         {
             this.Refresh();
             Thread.Sleep(10);
-            expandCollapseTransition.HideSync(ReservationLoadCheckingImg);
+            logoStatusTransition.HideSync(ReservationLoadCheckingImg);
             ReservationLoadCheckingImg.Image = picturePath;
-            expandCollapseTransition.ShowSync(ReservationLoadCheckingImg);
+            logoStatusTransition.ShowSync(ReservationLoadCheckingImg);
 
         }
 
@@ -306,8 +305,9 @@ namespace Turnos
         {
             if (!panelContainer.Controls.Contains(ValidarTurno.Instance))
             {
-                ValidarTurno.Instance.Dock = DockStyle.Fill;
                 panelContainer.Controls.Add(ValidarTurno.Instance);
+                ValidarTurno.Instance.Dock = DockStyle.Fill;
+                ValidarTurno.Instance.centrarPaneles();
             }
             ValidarTurno.Instance.BringToFront();
             if (panelContainer.Controls.Contains(ReservarTurno.Instance))

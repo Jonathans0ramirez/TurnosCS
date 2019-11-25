@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace Turnos
@@ -14,11 +15,13 @@ namespace Turnos
             InitializeComponent();
         }
 
-        public static DialogResult ShowMessage(string content, string title, MessageBoxButtons buttons = MessageBoxButtons.OK)
+        public static DialogResult ShowMessage(string content, string title, MessageBoxButtons buttons, Image image)
         {
             customDialog = new CustomDialog();
             customDialog.titleLbl.Text = title;
             customDialog.contentLbl.Text = content;
+            customDialog.dialogImg.BackgroundImage = image;
+            customDialog.dialogImg.BackgroundImageLayout = ImageLayout.Zoom;
             switch (buttons)
             {
                 case MessageBoxButtons.YesNo:

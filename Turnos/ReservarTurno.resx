@@ -126,4 +126,10 @@
   <metadata name="backgroundWorkerReservar.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>316, 17</value>
   </metadata>
+  <metadata name="panelTitleElipse.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>519, 17</value>
+  </metadata>
+  <metadata name="panelLoadElipse.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>655, 17</value>
+  </metadata>
 </root>

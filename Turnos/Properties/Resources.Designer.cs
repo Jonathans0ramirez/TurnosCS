@@ -63,9 +63,9 @@ namespace Turnos.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Double_Ring_1s_64px {
+        internal static System.Drawing.Bitmap _5MinLeftImg {
             get {
-                object obj = ResourceManager.GetObject("Double_Ring_1s_64px", resourceCulture);
+                object obj = ResourceManager.GetObject("5MinLeftImg", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -73,9 +73,9 @@ namespace Turnos.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap icons8_flecha_ampliar_50 {
+        internal static System.Drawing.Bitmap CreadaImg {
             get {
-                object obj = ResourceManager.GetObject("icons8-flecha-ampliar-50", resourceCulture);
+                object obj = ResourceManager.GetObject("CreadaImg", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -83,9 +83,29 @@ namespace Turnos.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap icons8_flecha_contraer_50 {
+        internal static System.Drawing.Bitmap ErrorImg {
             get {
-                object obj = ResourceManager.GetObject("icons8-flecha-contraer-50", resourceCulture);
+                object obj = ResourceManager.GetObject("ErrorImg", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap FranjaInstImg {
+            get {
+                object obj = ResourceManager.GetObject("FranjaInstImg", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap HoraLeftImg {
+            get {
+                object obj = ResourceManager.GetObject("HoraLeftImg", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -106,6 +126,56 @@ namespace Turnos.Properties {
         internal static System.Drawing.Bitmap icons8_reservation_100__1_ {
             get {
                 object obj = ResourceManager.GetObject("icons8-reservation-100 (1)", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Interwind_1s_100px {
+            get {
+                object obj = ResourceManager.GetObject("Interwind-1s-100px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap logo_udea {
+            get {
+                object obj = ResourceManager.GetObject("logo_udea", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap NoCreadaImg {
+            get {
+                object obj = ResourceManager.GetObject("NoCreadaImg", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ReservarImg {
+            get {
+                object obj = ResourceManager.GetObject("ReservarImg", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Spinner_1s_64px {
+            get {
+                object obj = ResourceManager.GetObject("Spinner-1s-64px", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
