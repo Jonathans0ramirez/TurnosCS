@@ -71,8 +71,10 @@ namespace Turnos
             {
                 Principal.Instance.actualizarImgEstado(global::Turnos.Properties.Resources.Spinner_1s_64px);
             });
-            if (textBoxPass.Text == "turnosUGT") { }
-            //Principal.Instance.makeVisible(false);
+            if (textBoxPass.Text == "turnosUGT")
+            {
+                Principal.Instance.makeVisible(false);
+            }
             //else if (false) //Para Pruebas
             else if (servicios.validarTurnoUsuario(textBoxUser.Text))
             {

@@ -170,6 +170,31 @@ namespace Turnos
             }
         }
 
+        public bool validar130Horas(string codComputador)
+        {
+            try
+            {
+                string codigoComputador = codComputador;
+                var uri = new Uri("http://biblioteca.udea.edu.co/turnos/services/Validar130Horas.php?codComputador=" + codigoComputador);
+                var result_post = SendRequest(uri, null, "application/json", "GET");
+                result_post = result_post.Trim();
+
+                JToken Estado = JToken.Parse(result_post);
+                string word = (string)Estado.SelectToken("Estado");
+
+                if (word == "J")
+                {
+                    return true;
+                }
+                return false;
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("No se pudo consumir el servicio web que valida si el equipo está en 130 Horas");
+                return true;
+            }
+        }
+
         public string obtenerHoraReserva(string codComputador, int inicioOFin) //0 Inicio, 1 Fin
         {
             try

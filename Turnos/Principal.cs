@@ -1,7 +1,7 @@
 ﻿using Microsoft.Win32;
 using System;
+using System.Diagnostics;
 using System.Drawing;
-using System.Linq;
 using System.Security.Principal;
 using System.Threading;
 using System.Windows.Forms;
@@ -54,11 +54,14 @@ namespace Turnos
         public int minutosParaFinDeTurno = 0;
         // Constante que determina los minutos que faltan para alcanzar la hora de fin de turno
 
-        // Este booleano sirve para indicar si el usuario a accedido al tur
+        // Este booleano sirve para indicar si el usuario a accedido al turno
         public bool esEquipoHabilitado = false;
 
+        // Este booleano sirve para indicar si el equipo está en jornada 130 Horas.
+        public bool estaEn130Horas = false;
+
         // Constante que determina el momento en que la sesión de usuario será bloqueada
-        private const int BLOQUEAR = 9;
+        private const int BLOQUEAR = 0;
 
         // Constante que determina el momento en que la sesión de usuario será desbloqueada
         private const int DESBLOQUEAR = 10;
@@ -82,13 +85,10 @@ namespace Turnos
         public Principal()
         {
             InitializeComponent();
-            Show();
+            //Show();
 
             //lockTaskManager(true);
             //makeVisible(true);
-
-            var t = new Thread(new ThreadStart(service));
-            t.Start();
         }
 
         public void lockTaskManager(bool flag)
@@ -145,7 +145,6 @@ namespace Turnos
 
                 if (flag)
                 {
-                    //closeSessionMsg(true);
                     hk.HookStart();
                 }
                 else
@@ -175,17 +174,28 @@ namespace Turnos
                             {
                                 if (servicios.validarTurnoUsuario(confManager.ReadSetting("Usuario")))
                                 {
-                                    inactive = 60000;
                                     servicios.registrarUsoReserva(confManager.ReadSetting("Usuario"));
                                     CustomDialog.ShowMessage("Continúa trabajando sin problemas por una hora más.", "Te queda una hora", MessageBoxButtons.OK, global::Turnos.Properties.Resources.HoraLeftImg);
                                 }
                                 else
                                 {
                                     confManager.RemoveSetting("Usuario");
+
+                                    /*Cierra todas las aplicaciones y procesos abiertos.*/
+                                    Process[] processes = Process.GetProcesses();
+                                    foreach (Process p in processes)
+                                    {
+                                        if (!String.IsNullOrEmpty(p.MainWindowTitle) && !p.MainWindowTitle.Contains("Turnos"))
+                                        {
+                                            p.Kill();
+                                        }
+                                    }
+
+
                                     esEquipoHabilitado = false;
                                     makeVisible(true);
-                                    inactive = 60000 * (DESBLOQUEAR);
                                 }
+                                inactive = 60000;
                             }
                             break;
                         }
@@ -198,21 +208,13 @@ namespace Turnos
                             break;
                         }
 
-                    case EXTRAER:
-                        {
-                            Console.WriteLine("Momento en que la aplicación Extrae los turnos siguientes");
-                            inactive = 60000;
-                            break;
-                        }
-
                     case MENSAJE:
                         {
                             Console.WriteLine("Momento en que la aplicación avisa al usuario el cierre de la sesión");
                             inactive = 60000 * (EXTRAER - MENSAJE);
                             if (esEquipoHabilitado) {
-                                CustomDialog.ShowMessage("Tu turno terminará en 5 minutos; " + "Asegúrate de cerrar tus cuentas y guardar todos los datos importantes. ¡GRACIAS!", "Te quedan 5 minutos", MessageBoxButtons.OK, global::Turnos.Properties.Resources._5MinLeftImg);
+                                CustomDialog.ShowMessage("Tu turno terminará en 5 minutos; " + "Asegúrate de guardar todos los datos importantes. Al finalizar cerraremos todo por ti. ¡GRACIAS!", "Te quedan 5 minutos", MessageBoxButtons.OK, global::Turnos.Properties.Resources._5MinLeftImg);
                             }
-                            //closeSessionMsg();
                             break;
                         }
                 }
@@ -226,16 +228,22 @@ namespace Turnos
         // la combinación de teclas ALT + F4
         private void Turnos_Closing(object sender, System.Windows.Forms.FormClosingEventArgs e)
         {
-            e.Cancel = true;
-            //lockTaskManager(false);
-            //makeVisible(false);
-            hk.HookStop();
+            if (!estaEn130Horas)
+            {
+                e.Cancel = true;
+                //lockTaskManager(false);
+                //makeVisible(false);
+                //hk.HookStop();
+            }
+            else
+            {
+                Application.Exit();
+            }
         }
 
         // Ejecuta el evento cuando la ventana está cargada
         private void frmMain_Load(System.Object sender, System.EventArgs e)
         {
-            /*AQUÍ DEBE IR LA LLAMADA AL SERVICIO QUE VERIFICARÁ SI EL EQUIPO ESTÁ EN 130 HORAS*/
             //hk.HookStart();
             _obj = this;
 
@@ -246,6 +254,9 @@ namespace Turnos
             panelContainer.Controls.Add(ValidarTurno.Instance);
             ValidarTurno.Instance.Dock = DockStyle.Fill;
             ValidarTurno.Instance.centrarPaneles();
+
+            /*AQUÍ DEBE IR LA LLAMADA AL SERVICIO QUE VERIFICARÁ SI EL EQUIPO ESTÁ EN 130 HORAS*/
+            bw130Horas.RunWorkerAsync();
         }
 
 
@@ -268,27 +279,6 @@ namespace Turnos
             }
             actualizarImgEstado(global::Turnos.Properties.Resources.icons8_instagram_check_mark_100);
             timerAnimation.Stop();
-            /*if(!Expanded)
-            {
-                accionesPanel.Height = accionesPanel.Height + 5;
-                if (accionesPanel.Height >= 100)
-                {
-                    Expanded = true;
-                    timerAnimation.Stop();
-                    expandCollapseTransition.ShowSync(expandCollapseBtn);
-                    this.Refresh();
-                }
-            } else
-            {
-                accionesPanel.Height = accionesPanel.Height - 5;
-                if (accionesPanel.Height <= 70)
-                {
-                    Expanded = false;
-                    timerAnimation.Stop();
-                    expandCollapseTransition.ShowSync(expandCollapseBtn);
-                    this.Refresh();
-                }
-            }*/
         }
 
         public void actualizarImgEstado(Image picturePath)
@@ -301,46 +291,21 @@ namespace Turnos
 
         }
 
-        private void Verificar_Click(object sender, EventArgs e)
+        private void bw130Horas_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
         {
-            if (!panelContainer.Controls.Contains(ValidarTurno.Instance))
+            if (servicios.validar130Horas("PISO2-PC12"))
             {
-                panelContainer.Controls.Add(ValidarTurno.Instance);
-                ValidarTurno.Instance.Dock = DockStyle.Fill;
-                ValidarTurno.Instance.centrarPaneles();
+                estaEn130Horas = true;
+                BeginInvoke((Action)delegate ()
+                {
+                    Close();
+                });
             }
-            ValidarTurno.Instance.BringToFront();
-            if (panelContainer.Controls.Contains(ReservarTurno.Instance))
+            else
             {
-                panelContainer.Controls.Remove(ReservarTurno.Instance);
-                ReservarTurno.Instance.Dispose();
-                ReservarTurno.Instance = null;
+                var t = new Thread(new ThreadStart(service));
+                t.Start();
             }
-            actualizarImgEstado(global::Turnos.Properties.Resources.icons8_instagram_check_mark_100);
-            timerAnimation.Stop();
-        }
-
-        private void Reservar_Click(object sender, EventArgs e)
-        {
-            if (!panelContainer.Controls.Contains(ReservarTurno.Instance))
-            {
-                ReservarTurno.Instance.Dock = DockStyle.Fill;
-                panelContainer.Controls.Add(ReservarTurno.Instance);
-            }
-            ReservarTurno.Instance.BringToFront();
-            if (panelContainer.Controls.Contains(ValidarTurno.Instance))
-            {
-                panelContainer.Controls.Remove(ValidarTurno.Instance);
-                ValidarTurno.Instance.Dispose();
-                ValidarTurno.Instance = null;
-            }
-        }
-
-        private void expandCollapseBtn_Click(object sender, EventArgs e)
-        {
-            lockTaskManager(false);
-            makeVisible(false);
-            this.Close();
         }
     }
 }

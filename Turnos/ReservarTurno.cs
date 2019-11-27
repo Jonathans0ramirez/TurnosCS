@@ -2,10 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -13,7 +11,7 @@ namespace Turnos
 {
     public partial class ReservarTurno : UserControl
     {
-        string fechaHoy = string.Empty;
+        private string fechaHoy = string.Empty;
 
         WebServices servicios = new WebServices();
 
@@ -22,14 +20,20 @@ namespace Turnos
         public delegate void RellenarHorasParaReservaDelegate();
 
         static ReservarTurno _instance;
+
+        private int tiempoRestante = 59;
         
-        int contadorHora = 1;
+        private int contadorHora = 1;
 
-        int contadorBotonesReserva = 0;
+        private int contadorBotonesReserva = 0;
 
-        //int numeroMaximoReservasDia = 0;
+        //private int numeroMaximoReservasDia = 0;
 
-        int numeroMaximoReservasUsuario = 0;
+        private int numeroMaximoReservasUsuario = 0;
+
+        private Color colorSeleccionadoBtn = Color.FromArgb(127, 179, 22);
+
+        private Color colorDisponibleBtn = Color.FromArgb(31, 106, 57);
 
         public static ReservarTurno Instance
         {
@@ -98,7 +102,7 @@ namespace Turnos
                                     {
                                         if (!btn.IsDisposed)
                                         {
-                                            btn.BackColor = Color.FromArgb(31, 106, 57);   //Color de Horario disponible
+                                            btn.BackColor = colorDisponibleBtn;   //Color de Horario disponible
                                             btn.FlatStyle = FlatStyle.Flat;
                                             btn.ForeColor = SystemColors.ControlLight;
                                             btn.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
@@ -107,7 +111,7 @@ namespace Turnos
                                                 btn.Enabled = false;
                                                 btn.BackColor = Color.FromArgb(236, 43, 68);    //Color de Horario ocuopado
                                             }
-                                            btn.Size = new Size(115, 32);
+                                            btn.Size = new Size(115, 35);
                                             string auxHour = string.Empty;
                                             if ((DateTime.Now.Hour + contadorHora) == 24)
                                             {
@@ -150,6 +154,7 @@ namespace Turnos
                 flPanelHoras.Enabled = true;
                 panelLoad.Visible = false;
                 containerlPrincipal.Visible = true;
+                tiempoRestanteReserva.Start();
                 paneAcciones.Enabled = true;
                 paneAcciones.Visible = true;
                 containerHoras.Visible = true;
@@ -178,7 +183,10 @@ namespace Turnos
             
             x = (containerlPrincipal.Width / 2) - (descripcionLbl.Width / 2);
             descripcionLbl.Location = new Point(x, descripcionLbl.Location.Y);
-            
+
+            x = (containerlPrincipal.Width / 2) - (tiempoRestanteLbl.Width / 2);
+            tiempoRestanteLbl.Location = new Point(x, tiempoRestanteLbl.Location.Y);
+
             x = (containerlPrincipal.Width / 2) - (pictureBoxLogo.Width / 2);
             pictureBoxLogo.Location = new Point(x, pictureBoxLogo.Location.Y);
 
@@ -279,14 +287,14 @@ namespace Turnos
         private void reservarBtns_Click(object sender, EventArgs e)
         {
             Button button = sender as Button;
-            if (button.BackColor == Color.FromArgb(127, 179, 22))   //Color de horario seleccionado
+            if (button.BackColor == colorSeleccionadoBtn)   //Color de horario seleccionado
             {
-                button.BackColor = Color.FromArgb(31, 106, 57);    //Color de horario disponible
+                button.BackColor = colorDisponibleBtn;    //Color de horario disponible
                 contadorBotonesReserva--;
             }
-            else if (button.BackColor == Color.FromArgb(31, 106, 57) /*[Color de horario disponible]*/ && contadorBotonesReserva < numeroMaximoReservasUsuario)
+            else if (button.BackColor == colorDisponibleBtn /*[Color de horario disponible]*/ && contadorBotonesReserva < numeroMaximoReservasUsuario)
             {
-                button.BackColor = Color.FromArgb(127, 179, 22);    //Color de horario seleccionado
+                button.BackColor = colorSeleccionadoBtn;    //Color de horario seleccionado
                 contadorBotonesReserva++;
             }
             string name = button.Text;
@@ -310,7 +318,7 @@ namespace Turnos
             bool moreThanOne = false;
             foreach (var button in flPanelHoras.Controls.OfType<Button>())
             {
-                if (button.BackColor.Equals(Color.FromArgb(127, 179, 22)))
+                if (button.BackColor.Equals(colorSeleccionadoBtn))
                 {
                     if (moreThanOne)
                     {
@@ -382,6 +390,27 @@ namespace Turnos
                 }           
                 Principal.Instance.actualizarImgEstado(global::Turnos.Properties.Resources.icons8_instagram_check_mark_100);
             });
+        }
+
+        private void tiempoRestanteReserva_Tick(object sender, EventArgs e)
+        {
+            fadeTiempoRestanteTransition.HideSync(tiempoRestanteLbl);
+            if (tiempoRestante > 0)
+            {
+                tiempoRestanteLbl.Text = "Tienes " + tiempoRestante + " segundos para realizar tu reserva";
+                int x = (containerlPrincipal.Width / 2) - (tiempoRestanteLbl.Width / 2);
+                tiempoRestanteLbl.Location = new Point(x, tiempoRestanteLbl.Location.Y);
+                tiempoRestante--;
+            }
+            else
+            {
+                tiempoRestante = 59;
+                tiempoRestanteLbl.Text = "Tu tiempo para reservar se ha agotado";
+                int x = (containerlPrincipal.Width / 2) - (tiempoRestanteLbl.Width / 2);
+                tiempoRestanteLbl.Location = new Point(x, tiempoRestanteLbl.Location.Y);
+                tiempoRestanteReserva.Stop();
+            }
+            fadeTiempoRestanteTransition.ShowSync(tiempoRestanteLbl);
         }
     }
 }

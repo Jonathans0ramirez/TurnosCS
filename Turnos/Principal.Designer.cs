@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            BunifuAnimatorNS.Animation animation1 = new BunifuAnimatorNS.Animation();
+            BunifuAnimatorNS.Animation animation2 = new BunifuAnimatorNS.Animation();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Principal));
             this.timerAnimation = new System.Windows.Forms.Timer(this.components);
             this.headerPanel = new System.Windows.Forms.Panel();
@@ -37,6 +37,7 @@
             this.ReservationLoadCheckingImg = new System.Windows.Forms.PictureBox();
             this.logoStatusTransition = new BunifuAnimatorNS.BunifuTransition(this.components);
             this.panelContainer = new System.Windows.Forms.Panel();
+            this.bw130Horas = new System.ComponentModel.BackgroundWorker();
             this.headerPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbFranja)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ReservationLoadCheckingImg)).BeginInit();
@@ -44,7 +45,7 @@
             // 
             // timerAnimation
             // 
-            this.timerAnimation.Interval = 60000;
+            this.timerAnimation.Interval = 61000;
             this.timerAnimation.Tick += new System.EventHandler(this.TimerAnimation_Tick);
             // 
             // headerPanel
@@ -86,22 +87,22 @@
             // 
             this.logoStatusTransition.AnimationType = BunifuAnimatorNS.AnimationType.Mosaic;
             this.logoStatusTransition.Cursor = null;
-            animation1.AnimateOnlyDifferences = true;
-            animation1.BlindCoeff = ((System.Drawing.PointF)(resources.GetObject("animation1.BlindCoeff")));
-            animation1.LeafCoeff = 0F;
-            animation1.MaxTime = 1F;
-            animation1.MinTime = 0F;
-            animation1.MosaicCoeff = ((System.Drawing.PointF)(resources.GetObject("animation1.MosaicCoeff")));
-            animation1.MosaicShift = ((System.Drawing.PointF)(resources.GetObject("animation1.MosaicShift")));
-            animation1.MosaicSize = 20;
-            animation1.Padding = new System.Windows.Forms.Padding(30);
-            animation1.RotateCoeff = 0F;
-            animation1.RotateLimit = 0F;
-            animation1.ScaleCoeff = ((System.Drawing.PointF)(resources.GetObject("animation1.ScaleCoeff")));
-            animation1.SlideCoeff = ((System.Drawing.PointF)(resources.GetObject("animation1.SlideCoeff")));
-            animation1.TimeCoeff = 0F;
-            animation1.TransparencyCoeff = 0F;
-            this.logoStatusTransition.DefaultAnimation = animation1;
+            animation2.AnimateOnlyDifferences = true;
+            animation2.BlindCoeff = ((System.Drawing.PointF)(resources.GetObject("animation2.BlindCoeff")));
+            animation2.LeafCoeff = 0F;
+            animation2.MaxTime = 1F;
+            animation2.MinTime = 0F;
+            animation2.MosaicCoeff = ((System.Drawing.PointF)(resources.GetObject("animation2.MosaicCoeff")));
+            animation2.MosaicShift = ((System.Drawing.PointF)(resources.GetObject("animation2.MosaicShift")));
+            animation2.MosaicSize = 20;
+            animation2.Padding = new System.Windows.Forms.Padding(30);
+            animation2.RotateCoeff = 0F;
+            animation2.RotateLimit = 0F;
+            animation2.ScaleCoeff = ((System.Drawing.PointF)(resources.GetObject("animation2.ScaleCoeff")));
+            animation2.SlideCoeff = ((System.Drawing.PointF)(resources.GetObject("animation2.SlideCoeff")));
+            animation2.TimeCoeff = 0F;
+            animation2.TransparencyCoeff = 0F;
+            this.logoStatusTransition.DefaultAnimation = animation2;
             // 
             // panelContainer
             // 
@@ -112,6 +113,10 @@
             this.panelContainer.Name = "panelContainer";
             this.panelContainer.Size = new System.Drawing.Size(920, 592);
             this.panelContainer.TabIndex = 13;
+            // 
+            // bw130Horas
+            // 
+            this.bw130Horas.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bw130Horas_DoWork);
             // 
             // Principal
             // 
@@ -126,7 +131,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "Principal";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "PrincipalNew";
+            this.Text = "TurnosPrincipal";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Turnos_Closing);
             this.Load += new System.EventHandler(this.frmMain_Load);
@@ -144,5 +149,6 @@
         private System.Windows.Forms.Panel panelContainer;
         private System.Windows.Forms.PictureBox ReservationLoadCheckingImg;
         private System.Windows.Forms.PictureBox pbFranja;
+        private System.ComponentModel.BackgroundWorker bw130Horas;
     }
 }
