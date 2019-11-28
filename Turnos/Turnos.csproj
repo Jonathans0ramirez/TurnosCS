@@ -154,21 +154,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\icons8-flecha-ampliar-50.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\icons8-flecha-contraer-50.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\icons8-instagram-check-mark-100.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\icons8-reservation-100 %281%29.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\Double Ring-1s-64px.gif" />
-  </ItemGroup>
-  <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">
       <Visible>False</Visible>
       <ProductName>Microsoft .NET Framework 4.7.2 %28x86 y x64%29</ProductName>
@@ -212,6 +197,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\6.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Login-Icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Reservar-Icon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -74,8 +74,7 @@ namespace Turnos
         {
             try
             {
-                //string codigoComputador = System.Net.Dns.GetHostName();
-                string codigoComputador = "PISO3-PC20";
+                string codigoComputador = System.Net.Dns.GetHostName();
                 string idSala = consultarSalaPorPC(codigoComputador);
 
                 string json = "{\"codigoSala\":" + idSala + ",\"codigoComputador\":\"" + codigoComputador + "\",\"horasReserva\":[" + horaReserva + "],\"usuario\":\"" + usuario + "\"}";
@@ -95,8 +94,7 @@ namespace Turnos
         {
             try
             {
-                //string codigoComputador = System.Net.Dns.GetHostName();
-                string codigoComputador = "PISO3-PC20";
+                string codigoComputador = System.Net.Dns.GetHostName();
                 string json = "{\"usuario\":\"" + usuario + "\",\"codComputador\":\"" + codigoComputador + "\"}";
                 var data = Encoding.UTF8.GetBytes(json);
                 var uri = new Uri("http://biblioteca.udea.edu.co/turnos/services/ValidarReservaUsuario.php");
@@ -136,8 +134,7 @@ namespace Turnos
         {
             try
             {
-                //string codigoComputador = System.Net.Dns.GetHostName();
-                string codigoComputador = "PISO3-PC20";
+                string codigoComputador = System.Net.Dns.GetHostName();
                 string json = "{\"usuario\":\"" + user + "\",\"codComputador\":\"" + codigoComputador + "\"}";
                 var data = Encoding.UTF8.GetBytes(json);
                 var uri = new Uri("http://biblioteca.udea.edu.co/turnos/services/registrarUsoReserva.php");

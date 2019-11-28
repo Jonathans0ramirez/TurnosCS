@@ -264,6 +264,7 @@ namespace Turnos
 
         private void TimerAnimation_Tick(object sender, EventArgs e)
         {
+            actualizarImgEstado(global::Turnos.Properties.Resources.Login_Icon);
             if (!panelContainer.Controls.Contains(ValidarTurno.Instance))
             {
                 panelContainer.Controls.Add(ValidarTurno.Instance);
@@ -277,7 +278,6 @@ namespace Turnos
                 ReservarTurno.Instance.Dispose();
                 ReservarTurno.Instance = null;
             }
-            actualizarImgEstado(global::Turnos.Properties.Resources.icons8_instagram_check_mark_100);
             timerAnimation.Stop();
         }
 
@@ -293,7 +293,7 @@ namespace Turnos
 
         private void bw130Horas_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
         {
-            if (servicios.validar130Horas("PISO2-PC12"))
+            if (servicios.validar130Horas(System.Net.Dns.GetHostName()))
             {
                 estaEn130Horas = true;
                 BeginInvoke((Action)delegate ()

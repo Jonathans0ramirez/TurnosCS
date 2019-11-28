@@ -113,29 +113,19 @@ namespace Turnos.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap icons8_instagram_check_mark_100 {
-            get {
-                object obj = ResourceManager.GetObject("icons8-instagram-check-mark-100", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap icons8_reservation_100__1_ {
-            get {
-                object obj = ResourceManager.GetObject("icons8-reservation-100 (1)", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap Interwind_1s_100px {
             get {
                 object obj = ResourceManager.GetObject("Interwind-1s-100px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Login_Icon {
+            get {
+                object obj = ResourceManager.GetObject("Login_Icon", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -156,6 +146,16 @@ namespace Turnos.Properties {
         internal static System.Drawing.Bitmap NoCreadaImg {
             get {
                 object obj = ResourceManager.GetObject("NoCreadaImg", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Reservar_Icon {
+            get {
+                object obj = ResourceManager.GetObject("Reservar_Icon", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

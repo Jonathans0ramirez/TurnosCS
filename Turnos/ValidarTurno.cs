@@ -84,7 +84,7 @@ namespace Turnos
                     servicios.registrarUsoReserva(textBoxUser.Text);
                     Principal.Instance.BeginInvoke((Action)delegate ()
                     {
-                        Principal.Instance.actualizarImgEstado(global::Turnos.Properties.Resources.icons8_instagram_check_mark_100);
+                        Principal.Instance.actualizarImgEstado(global::Turnos.Properties.Resources.Login_Icon);
                         Principal.Instance.esEquipoHabilitado = true;
                         Principal.Instance.makeVisible(false);
                     });
@@ -99,7 +99,7 @@ namespace Turnos
                 {
                     Principal.Instance.BeginInvoke((Action)delegate ()
                     {
-                        Principal.Instance.actualizarImgEstado(global::Turnos.Properties.Resources.icons8_instagram_check_mark_100);
+                        Principal.Instance.actualizarImgEstado(global::Turnos.Properties.Resources.Login_Icon);
                     });
                     string message = textBoxUser.Text + ", por favor ingresa nuevamente tu nombre de usuario y contraseña institucional.";
                     string title = "¡Error al autenticar!";
@@ -117,7 +117,7 @@ namespace Turnos
                 {
                     Principal.Instance.BeginInvoke((Action)delegate ()
                     {
-                        Principal.Instance.actualizarImgEstado(global::Turnos.Properties.Resources.icons8_instagram_check_mark_100);
+                        Principal.Instance.actualizarImgEstado(global::Turnos.Properties.Resources.Login_Icon);
                     });
                     string message = "Hola, no tienes reservado este equipo. ¿Deseas realizar la reserva de este equipo?";
                     string title = "¿Reserva?";
@@ -166,7 +166,7 @@ namespace Turnos
                 {
                     Principal.Instance.BeginInvoke((Action)delegate ()
                     {
-                        Principal.Instance.actualizarImgEstado(global::Turnos.Properties.Resources.icons8_instagram_check_mark_100);
+                        Principal.Instance.actualizarImgEstado(global::Turnos.Properties.Resources.Login_Icon);
                     });
                     string message = textBoxUser.Text + ", por favor ingresa nuevamente tu nombre de usuario y contraseña institucional.";
                     string title = "¡Error al autenticar!";
