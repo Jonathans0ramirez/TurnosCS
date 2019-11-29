@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            BunifuAnimatorNS.Animation animation1 = new BunifuAnimatorNS.Animation();
+            BunifuAnimatorNS.Animation animation3 = new BunifuAnimatorNS.Animation();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Principal));
             this.timerAnimation = new System.Windows.Forms.Timer(this.components);
             this.headerPanel = new System.Windows.Forms.Panel();
@@ -38,6 +38,7 @@
             this.logoStatusTransition = new BunifuAnimatorNS.BunifuTransition(this.components);
             this.panelContainer = new System.Windows.Forms.Panel();
             this.bw130Horas = new System.ComponentModel.BackgroundWorker();
+            this.pcNombreLbl = new System.Windows.Forms.Label();
             this.headerPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbFranja)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ReservationLoadCheckingImg)).BeginInit();
@@ -51,6 +52,7 @@
             // headerPanel
             // 
             this.headerPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(176)))), ((int)(((byte)(6)))));
+            this.headerPanel.Controls.Add(this.pcNombreLbl);
             this.headerPanel.Controls.Add(this.pbFranja);
             this.headerPanel.Controls.Add(this.ReservationLoadCheckingImg);
             this.logoStatusTransition.SetDecoration(this.headerPanel, BunifuAnimatorNS.DecorationType.None);
@@ -87,22 +89,22 @@
             // 
             this.logoStatusTransition.AnimationType = BunifuAnimatorNS.AnimationType.Mosaic;
             this.logoStatusTransition.Cursor = null;
-            animation1.AnimateOnlyDifferences = true;
-            animation1.BlindCoeff = ((System.Drawing.PointF)(resources.GetObject("animation1.BlindCoeff")));
-            animation1.LeafCoeff = 0F;
-            animation1.MaxTime = 1F;
-            animation1.MinTime = 0F;
-            animation1.MosaicCoeff = ((System.Drawing.PointF)(resources.GetObject("animation1.MosaicCoeff")));
-            animation1.MosaicShift = ((System.Drawing.PointF)(resources.GetObject("animation1.MosaicShift")));
-            animation1.MosaicSize = 20;
-            animation1.Padding = new System.Windows.Forms.Padding(30);
-            animation1.RotateCoeff = 0F;
-            animation1.RotateLimit = 0F;
-            animation1.ScaleCoeff = ((System.Drawing.PointF)(resources.GetObject("animation1.ScaleCoeff")));
-            animation1.SlideCoeff = ((System.Drawing.PointF)(resources.GetObject("animation1.SlideCoeff")));
-            animation1.TimeCoeff = 0F;
-            animation1.TransparencyCoeff = 0F;
-            this.logoStatusTransition.DefaultAnimation = animation1;
+            animation3.AnimateOnlyDifferences = true;
+            animation3.BlindCoeff = ((System.Drawing.PointF)(resources.GetObject("animation3.BlindCoeff")));
+            animation3.LeafCoeff = 0F;
+            animation3.MaxTime = 1F;
+            animation3.MinTime = 0F;
+            animation3.MosaicCoeff = ((System.Drawing.PointF)(resources.GetObject("animation3.MosaicCoeff")));
+            animation3.MosaicShift = ((System.Drawing.PointF)(resources.GetObject("animation3.MosaicShift")));
+            animation3.MosaicSize = 20;
+            animation3.Padding = new System.Windows.Forms.Padding(30);
+            animation3.RotateCoeff = 0F;
+            animation3.RotateLimit = 0F;
+            animation3.ScaleCoeff = ((System.Drawing.PointF)(resources.GetObject("animation3.ScaleCoeff")));
+            animation3.SlideCoeff = ((System.Drawing.PointF)(resources.GetObject("animation3.SlideCoeff")));
+            animation3.TimeCoeff = 0F;
+            animation3.TransparencyCoeff = 0F;
+            this.logoStatusTransition.DefaultAnimation = animation3;
             // 
             // panelContainer
             // 
@@ -118,6 +120,19 @@
             // 
             this.bw130Horas.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bw130Horas_DoWork);
             // 
+            // pcNombreLbl
+            // 
+            this.pcNombreLbl.AutoSize = true;
+            this.logoStatusTransition.SetDecoration(this.pcNombreLbl, BunifuAnimatorNS.DecorationType.None);
+            this.pcNombreLbl.Font = new System.Drawing.Font("Arial", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.pcNombreLbl.ForeColor = System.Drawing.SystemColors.Control;
+            this.pcNombreLbl.Location = new System.Drawing.Point(80, 23);
+            this.pcNombreLbl.Margin = new System.Windows.Forms.Padding(10, 0, 3, 0);
+            this.pcNombreLbl.Name = "pcNombreLbl";
+            this.pcNombreLbl.Size = new System.Drawing.Size(184, 24);
+            this.pcNombreLbl.TabIndex = 14;
+            this.pcNombreLbl.Text = "NOMBRE DEL PC";
+            // 
             // Principal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -132,10 +147,12 @@
             this.Name = "Principal";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "TurnosPrincipal";
+            this.TopMost = true;
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Turnos_Closing);
             this.Load += new System.EventHandler(this.frmMain_Load);
             this.headerPanel.ResumeLayout(false);
+            this.headerPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbFranja)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ReservationLoadCheckingImg)).EndInit();
             this.ResumeLayout(false);
@@ -150,5 +167,6 @@
         private System.Windows.Forms.PictureBox ReservationLoadCheckingImg;
         private System.Windows.Forms.PictureBox pbFranja;
         private System.ComponentModel.BackgroundWorker bw130Horas;
+        private System.Windows.Forms.Label pcNombreLbl;
     }
 }

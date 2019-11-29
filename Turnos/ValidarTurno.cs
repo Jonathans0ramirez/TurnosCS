@@ -45,7 +45,10 @@ namespace Turnos
 
         private void ValidarBtn_Click(object sender, EventArgs e)
         {
-            backgroundWorkerValidar.RunWorkerAsync();
+            if (!backgroundWorkerValidar.IsBusy)
+            {
+                backgroundWorkerValidar.RunWorkerAsync();
+            }
         }
 
         private void validarBtn_MouseEnter(object sender, EventArgs e)
@@ -73,6 +76,7 @@ namespace Turnos
             });
             if (textBoxPass.Text == "turnosUGT")
             {
+                Principal.Instance.esEquipoHabilitado = true;
                 Principal.Instance.makeVisible(false);
             }
             //else if (false) //Para Pruebas
@@ -177,6 +181,26 @@ namespace Turnos
                         textBoxPass.Focus();
                     });
                 }
+            }
+        }
+
+        private void textBoxPass_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                ValidarBtn_Click(sender, e);
+
+                e.Handled = true;
+                e.SuppressKeyPress = true;
+            }
+        }
+
+        private void textBoxUser_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.Handled = true;
+                e.SuppressKeyPress = true;
             }
         }
     }

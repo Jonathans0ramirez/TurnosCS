@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            BunifuAnimatorNS.Animation animation1 = new BunifuAnimatorNS.Animation();
+            BunifuAnimatorNS.Animation animation2 = new BunifuAnimatorNS.Animation();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ReservarTurno));
             this.reservarBtn = new System.Windows.Forms.Button();
             this.flPanelHoras = new System.Windows.Forms.FlowLayoutPanel();
@@ -65,11 +65,11 @@
             this.reservarBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(179)))), ((int)(((byte)(22)))));
             this.fadeTiempoRestanteTransition.SetDecoration(this.reservarBtn, BunifuAnimatorNS.DecorationType.None);
             this.reservarBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.reservarBtn.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.reservarBtn.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.reservarBtn.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.reservarBtn.Location = new System.Drawing.Point(109, 3);
+            this.reservarBtn.Location = new System.Drawing.Point(129, 3);
             this.reservarBtn.Name = "reservarBtn";
-            this.reservarBtn.Size = new System.Drawing.Size(100, 33);
+            this.reservarBtn.Size = new System.Drawing.Size(120, 38);
             this.reservarBtn.TabIndex = 0;
             this.reservarBtn.Text = "Reservar >";
             this.reservarBtn.UseVisualStyleBackColor = false;
@@ -79,9 +79,9 @@
             // 
             this.flPanelHoras.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
             this.fadeTiempoRestanteTransition.SetDecoration(this.flPanelHoras, BunifuAnimatorNS.DecorationType.None);
-            this.flPanelHoras.Location = new System.Drawing.Point(79, 14);
+            this.flPanelHoras.Location = new System.Drawing.Point(32, 14);
             this.flPanelHoras.Name = "flPanelHoras";
-            this.flPanelHoras.Size = new System.Drawing.Size(726, 100);
+            this.flPanelHoras.Size = new System.Drawing.Size(756, 139);
             this.flPanelHoras.TabIndex = 1;
             // 
             // tiempoRestanteReserva
@@ -113,11 +113,11 @@
             this.cancelarBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(106)))), ((int)(((byte)(57)))));
             this.fadeTiempoRestanteTransition.SetDecoration(this.cancelarBtn, BunifuAnimatorNS.DecorationType.None);
             this.cancelarBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.cancelarBtn.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cancelarBtn.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cancelarBtn.ForeColor = System.Drawing.SystemColors.Control;
             this.cancelarBtn.Location = new System.Drawing.Point(3, 3);
             this.cancelarBtn.Name = "cancelarBtn";
-            this.cancelarBtn.Size = new System.Drawing.Size(100, 33);
+            this.cancelarBtn.Size = new System.Drawing.Size(120, 38);
             this.cancelarBtn.TabIndex = 0;
             this.cancelarBtn.Text = "< Cancelar";
             this.cancelarBtn.UseVisualStyleBackColor = false;
@@ -130,9 +130,9 @@
             this.paneAcciones.Controls.Add(this.cancelarBtn);
             this.paneAcciones.Controls.Add(this.reservarBtn);
             this.fadeTiempoRestanteTransition.SetDecoration(this.paneAcciones, BunifuAnimatorNS.DecorationType.None);
-            this.paneAcciones.Location = new System.Drawing.Point(335, 459);
+            this.paneAcciones.Location = new System.Drawing.Point(315, 495);
             this.paneAcciones.Name = "paneAcciones";
-            this.paneAcciones.Size = new System.Drawing.Size(212, 39);
+            this.paneAcciones.Size = new System.Drawing.Size(252, 44);
             this.paneAcciones.TabIndex = 3;
             // 
             // backgroundWorkerReservar
@@ -202,9 +202,9 @@
             this.containerHoras.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.containerHoras.Controls.Add(this.flPanelHoras);
             this.fadeTiempoRestanteTransition.SetDecoration(this.containerHoras, BunifuAnimatorNS.DecorationType.None);
-            this.containerHoras.Location = new System.Drawing.Point(31, 286);
+            this.containerHoras.Location = new System.Drawing.Point(31, 288);
             this.containerHoras.Name = "containerHoras";
-            this.containerHoras.Size = new System.Drawing.Size(820, 132);
+            this.containerHoras.Size = new System.Drawing.Size(820, 171);
             this.containerHoras.TabIndex = 5;
             // 
             // panelLoad
@@ -266,22 +266,22 @@
             // 
             this.fadeTiempoRestanteTransition.AnimationType = BunifuAnimatorNS.AnimationType.Transparent;
             this.fadeTiempoRestanteTransition.Cursor = null;
-            animation1.AnimateOnlyDifferences = true;
-            animation1.BlindCoeff = ((System.Drawing.PointF)(resources.GetObject("animation1.BlindCoeff")));
-            animation1.LeafCoeff = 0F;
-            animation1.MaxTime = 1F;
-            animation1.MinTime = 0F;
-            animation1.MosaicCoeff = ((System.Drawing.PointF)(resources.GetObject("animation1.MosaicCoeff")));
-            animation1.MosaicShift = ((System.Drawing.PointF)(resources.GetObject("animation1.MosaicShift")));
-            animation1.MosaicSize = 0;
-            animation1.Padding = new System.Windows.Forms.Padding(0, 0, 0, 0);
-            animation1.RotateCoeff = 0F;
-            animation1.RotateLimit = 0F;
-            animation1.ScaleCoeff = ((System.Drawing.PointF)(resources.GetObject("animation1.ScaleCoeff")));
-            animation1.SlideCoeff = ((System.Drawing.PointF)(resources.GetObject("animation1.SlideCoeff")));
-            animation1.TimeCoeff = 0F;
-            animation1.TransparencyCoeff = 1F;
-            this.fadeTiempoRestanteTransition.DefaultAnimation = animation1;
+            animation2.AnimateOnlyDifferences = true;
+            animation2.BlindCoeff = ((System.Drawing.PointF)(resources.GetObject("animation2.BlindCoeff")));
+            animation2.LeafCoeff = 0F;
+            animation2.MaxTime = 1F;
+            animation2.MinTime = 0F;
+            animation2.MosaicCoeff = ((System.Drawing.PointF)(resources.GetObject("animation2.MosaicCoeff")));
+            animation2.MosaicShift = ((System.Drawing.PointF)(resources.GetObject("animation2.MosaicShift")));
+            animation2.MosaicSize = 0;
+            animation2.Padding = new System.Windows.Forms.Padding(0);
+            animation2.RotateCoeff = 0F;
+            animation2.RotateLimit = 0F;
+            animation2.ScaleCoeff = ((System.Drawing.PointF)(resources.GetObject("animation2.ScaleCoeff")));
+            animation2.SlideCoeff = ((System.Drawing.PointF)(resources.GetObject("animation2.SlideCoeff")));
+            animation2.TimeCoeff = 0F;
+            animation2.TransparencyCoeff = 1F;
+            this.fadeTiempoRestanteTransition.DefaultAnimation = animation2;
             // 
             // ReservarTurno
             // 
@@ -293,7 +293,7 @@
             this.Controls.Add(this.panelLoad);
             this.fadeTiempoRestanteTransition.SetDecoration(this, BunifuAnimatorNS.DecorationType.None);
             this.Name = "ReservarTurno";
-            this.Size = new System.Drawing.Size(881, 538);
+            this.Size = new System.Drawing.Size(881, 579);
             this.Load += new System.EventHandler(this.ReservarTurno_Load);
             this.paneAcciones.ResumeLayout(false);
             this.containerlPrincipal.ResumeLayout(false);

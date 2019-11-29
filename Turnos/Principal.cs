@@ -85,10 +85,6 @@ namespace Turnos
         public Principal()
         {
             InitializeComponent();
-            //Show();
-
-            //lockTaskManager(true);
-            //makeVisible(true);
         }
 
         public void lockTaskManager(bool flag)
@@ -140,7 +136,6 @@ namespace Turnos
                 else
                 {
                     this.Visible = flag;
-                    //lockTaskManager(flag);
                 }
 
                 if (flag)
@@ -231,9 +226,6 @@ namespace Turnos
             if (!estaEn130Horas)
             {
                 e.Cancel = true;
-                //lockTaskManager(false);
-                //makeVisible(false);
-                //hk.HookStop();
             }
             else
             {
@@ -244,7 +236,47 @@ namespace Turnos
         // Ejecuta el evento cuando la ventana está cargada
         private void frmMain_Load(System.Object sender, System.EventArgs e)
         {
-            //hk.HookStart();
+            lockTaskManager(true);
+            makeVisible(true);
+
+            bool anteriorFueNumero = false;
+            string pcName = System.Net.Dns.GetHostName();
+
+            for (int i = 0; i < pcName.Length; i++)
+            {
+                string auxChar = pcName.Substring(i, 1);
+                switch (auxChar)
+                {
+                    case "0":
+                    case "1":
+                    case "2":
+                    case "3":
+                    case "4":
+                    case "5":
+                    case "6":
+                    case "7":
+                    case "8":
+                    case "9":
+                        if (!anteriorFueNumero)
+                        {
+                            pcName = String.Concat(pcName.Substring(0, i), " " + pcName.Substring(i));
+                            i++;
+                        }
+                        anteriorFueNumero = true;
+                        break;
+                    case "-":
+                        anteriorFueNumero = false;
+                        pcName = String.Concat(pcName.Substring(0, i), " " + pcName.Substring(i, 1) + " " + pcName.Substring(i + 1));
+                        i = i + 2;
+                        break;
+                    default:
+                        anteriorFueNumero = false;
+                        break;
+                }
+            }
+
+            pcNombreLbl.Text = pcName;
+
             _obj = this;
 
             int y;

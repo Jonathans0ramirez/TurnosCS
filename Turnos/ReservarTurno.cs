@@ -64,7 +64,6 @@ namespace Turnos
                 Principal.Instance.actualizarImgEstado(global::Turnos.Properties.Resources.Spinner_1s_64px);
             });
             await pintarBotones();
-            //Hacer llamado al reloj que finalizará instancia si es necesario
             Principal.Instance.BeginInvoke((Action)delegate ()
             {
                 Principal.Instance.timerReserva.Start();
@@ -96,13 +95,13 @@ namespace Turnos
                                             btn.BackColor = colorDisponibleBtn;   //Color de Horario disponible
                                             btn.FlatStyle = FlatStyle.Flat;
                                             btn.ForeColor = SystemColors.ControlLight;
-                                            btn.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+                                            btn.Font = new Font("Segoe UI Semibold", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
                                             if (item == 1)
                                             {
                                                 btn.Enabled = false;
                                                 btn.BackColor = Color.FromArgb(236, 43, 68);    //Color de Horario ocuopado
                                             }
-                                            btn.Size = new Size(115, 35);
+                                            btn.Size = new Size(120, 40);
                                             string auxHour = string.Empty;
                                             if ((DateTime.Now.Hour + contadorHora) == 24)
                                             {
@@ -240,36 +239,45 @@ namespace Turnos
 
         private void ReservarBtn_Click(object sender, EventArgs e)
         {
-            Principal.Instance.actualizarImgEstado(global::Turnos.Properties.Resources.Spinner_1s_64px);
-            if (contadorBotonesReserva == 0)
-            {                
-                Principal.Instance.BeginInvoke((Action)delegate ()
-                {
-                    Principal.Instance.actualizarImgEstado(global::Turnos.Properties.Resources.Reservar_Icon);
-                    Principal.Instance.timerReserva.Stop();
-                });
-
-                tiempoRestanteReserva.Stop();
-                tiempoRestante = 59;
-
-                CustomDialog.ShowMessage("Recuerda que debes seleccionar el horario en el que deseas reservar este equipo de acuerdo a la disponibilidad.", "¡Selecciona un horario!", MessageBoxButtons.OK, global::Turnos.Properties.Resources.ErrorImg);
-
-                containerlPrincipal.Visible = false;
-                paneAcciones.Visible = false;
-                containerHoras.Visible = false;
-                panelLoad.Visible = true;
-                flPanelHoras.Controls.Clear();
-                backgroundWorkerHorasBtns.RunWorkerAsync();
-            }
-            else
+            if (!backgroundWorkerHorasBtns.IsBusy)
             {
-                tiempoRestanteReserva.Stop();
-                tiempoRestante = 59;
-
-                contadorBotonesReserva = 0;
+                //Deshabilita los contenedores de los botones
                 flPanelHoras.Enabled = false;
                 paneAcciones.Enabled = false;
-                backgroundWorkerReservar.RunWorkerAsync();
+
+                tiempoRestanteReserva.Stop();
+                tiempoRestante = 59;
+
+                Principal.Instance.actualizarImgEstado(global::Turnos.Properties.Resources.Spinner_1s_64px);
+
+                if (contadorBotonesReserva == 0)
+                {
+                    Principal.Instance.BeginInvoke((Action)delegate ()
+                    {
+                        Principal.Instance.actualizarImgEstado(global::Turnos.Properties.Resources.Reservar_Icon);
+                        Principal.Instance.timerReserva.Stop();
+                    });
+
+
+
+                    CustomDialog.ShowMessage("Recuerda que debes seleccionar el horario en el que deseas reservar este equipo de acuerdo a la disponibilidad.", "¡Selecciona un horario!", MessageBoxButtons.OK, global::Turnos.Properties.Resources.ErrorImg);
+
+                    //Vuelve a cargar los horarios disponibles
+                    containerlPrincipal.Visible = false;
+                    paneAcciones.Visible = false;
+                    containerHoras.Visible = false;
+                    panelLoad.Visible = true;
+                    flPanelHoras.Controls.Clear();
+                    flPanelHoras.Enabled = true;
+                    paneAcciones.Enabled = true;
+
+                    backgroundWorkerHorasBtns.RunWorkerAsync();
+                }
+                else
+                {
+                    contadorBotonesReserva = 0;
+                    backgroundWorkerReservar.RunWorkerAsync();
+                }
             }
         }
 

@@ -70,7 +70,7 @@
             this.noBtn.Location = new System.Drawing.Point(557, 11);
             this.noBtn.Name = "noBtn";
             this.noBtn.Size = new System.Drawing.Size(75, 23);
-            this.noBtn.TabIndex = 3;
+            this.noBtn.TabIndex = 4;
             this.noBtn.Text = "No";
             this.noBtn.UseVisualStyleBackColor = false;
             this.noBtn.Visible = false;
