@@ -5,6 +5,8 @@ VisualStudioVersion = 16.0.29306.81
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Turnos", "Turnos\Turnos.csproj", "{06F8051C-D9D2-4683-820A-82E5FAD1C566}"
 EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "TurnosApp", "TurnosApp\TurnosApp.vdproj", "{7953661E-0FD3-40E9-A59D-44B228691AAB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,8 @@ Global
 		{06F8051C-D9D2-4683-820A-82E5FAD1C566}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{06F8051C-D9D2-4683-820A-82E5FAD1C566}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{06F8051C-D9D2-4683-820A-82E5FAD1C566}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7953661E-0FD3-40E9-A59D-44B228691AAB}.Debug|Any CPU.ActiveCfg = Debug
+		{7953661E-0FD3-40E9-A59D-44B228691AAB}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

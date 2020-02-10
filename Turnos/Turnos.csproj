@@ -54,6 +54,9 @@
     <StartupObject>
     </StartupObject>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>IconTurnos.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Bunifu_UI_v1.52">
       <HintPath>..\..\..\Downloads\Bunifu_UI_v1.52.dll</HintPath>
@@ -203,6 +206,15 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Reservar-Icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CloseIconBlack.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CloseIconWhite.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="IconTurnos.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

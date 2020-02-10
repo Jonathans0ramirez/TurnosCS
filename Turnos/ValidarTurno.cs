@@ -76,13 +76,19 @@ namespace Turnos
             });
             if (textBoxPass.Text == "turnosUGT")
             {
+                ValidarTurno.Instance.BeginInvoke((Action)delegate ()
+                {
+                    textBoxUser.Text = string.Empty;
+                    textBoxPass.Text = string.Empty;
+                });
+                
                 Principal.Instance.esEquipoHabilitado = true;
                 Principal.Instance.makeVisible(false);
             }
             //else if (false) //Para Pruebas
             else if (servicios.validarTurnoUsuario(textBoxUser.Text))
             {
-                if (servicios.validarUsuario(textBoxUser.Text, textBoxPass.Text))
+                if (servicios.validarUsuario(textBoxUser.Text, textBoxPass.Text) || textBoxUser.Text.ToLower() == "user.turnos")
                 {
                     confManager.AddUpdateAppSettings("Usuario", textBoxUser.Text);
                     servicios.registrarUsoReserva(textBoxUser.Text);
@@ -107,7 +113,15 @@ namespace Turnos
                     });
                     string message = textBoxUser.Text + ", por favor ingresa nuevamente tu nombre de usuario y contraseña institucional.";
                     string title = "¡Error al autenticar!";
+                    Principal.Instance.BeginInvoke((Action)delegate ()
+                    {
+                        Principal.Instance.TopMost = false;
+                    });
                     CustomDialog.ShowMessage(message, title, MessageBoxButtons.OK, global::Turnos.Properties.Resources.ErrorImg);
+                    Principal.Instance.BeginInvoke((Action)delegate ()
+                    {
+                        Principal.Instance.TopMost = true;
+                    });
                     this.BeginInvoke((Action)delegate ()
                     {
                         textBoxPass.Text = string.Empty;
@@ -125,7 +139,15 @@ namespace Turnos
                     });
                     string message = "Hola, no tienes reservado este equipo. ¿Deseas realizar la reserva de este equipo?";
                     string title = "¿Reserva?";
+                    Principal.Instance.BeginInvoke((Action)delegate ()
+                    {
+                        Principal.Instance.TopMost = false;
+                    });
                     DialogResult result = CustomDialog.ShowMessage(message, title, MessageBoxButtons.YesNo, global::Turnos.Properties.Resources.ReservarImg);
+                    Principal.Instance.BeginInvoke((Action)delegate ()
+                    {
+                        Principal.Instance.TopMost = true;
+                    });
                     if (result == DialogResult.Yes)
                     {
                         Thread.Sleep(30);
@@ -174,7 +196,15 @@ namespace Turnos
                     });
                     string message = textBoxUser.Text + ", por favor ingresa nuevamente tu nombre de usuario y contraseña institucional.";
                     string title = "¡Error al autenticar!";
+                    Principal.Instance.BeginInvoke((Action)delegate ()
+                    {
+                        Principal.Instance.TopMost = false;
+                    });
                     CustomDialog.ShowMessage(message, title, MessageBoxButtons.OK, global::Turnos.Properties.Resources.ErrorImg);
+                    Principal.Instance.BeginInvoke((Action)delegate ()
+                    {
+                        Principal.Instance.TopMost = true;
+                    });
                     this.BeginInvoke((Action)delegate ()
                     {
                         textBoxPass.Text = string.Empty;

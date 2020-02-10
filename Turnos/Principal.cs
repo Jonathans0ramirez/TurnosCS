@@ -135,6 +135,7 @@ namespace Turnos
                 }
                 else
                 {
+                    this.TopMost = flag;
                     this.Visible = flag;
                 }
 
@@ -170,7 +171,9 @@ namespace Turnos
                                 if (servicios.validarTurnoUsuario(confManager.ReadSetting("Usuario")))
                                 {
                                     servicios.registrarUsoReserva(confManager.ReadSetting("Usuario"));
+                                    this.TopMost = false;
                                     CustomDialog.ShowMessage("Continúa trabajando sin problemas por una hora más.", "Te queda una hora", MessageBoxButtons.OK, global::Turnos.Properties.Resources.HoraLeftImg);
+                                    this.TopMost = true;
                                 }
                                 else
                                 {
@@ -208,10 +211,15 @@ namespace Turnos
                             Console.WriteLine("Momento en que la aplicación avisa al usuario el cierre de la sesión");
                             inactive = 60000 * (EXTRAER - MENSAJE);
                             if (esEquipoHabilitado) {
+                                this.TopMost = false;
                                 CustomDialog.ShowMessage("Tu turno terminará en 5 minutos; " + "Asegúrate de guardar todos los datos importantes. Al finalizar cerraremos todo por ti. ¡GRACIAS!", "Te quedan 5 minutos", MessageBoxButtons.OK, global::Turnos.Properties.Resources._5MinLeftImg);
+                                this.TopMost = true;
                             }
                             break;
                         }
+                    default:
+                        inactive = 60000;
+                        break;
                 }
 
                 Console.WriteLine(DateTime.Now.Minute);
@@ -236,7 +244,7 @@ namespace Turnos
         // Ejecuta el evento cuando la ventana está cargada
         private void frmMain_Load(System.Object sender, System.EventArgs e)
         {
-            lockTaskManager(true);
+            //lockTaskManager(true);
             makeVisible(true);
 
             bool anteriorFueNumero = false;
@@ -275,7 +283,7 @@ namespace Turnos
                 }
             }
 
-            pcNombreLbl.Text = pcName;
+            pcNombreLbl.Text = pcName.ToUpper();
 
             _obj = this;
 

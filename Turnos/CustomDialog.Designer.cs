@@ -28,6 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CustomDialog));
             this.yesBtn = new System.Windows.Forms.Button();
             this.noBtn = new System.Windows.Forms.Button();
             this.flowLayoutPanelButtons = new System.Windows.Forms.FlowLayoutPanel();
@@ -37,10 +39,15 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.contentLbl = new System.Windows.Forms.Label();
             this.titleLbl = new System.Windows.Forms.Label();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.closePic = new System.Windows.Forms.PictureBox();
+            this.timerClose = new System.Windows.Forms.Timer(this.components);
             this.flowLayoutPanelButtons.SuspendLayout();
             this.flPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dialogImg)).BeginInit();
             this.panel1.SuspendLayout();
+            this.panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.closePic)).BeginInit();
             this.SuspendLayout();
             // 
             // yesBtn
@@ -84,7 +91,7 @@
             this.flowLayoutPanelButtons.Controls.Add(this.okBtn);
             this.flowLayoutPanelButtons.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.flowLayoutPanelButtons.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
-            this.flowLayoutPanelButtons.Location = new System.Drawing.Point(0, 111);
+            this.flowLayoutPanelButtons.Location = new System.Drawing.Point(0, 148);
             this.flowLayoutPanelButtons.Name = "flowLayoutPanelButtons";
             this.flowLayoutPanelButtons.Padding = new System.Windows.Forms.Padding(8);
             this.flowLayoutPanelButtons.Size = new System.Drawing.Size(651, 45);
@@ -111,10 +118,10 @@
             this.flPanel.Controls.Add(this.dialogImg);
             this.flPanel.Controls.Add(this.panel1);
             this.flPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flPanel.Location = new System.Drawing.Point(0, 0);
+            this.flPanel.Location = new System.Drawing.Point(0, 30);
             this.flPanel.Name = "flPanel";
             this.flPanel.Padding = new System.Windows.Forms.Padding(15, 0, 0, 0);
-            this.flPanel.Size = new System.Drawing.Size(651, 111);
+            this.flPanel.Size = new System.Drawing.Size(651, 118);
             this.flPanel.TabIndex = 8;
             // 
             // dialogImg
@@ -167,16 +174,48 @@
             this.titleLbl.Text = "titleLbl";
             this.titleLbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.closePic);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel2.Location = new System.Drawing.Point(0, 0);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(651, 30);
+            this.panel2.TabIndex = 9;
+            // 
+            // closePic
+            // 
+            this.closePic.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.closePic.BackColor = System.Drawing.Color.Transparent;
+            this.closePic.BackgroundImage = global::Turnos.Properties.Resources.CloseIconBlack;
+            this.closePic.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.closePic.Location = new System.Drawing.Point(621, 0);
+            this.closePic.Margin = new System.Windows.Forms.Padding(0);
+            this.closePic.Name = "closePic";
+            this.closePic.Size = new System.Drawing.Size(30, 30);
+            this.closePic.TabIndex = 0;
+            this.closePic.TabStop = false;
+            this.closePic.Click += new System.EventHandler(this.closePic_Click);
+            this.closePic.MouseEnter += new System.EventHandler(this.closePic_MouseEnter);
+            this.closePic.MouseLeave += new System.EventHandler(this.closePic_MouseLeave);
+            // 
+            // timerClose
+            // 
+            this.timerClose.Interval = 30000;
+            this.timerClose.Tick += new System.EventHandler(this.timerClose_Tick);
+            // 
             // CustomDialog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackColor = System.Drawing.SystemColors.Window;
-            this.ClientSize = new System.Drawing.Size(651, 156);
+            this.ClientSize = new System.Drawing.Size(651, 193);
             this.Controls.Add(this.flPanel);
             this.Controls.Add(this.flowLayoutPanelButtons);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.Controls.Add(this.panel2);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "CustomDialog";
@@ -190,6 +229,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.dialogImg)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            this.panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.closePic)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -205,5 +246,8 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label contentLbl;
         private System.Windows.Forms.Label titleLbl;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.PictureBox closePic;
+        private System.Windows.Forms.Timer timerClose;
     }
 }

@@ -69,7 +69,7 @@ namespace Turnos
                     throw new Exception("SetWindowsHookEx() function failed. " + "Error code: " + error.ToString());
                 }
             }
-            SetRegistryValue(1);
+            //SetRegistryValue(1);
         }
 
         public void HookStop()
@@ -84,7 +84,7 @@ namespace Turnos
             {
                 throw new Exception("UnhookWindowsHookEx failed.");
             }
-            SetRegistryValue(0);
+            //SetRegistryValue(0);
         }
 
         private int KeyboardHookProc(int nCode, int wParam, IntPtr lParam)

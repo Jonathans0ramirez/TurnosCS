@@ -14,3 +14,19 @@ C:\Users\1020490075\Desktop\Turnos\Turnos\obj\Debug\Turnos.exe
 C:\Users\1020490075\Desktop\Turnos\Turnos\obj\Debug\Turnos.pdb
 C:\Users\1020490075\Desktop\Turnos\Turnos\obj\Debug\Turnos.csprojAssemblyReference.cache
 C:\Users\1020490075\Desktop\Turnos\Turnos\obj\Debug\Turnos.CustomDialog.resources
+C:\Users\1020490075\Documents\Visual Studio 2019\Turnos\Turnos\bin\Debug\Turnos.exe.config
+C:\Users\1020490075\Documents\Visual Studio 2019\Turnos\Turnos\bin\Debug\Turnos.exe
+C:\Users\1020490075\Documents\Visual Studio 2019\Turnos\Turnos\bin\Debug\Turnos.pdb
+C:\Users\1020490075\Documents\Visual Studio 2019\Turnos\Turnos\bin\Debug\Newtonsoft.Json.dll
+C:\Users\1020490075\Documents\Visual Studio 2019\Turnos\Turnos\bin\Debug\Newtonsoft.Json.xml
+C:\Users\1020490075\Documents\Visual Studio 2019\Turnos\Turnos\obj\Debug\Turnos.CustomDialog.resources
+C:\Users\1020490075\Documents\Visual Studio 2019\Turnos\Turnos\obj\Debug\Turnos.Principal_OLD.resources
+C:\Users\1020490075\Documents\Visual Studio 2019\Turnos\Turnos\obj\Debug\Turnos.Principal.resources
+C:\Users\1020490075\Documents\Visual Studio 2019\Turnos\Turnos\obj\Debug\Turnos.Properties.Resources.resources
+C:\Users\1020490075\Documents\Visual Studio 2019\Turnos\Turnos\obj\Debug\Turnos.ReservarTurno.resources
+C:\Users\1020490075\Documents\Visual Studio 2019\Turnos\Turnos\obj\Debug\Turnos.ValidarTurno.resources
+C:\Users\1020490075\Documents\Visual Studio 2019\Turnos\Turnos\obj\Debug\Turnos.csproj.GenerateResource.cache
+C:\Users\1020490075\Documents\Visual Studio 2019\Turnos\Turnos\obj\Debug\Turnos.csproj.CopyComplete
+C:\Users\1020490075\Documents\Visual Studio 2019\Turnos\Turnos\obj\Debug\Turnos.exe
+C:\Users\1020490075\Documents\Visual Studio 2019\Turnos\Turnos\obj\Debug\Turnos.pdb
+C:\Users\1020490075\Documents\Visual Studio 2019\Turnos\Turnos\obj\Debug\Turnos.csprojAssemblyReference.cache

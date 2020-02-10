@@ -154,8 +154,13 @@ namespace Turnos
 
         public void centrarPanelesContainers()
         {
-            /*CENTRAR HORAS CONTAINER*/
+            /*CENTRAR LOAD*/
             int x, y;
+            x = (this.Width / 2) - (panelLoad.Width / 2);
+            y = (this.Height / 2) - (panelLoad.Height / 2);
+            panelLoad.Location = new Point(x, y);
+
+            /*CENTRAR HORAS CONTAINER*/
             x = (this.Width / 2) - (containerHoras.Width / 2);
             containerHoras.Location = new Point(x, containerHoras.Location.Y);
 
@@ -180,10 +185,6 @@ namespace Turnos
             x = (containerlPrincipal.Width / 2) - (pictureBoxLogo.Width / 2);
             pictureBoxLogo.Location = new Point(x, pictureBoxLogo.Location.Y);
 
-            /*CENTRAR LOAD*/
-            x = (this.Width / 2) - (panelLoad.Width / 2);
-            y = (this.Height / 2) - (panelLoad.Height / 2);
-            panelLoad.Location = new Point(x, y);
         }
 
         private List<int> rellenarListaHoras()
@@ -256,11 +257,15 @@ namespace Turnos
                     {
                         Principal.Instance.actualizarImgEstado(global::Turnos.Properties.Resources.Reservar_Icon);
                         Principal.Instance.timerReserva.Stop();
+                        Principal.Instance.TopMost = false;
                     });
-
-
-
+                    
                     CustomDialog.ShowMessage("Recuerda que debes seleccionar el horario en el que deseas reservar este equipo de acuerdo a la disponibilidad.", "¡Selecciona un horario!", MessageBoxButtons.OK, global::Turnos.Properties.Resources.ErrorImg);
+
+                    Principal.Instance.BeginInvoke((Action)delegate ()
+                    {
+                        Principal.Instance.TopMost = true;
+                    });
 
                     //Vuelve a cargar los horarios disponibles
                     containerlPrincipal.Visible = false;
@@ -352,12 +357,28 @@ namespace Turnos
             if (resultadoCrearReserva.Contains("\"La reserva No fue creada"))
             {
                 volverAVistaValidarTurno();
+                Principal.Instance.BeginInvoke((Action)delegate ()
+                {
+                    Principal.Instance.TopMost = false;
+                });
                 CustomDialog.ShowMessage("La reserva no fue creada, excediste el número máximo de reservas por día.", "Reserva no creada", MessageBoxButtons.OK, global::Turnos.Properties.Resources.NoCreadaImg);
+                Principal.Instance.BeginInvoke((Action)delegate ()
+                {
+                    Principal.Instance.TopMost = true;
+                });
             }
             else if (resultadoCrearReserva.Contains("\"La Reserva fue creada exitosamente.\""))
             {
                 volverAVistaValidarTurno();
+                Principal.Instance.BeginInvoke((Action)delegate ()
+                {
+                    Principal.Instance.TopMost = false;
+                });
                 CustomDialog.ShowMessage("Recuerda hacer un uso efectivo de este equipo.", "Reserva creada", MessageBoxButtons.OK, global::Turnos.Properties.Resources.CreadaImg);
+                Principal.Instance.BeginInvoke((Action)delegate ()
+                {
+                    Principal.Instance.TopMost = true;
+                });
             }
             else if (resultadoCrearReserva.Contains("\"Reserva no creada"))
             {
@@ -365,7 +386,15 @@ namespace Turnos
                 {
                     Principal.Instance.actualizarImgEstado(global::Turnos.Properties.Resources.Reservar_Icon);
                 });
+                Principal.Instance.BeginInvoke((Action)delegate ()
+                {
+                    Principal.Instance.TopMost = false;
+                });
                 DialogResult result = CustomDialog.ShowMessage("Otro usuario acaba de reservar el mismo equipo, lo invitamos a reservar en otro horario. ¿Desea actualizar la lista con los horarios disponibles para este equipo?", "Reserva no creada " + Emoji.Confused, MessageBoxButtons.YesNo, global::Turnos.Properties.Resources.NoCreadaImg);
+                Principal.Instance.BeginInvoke((Action)delegate ()
+                {
+                    Principal.Instance.TopMost = true;
+                });
                 if (result == DialogResult.Yes)
                 {
                     this.BeginInvoke((Action)delegate ()
